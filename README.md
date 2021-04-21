@@ -100,5 +100,4 @@ Error: Error building site: TOCSS: failed to transform "scss/main.scss" (text/x-
 ```
 
 This error occurs if you have not installed the extended version of Hugo.
-See our [user guide](https://www.docsy.dev/docs/getting-started/) for instructions on how to install Hugo.
 
