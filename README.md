@@ -1,95 +1,90 @@
-# Docsy Example
+# Setting Up a Local Development Environment
 
-[Docsy](https://github.com/google/docsy) is a Hugo theme for technical documentation sites, providing easy site navigation, structure, and more. This **Docsy Example Project** uses the Docsy theme, as well as providing a skeleton documentation structure for you to use. You can either copy this project and edit it with your own content, or use the theme in your projects like any other [Hugo theme](https://gohugo.io/themes/installing-and-using-themes/).
+_The Following Instructions are based on an installation in an Ubuntu Virtual Machine, but this project can be run in any 64bit OS_
 
-The theme is included in this project as a Git submodule:
+## Installing Hugo
 
-```bash
-▶ git submodule
- a053131a4ebf6a59e4e8834a42368e248d98c01d themes/docsy (heads/master)
+1. Your virtual machine should have guest port 1313 open. In the case of Vagrant, the following line in your VagrantFile should be uncommented and edited.
+`config.vm.network "forwarded_port", guest: 1313, host: 8080`
+2. Download the latest **extended** version of Hugo from [here](https://github.com/gohugoio/hugo/releases). Save this to the shared volume of your vm.
+3. `ssh` into your vm, create a hugo directory `mkdir hugo`, move the file there, and extract it using `tar -xf hugo_extended_0.82.0_Linux-64bit.tar.gz` (filename may not be the same).
+4. Install Hugo to your `/usr/bin` directory. `sudo install hugo /usr/bin`
+5. You should see the +extended suffix when checking the version with `hugo version`.
+
+## Regarding node and npm
+
+* Please note that you will need a node version above 6 for the required npm packages. An easy way to update is using the `n` package:
+```
+npm cache clean -f
+sudo npm install -g n
+sudo n stable
 ```
 
-This Docsy Example Project is hosted at [https://example.docsy.dev/](https://example.docsy.dev/).
+## Cloning and Booting up the Web Server
 
-You can find detailed theme instructions in the Docsy user guide: https://docsy.dev/docs/
-
-This is not an officially supported Google product. This project is currently maintained.
-
-## Using the Docsy Example Project as a template
-
-A simple way to get started is to use this project as a template, which gives you a site project that is set up and ready to use. To do this: 
-
-1. Click **Use this template**.
-
-2. Select a name for your new project and click **Create repository from template**.
-
-3. Make your own local working copy of your new repo using git clone, replacing https://github.com/my/example.git with your repo’s web URL:
-
-```bash
-git clone --recurse-submodules --depth 1 https://github.com/my/example.git
+1. Move to the directory you want to download the package to and then:
+`git clone git@github.com:dreamfactorysoftware/dreamfactory-book-v2.git`
+2. Move into the newly created directory and get local copies of the project using:
+`git submodule update --init --recursive`
+3. npm install the necessary packages
+```
+sudo npm install -D autoprefixer
+sudo npm install -D postcss-cli
+sudo npm install -D postcss
 ```
 
-You can now edit your own versions of the site’s source files.
+Start the Hugo server using `hugo server` and go to localhost:1313 to see the site. If you are unable to view the site, shutdown the server and restart using `hugo server --bind 0.0.0.0`
 
-If you want to do SCSS edits and want to publish these, you need to install `PostCSS`
+## Making Changes to dreamfactory-book-v2
 
-```bash
-npm install
+* scss variables can be changed in assets/scss/_variables_project.scss
+
+### Navbar Changes
+
+* Navbar changes (internal links)can be made by going to the relevant root _index.md file (eg content/en/about) and adding a title and linkTitle.
+```
+---
+title: Getting Started With DreamFactory
+linkTitle: Home
+menu:
+  main:
+    weight: 10
+---
+```
+`weight` corresponds to the order of tabs from the left.
+* External hyperlinks can be added to the navbar by adding the following in the config.toml file
+```
+[[menu.main]]
+    name = "<title of link>"
+    weight = 50 
+    url = "https://<site>"
+    pre = "<i class='fas fa-link'></i>"
+```
+`pre` will show on the left of the link, `post` will show on the right of the link
+
+### Making Alerts
+```
+{{< alert >}}This is an alert.{{< /alert >}}
+{{< alert title="Note" >}}This is an alert with a title.{{< /alert >}}
+{{% alert title="Note" %}}This is an alert with a title and **Markdown**.{{% /alert %}}
+{{< alert color="success" >}}This is a successful alert.{{< /alert >}}
+{{< alert color="warning" >}}This is a warning.{{< /alert >}}
+{{< alert color="warning" title="Warning" >}}This is a warning with a title.{{< /alert >}}
 ```
 
-## Running the website locally
+### Images
 
-Building and running the site locally requires a recent `extended` version of [Hugo](https://gohugo.io).
-You can find out more about how to install Hugo for your environment in our
-[Getting started](https://www.docsy.dev/docs/getting-started/#prerequisites-and-installation) guide.
+* Images should be stored in the `static` folder, and then can be called from the path after that. For example: `<img src=“/images/02/lb-ha-diagram.png” width=“800”>`
 
-Once you've made your working copy of the site repo, from the repo root folder, run:
+### Internal Links
 
-```
-hugo server
-```
+* Use the automatically generated slugs when linking to other pages:
+`[Chapter 1. Introducing REST and DreamFactory](./introducing-rest-and-dreamfactory/)`
+Slugs are hyphonated lowercase versions of the folder names.
 
-## Running a container locally
+### Footer
 
-You can run docsy-example inside a [Docker](https://docs.docker.com/)
-container, the container runs with a volume bound to the `docsy-example`
-folder. This approach doesn't require you to install any dependencies other
-than [Docker Desktop](https://www.docker.com/products/docker-desktop) on
-Windows and Mac, and [Docker Compose](https://docs.docker.com/compose/install/)
-on Linux.
-
-1. Build the docker image 
-
-   ```bash
-   docker-compose build
-   ```
-
-1. Run the built image
-
-   ```bash
-   docker-compose up
-   ```
-
-   > NOTE: You can run both commands at once with `docker-compose up --build`.
-
-1. Verify that the service is working. 
-
-   Open your web browser and type `http://localhost:1313` in your navigation bar,
-   This opens a local instance of the docsy-example homepage. You can now make
-   changes to the docsy example and those changes will immediately show up in your
-   browser after you save.
-
-### Cleanup
-
-To stop Docker Compose, on your terminal window, press **Ctrl + C**. 
-
-To remove the produced images run:
-
-```console
-docker-compose rm
-```
-For more information see the [Docker Compose
-documentation](https://docs.docker.com/compose/gettingstarted/).
+* Changes can be made in the partials folder `themes/docsy/layouts/partials/footer.html`
 
 ## Troubleshooting
 
