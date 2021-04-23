@@ -1,7 +1,7 @@
 ---
 title: "Appendix C: Leveraging an API Gateway for GDPR Readiness"
 linkTitle: "C. Leveraging an API Gateway for GDPR Readiness"
-weight: 2
+weight: 3
 ---
 
 ## Executive Overview
