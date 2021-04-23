@@ -1,7 +1,7 @@
 ---
 title: "Modifying the Service Definition"
 linkTitle: "Modifying the Service Definition"
-weight: 17
+weight: 18
 ---
 
 There can be a variety of reasons for wanting to modify the pre-defined API documentation that is generated in the API Docs tab. We will cover modifying the documentation and exporting the documentation to have a developer portal without any coding.

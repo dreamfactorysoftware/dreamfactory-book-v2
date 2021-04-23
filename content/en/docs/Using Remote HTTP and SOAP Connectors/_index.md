@@ -1,7 +1,7 @@
 ---
 title: "Using DreamFactory's Remote HTTP and SOAP Connectors"
 linkTitle: "Using Remote HTTP and SOAP Connectors"
-weight: 14
+weight: 15
 ---
 
 Although the DreamFactory Platform is best known for the ability to generate REST APIs, many also take advantage of the platform's Remote Service connectors.
