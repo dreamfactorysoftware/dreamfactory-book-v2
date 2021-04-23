@@ -35,6 +35,10 @@ sudo npm install -D postcss
 
 Start the Hugo server using `hugo server` and go to localhost:1313 to see the site. If you are unable to view the site, shutdown the server and restart using `hugo server --bind 0.0.0.0`
 
+## DreamFactory Styling:
+
+Primary Color: `$primary: #6666CC;`
+
 ## Making Changes to dreamfactory-book-v2
 
 * scss variables can be changed in assets/scss/_variables_project.scss
