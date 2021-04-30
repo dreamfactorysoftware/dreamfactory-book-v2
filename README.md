@@ -103,6 +103,11 @@ Slugs are hyphonated lowercase versions of the folder names.
 
 * Make changes in the config.toml file git github_repo (docs repo) and github_project_repo (dreamfactory itself)
 
+### Logos
+
+* Logos need to be in svg format and saved to themes/docsy/assets/icons.
+Note that you will most likely need to play around with the height, width, and viewbox in the `<svg>` tag in the inspector until you have something thats fits nicely.
+
 ### Making Alerts
 ```
 {{< alert >}}This is an alert.{{< /alert >}}
