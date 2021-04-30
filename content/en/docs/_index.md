@@ -87,26 +87,26 @@ In this chapter you'll learn how to safely migrate existing data to a new instan
 
 We explore the possibilities of customizing your API Docs tab for customized documentation.
 
-### [Appendix A. Configuration Parameter Reference](./docs/appendix-a/README.md)
+### [Appendix A. Configuration Parameter Reference](./appendices/a-configuration-parameter-reference)
 
 DreamFactory is packed with features capable of being tweaked via configuration parameters. These parameters can be managed as server environment variables or within a `.env` file found in the platform's root directory. This appendix defines all available parameters.
 
-### [Appendix B. Security FAQ](./docs/appendix-b/README.md)
+### [Appendix B. Security FAQ](./appendices/b-security-faq)
 
 Customers tasked with managing sensitive data often ask rigorous questions regarding company and platform security policies.
 
-### [Appendix C. Leveraging an API Gateway for GDPR Readiness](./docs/appendix-c/README.md)
+### [Appendix C. Leveraging an API Gateway for GDPR Readiness](./appendices/c-leveraging-an-api-gateway-for-gdpr-readiness)
 
 This paper outlines how to leverage an API platform to retrofit existing infrastructure for
 "GDPR readiness", essentially as a byproduct of implementing a modern architecture for digital
 transformation.
 
-### [Appendix D. Examining DreamFactorys Architecture](./docs/appendix-d/README.md)
+### [Appendix D. Examining DreamFactorys Architecture](./appendices/d-architecture-faq)
 
 This paper answers frequently asked questions pertaining to Dreamfactorys system and an anatomy of various API calls as they travel
 through the system.
 
-### [Appendix E. Scaling DreamFactory](./docs/appendix-e/README.md)
+### [Appendix E. Scaling DreamFactory](./appendices/e-scalability)
 
 This paper is designed to provide information to enterprise customers about how to scale a DreamFactory Instance. The sections below talks about horizontal, vertical, and cloud scaling capabilities.
 
