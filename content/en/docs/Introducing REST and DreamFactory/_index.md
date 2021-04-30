@@ -35,7 +35,7 @@ If such a solution sounds appealing, then you're going to love working with REST
 
 Now that you understand a bit more about REST architecture, let's review a number of typical REST requests and responses.
 
-{{< alert title="TIP">}}
+{{< alert color="success" title="TIP">}}
 Throughout this book you'll often come across the term *resource*. In the REST context, a resource is any bit of data that can be named. For instance, an image, employee, classroom, or vehicle would all be referred to as a resource. Further, a resource can be a single instance of this named data, or can be a collection. In other words, an employee would be a singleton resource, whereas a set of employees would be a collection resource.
 {{< /alert >}}
 

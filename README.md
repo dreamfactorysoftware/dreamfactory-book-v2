@@ -38,6 +38,16 @@ Start the Hugo server using `hugo server` and go to localhost:1313 to see the si
 ## DreamFactory Styling:
 
 Primary Color: `$primary: #6666CC;`
+Tip Success Color: `$success: #41BA83;`
+Tip Warning Color: `$warning: #E7C000;`
+Tip Danger Color `$danger: #CC0202;`
+
+Font is lato:
+
+```
+$google_font_name: "Lato";
+$google_font_family: "Lato:300,300i,400,400i,700,700i";
+```
 
 ## Making Changes to dreamfactory-book-v2
 
@@ -46,6 +56,38 @@ Primary Color: `$primary: #6666CC;`
 ### Footer
 
 * Changes can be made in the partials folder `themes/docsy/layouts/partials/footer.html`
+
+### Homepage
+
+* The homepage is the _index.html localted in the root of the `content/en` directory. You can use the following layout to structure your page:
+```
+/// Hero Section (Full View Height)
+{{< blocks/cover title="Main Title" height="full" color="<color></color>" >}}
+html here
+{{< /blocks/cover >}}
+
+
+{{% blocks/lead color="primary" %}}
+ // Information Blurb
+{{% /blocks/lead %}}
+
+{{< blocks/section color="dark" >}}
+{{% blocks/feature title="<Title>" %}}
+ // Left Third Content
+{{% /blocks/feature %}}
+
+
+{{% blocks/feature icon="<font awesome icon>" title="<title>" url="<url>" %}}
+ // Center Third Content
+{{% /blocks/feature %}}
+
+
+{{% blocks/feature icon="<font awesome icon>" title="<title>" url="<url>" %}}
+// Right Third Content
+{{% /blocks/feature %}}
+
+{{< /blocks/section >}}
+```
 
 ### Images
 
