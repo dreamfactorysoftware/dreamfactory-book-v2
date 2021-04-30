@@ -43,6 +43,34 @@ Primary Color: `$primary: #6666CC;`
 
 * scss variables can be changed in assets/scss/_variables_project.scss
 
+### Footer
+
+* Changes can be made in the partials folder `themes/docsy/layouts/partials/footer.html`
+
+### Images
+
+* Images should be stored in the `static` folder, and then can be called from the path after that. For example: `<img src=“/images/02/lb-ha-diagram.png” width=“800”>`
+
+### Internal Links
+
+* Use the automatically generated slugs when linking to other pages:
+`[Chapter 1. Introducing REST and DreamFactory](./introducing-rest-and-dreamfactory/)`
+Slugs are hyphonated lowercase versions of the folder names.
+
+### Linking to the gihub repository
+
+* Make changes in the config.toml file git github_repo (docs repo) and github_project_repo (dreamfactory itself)
+
+### Making Alerts
+```
+{{< alert >}}This is an alert.{{< /alert >}}
+{{< alert title="Note" >}}This is an alert with a title.{{< /alert >}}
+{{% alert title="Note" %}}This is an alert with a title and **Markdown**.{{% /alert %}}
+{{< alert color="success" >}}This is a successful alert.{{< /alert >}}
+{{< alert color="warning" >}}This is a warning.{{< /alert >}}
+{{< alert color="warning" title="Warning" >}}This is a warning with a title.{{< /alert >}}
+```
+
 ### Navbar Changes
 
 * Navbar changes (internal links)can be made by going to the relevant root _index.md file (eg content/en/about) and adding a title and linkTitle.
@@ -65,30 +93,6 @@ menu:
     pre = "<i class='fas fa-link'></i>"
 ```
 `pre` will show on the left of the link, `post` will show on the right of the link
-
-### Making Alerts
-```
-{{< alert >}}This is an alert.{{< /alert >}}
-{{< alert title="Note" >}}This is an alert with a title.{{< /alert >}}
-{{% alert title="Note" %}}This is an alert with a title and **Markdown**.{{% /alert %}}
-{{< alert color="success" >}}This is a successful alert.{{< /alert >}}
-{{< alert color="warning" >}}This is a warning.{{< /alert >}}
-{{< alert color="warning" title="Warning" >}}This is a warning with a title.{{< /alert >}}
-```
-
-### Images
-
-* Images should be stored in the `static` folder, and then can be called from the path after that. For example: `<img src=“/images/02/lb-ha-diagram.png” width=“800”>`
-
-### Internal Links
-
-* Use the automatically generated slugs when linking to other pages:
-`[Chapter 1. Introducing REST and DreamFactory](./introducing-rest-and-dreamfactory/)`
-Slugs are hyphonated lowercase versions of the folder names.
-
-### Footer
-
-* Changes can be made in the partials folder `themes/docsy/layouts/partials/footer.html`
 
 ## Troubleshooting
 
