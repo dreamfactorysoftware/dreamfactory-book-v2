@@ -93,6 +93,8 @@ html here
 
 * Images should be stored in the `static` folder, and then can be called from the path after that. For example: `<img src=“/images/02/lb-ha-diagram.png” width=“800”>`
 
+* Note the homepage background image defaults to a darker gradient being applied to the image. This can be removed by deleting the `td-overlay--dark` class from cover.html
+
 ### Internal Links
 
 * Use the automatically generated slugs when linking to other pages:
@@ -140,6 +142,8 @@ menu:
     pre = "<i class='fas fa-link'></i>"
 ```
 `pre` will show on the left of the link, `post` will show on the right of the link
+
+* The default navbar setting on the homepage is to match the background color until you scroll down 1 viewport, this can be removed by deleting the `td-navbar-cover` class from navbar.html
 
 ## Troubleshooting
 

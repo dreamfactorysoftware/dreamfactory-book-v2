@@ -60,10 +60,6 @@
         left: 0;
     }
 
-    &--dark::after {
-        background-color: rgba($dark, 0.3);
-    }
-
     &--light::after {
         background-color: rgba($light, 0.3);
     }
