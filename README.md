@@ -53,6 +53,10 @@ $google_font_family: "Lato:300,300i,400,400i,700,700i";
 
 * scss variables can be changed in assets/scss/_variables_project.scss
 
+### Favicons
+
+* Are located in static/favicons
+
 ### Footer
 
 * Changes can be made in the partials folder `themes/docsy/layouts/partials/footer.html`

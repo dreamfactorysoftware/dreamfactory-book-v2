@@ -309,7 +309,7 @@ Go to the `General` tab and click the `Edit` button:
 Change `Single sign on URL` and `Audience URI (SP Entity ID)` to the values presented in DreamFactory's Okta API documentation, and then save the changes:
 
 <p>
-    <img src="/images/04/1 e2f05e7_2019.18.04..png" width="800" />
+    <img src="/images/04/1e2f05e7_2019.18.04..png" width="800" />
 </p>
 
 
