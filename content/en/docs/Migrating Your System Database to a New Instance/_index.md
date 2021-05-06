@@ -44,9 +44,9 @@ Now you have a zip file with all the JSON for your Services, Admins, Roles, etc.
 
 Upon unzipping the file you will notice all the JSON files and there is a particular order they must be uploaded since they can rely on each other.
 
-::: tip
+{{< alert color="success" title="Tip" >}}
 Please note removing the System, API Docs, Files, Logs, db, email, and user from the JSON (typically ids 1-7) help in avoiding any duplication errors being thrown.
-:::
+{{< /alert >}}
 
 #### Uploading Services
 

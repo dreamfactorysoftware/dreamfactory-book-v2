@@ -470,8 +470,8 @@ If successful, DreamFactory will return a `200` status code and a response body 
 
 The equivalent SQL query looks like this:
 
-   UPDATE supplies SET first_name = 'Johnny', last_name = 'Football',
-     birthdate = '1900-12-15', gender = 'm', hire_date = '2007-01-01' WHERE emp_no = 500015;
+    UPDATE supplies SET first_name = 'Johnny', last_name = 'Football',
+    birthdate = '1900-12-15', gender = 'm', hire_date = '2007-01-01' WHERE emp_no = 500015;
 
 #### Updating Records with PATCH
 

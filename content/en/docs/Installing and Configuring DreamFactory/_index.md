@@ -3,8 +3,6 @@ title: "Installing and Configuring DreamFactory"
 linkTitle: "Installing and Configuring DreamFactory"
 date: 2021-03-12T10:30:40-05:00
 weight: 4
-description: >
- Hello
 ---
 
 In this chapter you'll learn how to install and configure DreamFactory. A number of installation solutions are available, including GitHub repository, point-and-click installers, Docker container, and cloud-specific installers. Be sure to carefully read through the set of options before making a decision, because some might be more suitable than others for your particular situation.
@@ -933,10 +931,8 @@ Once done, save the changes and restart your web server. Confirm PHP's CLI envir
 
     $ php -m | grep sqlanywhere
     sqlanywhere
-
+		
 Next, confirm PHP's web environment recognizes the module by creating a file named phpinfo.php in your web document root directory and adding the following
----
----
 
 ## Useful System Administration Notes
 
