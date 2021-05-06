@@ -186,6 +186,18 @@ enable = false
 	icon = "fas fa-bookmark"
 
 [[menu.main]]
+    name = "Blog"
+    weight = 30
+    url = "https://blog.dreamfactory.com/"
+    pre = "<i class='fas fa-link'></i>"
+
+[[menu.main]]
+    name = "Community"
+    weight = 40
+    url = "https://community.dreamfactory.com/"
+    pre = "<i class='fas fa-link'></i>"
+
+[[menu.main]]
     name = "DreamFactory.com"
     weight = 50
     url = "https://www.dreamfactory.com"
