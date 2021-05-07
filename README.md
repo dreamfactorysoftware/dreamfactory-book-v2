@@ -149,6 +149,26 @@ menu:
 
 * The default navbar setting on the homepage is to match the background color until you scroll down 1 viewport, this can be removed by deleting the `td-navbar-cover` class from navbar.html
 
+## Hosting on Netlify
+
+* On netlify, after choosing "New site from Git" and selecting your repo, you will need to apply the following deploy settings:
+1. The build command should specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`
+2. In advanced build settings you will need two new variables:
+```
+HUGO_VERSION 0.83.1
+HUGO_ENV production
+```
+
+* Make sure that your package.json has the following dependencies in it:
+```
+"devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss-cli": "^8.0.0",
+    "postcss": "^8.0.0"
+  }
+```
+`postcss` and `postcss-cli` should be set to versions 8 or higher.
+
 ## Troubleshooting
 
 As you run the website locally, you may run into the following error:
