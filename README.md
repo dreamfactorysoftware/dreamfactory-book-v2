@@ -69,7 +69,7 @@ git clone git@github.com:dreamfactorysoftware/dreamfactory-book-v2.git
 
 Enter the project directory and get local copies of the project using:
 
-````
+```
 git submodule update --init --recursive
 ```
 
