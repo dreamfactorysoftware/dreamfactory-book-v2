@@ -4,16 +4,55 @@ _The Following Instructions are based on an installation in an Ubuntu Virtual Ma
 
 ## Installing Hugo
 
-1. Your virtual machine should have guest port 1313 open. In the case of Vagrant, the following line in your VagrantFile should be uncommented and edited.
-`config.vm.network "forwarded_port", guest: 1313, host: 8080`
-2. Download the latest **extended** version of Hugo from [here](https://github.com/gohugoio/hugo/releases). Save this to the shared volume of your vm.
-3. `ssh` into your vm, create a hugo directory `mkdir hugo`, move the file there, and extract it using `tar -xf hugo_extended_0.82.0_Linux-64bit.tar.gz` (filename may not be the same).
-4. Install Hugo to your `/usr/bin` directory. `sudo install hugo /usr/bin`
-5. You should see the +extended suffix when checking the version with `hugo version`.
+We'll use a Vagrant Ubuntu 18.04 VM to run the book website locally:
+
+```
+$ git@github.com:dreamfactorysoftware/dreamfactory-book-v2.git
+$ vagrant init hashicorp/bionic64
+```
+
+Next, open `Vagrantfile` and open guest port `1313`, pointing it to the host port of `8080` (or any other open port):
+
+```
+config.vm.network "forwarded_port", guest: 1313, host: 8080
+```
+
+Now start the VM:
+
+```
+$ vagrant up
+```
+
+Next, install the *extended* version of Hugo. This is important. Go [here](https://github.com/gohugoio/hugo/releases) and find the download that looks like `hugo_extended_0.83.1_Linux-64bit.tar.gz`. Of course the version number will be different, but the string `extended` should be in the file name, and you should download the Linux version.
+
+```
+$ vagrant ssh
+$ sudo apt update
+```
+
+Next, download the latest **extended** version of Hugo from [here](https://github.com/gohugoio/hugo/releases). Save this to the virtual machine shared volume. Then `ssh` into your vm, create a hugo directory `mkdir hugo`, move the file there, and extract it using:
+
+```
+tar -xf hugo_extended_0.82.0_Linux-64bit.tar.gz
+```
+
+Then install Hugo to your `/usr/bin` directory:
+
+```
+sudo install hugo /usr/bin
+```
+
+You should see the +extended suffix when checking the version with:
+
+```
+hugo version
+hugo v0.83.1-5AFE0A57+extended linux/amd64 BuildDate=2021-05-02T14:38:05Z VendorInfo=gohugoio
+```
 
 ## Regarding node and npm
 
-* Please note that you will need a node version above 6 for the required npm packages. An easy way to update is using the `n` package:
+You will need a Node version above 6 for the required npm packages. An easy way to update is using the `n` package:
+
 ```
 npm cache clean -f
 sudo npm install -g n
@@ -22,18 +61,27 @@ sudo n stable
 
 ## Cloning and Booting up the Web Server
 
-1. Move to the directory you want to download the package to and then:
-`git clone git@github.com:dreamfactorysoftware/dreamfactory-book-v2.git`
-2. Move into the newly created directory and get local copies of the project using:
-`git submodule update --init --recursive`
-3. npm install the necessary packages
+Return to your VM home directory and clone the book repository:
+
+```
+git clone git@github.com:dreamfactorysoftware/dreamfactory-book-v2.git
+```
+
+Enter the project directory and get local copies of the project using:
+
+```
+git submodule update --init --recursive
+```
+
+Finally, use npm to install the necessary packages:
+
 ```
 sudo npm install -D autoprefixer
 sudo npm install -D postcss-cli
 sudo npm install -D postcss
 ```
 
-Start the Hugo server using `hugo server` and go to localhost:1313 to see the site. If you are unable to view the site, shutdown the server and restart using `hugo server --bind 0.0.0.0`
+Start the Hugo server using `hugo server --bind 0.0.0.0` and go to http://localhost:8080 on your host machine to see the site. 
 
 ## DreamFactory Styling:
 
