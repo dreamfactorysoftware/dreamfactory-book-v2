@@ -38,11 +38,11 @@ Before we begin, keep in mind MySQL is just one of DreamFactory supported 18 dat
 Best of all, thanks to DreamFactory's unified interface and API generation solution, everything you learn in this chapter applies identically to your chosen database! So if you already plan on using another database, then by all means feel free to follow along using it instead!
 
 {{< alert color="success" title="TIP" >}}
-Looking for a more concise overview? Check out our blog post, ["Create a MySQL REST API in Minutes Using DreamFactory"](https://blog.dreamfactory.com/create-a-mysql-rest-api-in-minutes-using-dreamfactory/)!
+Looking for a more concise overview of the database API generation process? Check out our blog post, ["Create a MySQL REST API in Minutes Using DreamFactory"](https://blog.dreamfactory.com/create-a-mysql-rest-api-in-minutes-using-dreamfactory/)!
 {{< /alert >}}
 
 {{< alert color="success" title="TIP" >}}
-Want to create a MySQL API but don't have any test data? You can download a sample database from the MySQL website containing contrived employee-related data. [Click here](https://dev.mysql.com/doc/employee/en/) to learn more about and install the example database.
+Want to create a MySQL API but don't have any test data? You can download a sample database from the MySQL website containing several million records of contrived employee-related data. [Click here](https://dev.mysql.com/doc/employee/en/) to learn more about and install the example database. If you've started a [DreamFactory hosted trial](https://genie.dreamfactory.com/) then we've created this database for you! Your welcome e-mail includes the credentials.
 {{< /alert >}}
 
 ## Generating a MySQL-backed API
