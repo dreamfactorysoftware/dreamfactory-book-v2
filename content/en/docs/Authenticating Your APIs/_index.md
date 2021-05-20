@@ -113,7 +113,7 @@ DreamFactory's authentication connectors are found in the same location as the s
 
 With these fields completed, click the `Config` tab to finish configuration. On this screen you'll be presented with a number of fields, including:
 
-* **Default Role**: DreamFactory can automatically assign a default role (learn more about roles [here](https://guide.dreamfactory.com/docs/chapter03/creating-a-role.html)) to a user following successful login. You can identify that role here. If you want to more selectively grant roles, see the **Role per App** field, introduced below.
+* **Default Role**: DreamFactory can automatically assign a default role (learn more about roles [here](../generating-a-database-backed-api/#creating-a-role)) to a user following successful login. You can identify that role here. If you want to more selectively grant roles, see the **Role per App** field, introduced below.
 * **Discovery Document Endpoint**: If your identity provider offers a discovery document endpoint, adding it here will be the *fastest* way to configure your OpenID Connect connector. This is because doing so will automatically configure the rest of the fields, requiring you to only additionally supply the client ID, client secret, and redirection URL.
 * **Authorization Endpoint**: This endpoint authorizes access to a protected resource such as the resource owner's identity. It will be invoked following the resource owner's successful login and authorization for the requester to access said protected resource.
 * **Token Endpoint**: The token endpoint is contacted by the client after receiving an authorization code from the authorization endpoint. The client passes this authorization code to the token endpoint where if validated, tokens are returned to the client.

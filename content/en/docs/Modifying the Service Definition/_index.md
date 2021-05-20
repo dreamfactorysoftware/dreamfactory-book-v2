@@ -45,7 +45,7 @@ First we start by modifying the Service Definition we downloaded. We can simply 
 
 ### Making a New API
 
-Now we can import this custom documentation to DreamFactory via the [HTTP connector](../chapter14/proxying-a-remote-http-api.md). We start by specifying the base URL for the API we customized and providing an API Key for the Service.
+Now we can import this custom documentation to DreamFactory via the [HTTP connector](../using-remote-http-and-soap-connectors/#proxying-a-remote-http-api). We start by specifying the base URL for the API we customized and providing an API Key for the Service.
 
 <p>
 <img src="/images/17/custom-api-config.png" width="800" alt="Custom API Config tab">

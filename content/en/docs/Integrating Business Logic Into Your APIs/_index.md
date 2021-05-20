@@ -664,7 +664,7 @@ DreamFactory does not natively support scheduled tasks but you can setup a CRON 
 
 ### Creating the Script
 
-First we will create the script to call the API. One easy way to do so is by navigating to the `API Docs` tab and copying the cURL command for the appropriate call we would like to make. In this case we have business logic attached to `GET` on `_table/employees` that is synchronizing data between [two databases](../chapter03/interacting-with-the-api.html#synchronizing-records-between-two-databases).
+First we will create the script to call the API. One easy way to do so is by navigating to the `API Docs` tab and copying the cURL command for the appropriate call we would like to make. In this case we have business logic attached to `GET` on `_table/employees` that is synchronizing data between [two databases](../generating-a-database-backed-api/#synchronizing-records-between-two-databases).
 
 <p>
 <img src="/images/06/curl-schedule.png" width="800">

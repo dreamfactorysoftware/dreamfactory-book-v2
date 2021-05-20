@@ -48,10 +48,10 @@ After adding the base URL and `APPID` parameter, save your changes by pressing t
 
 ### Calling the API
 
-With the service in place, let's open up an HTTP testing tool such as Insomnia or Postman to test it out. As with all DreamFactory APIs, you'll first need to [create a role](https://guide.dreamfactory.com/docs/chapter03/creating-a-role.html)
- and [API key](https://guide.dreamfactory.com/docs/chapter03/creating-an-application.html). If you don't already know how to do this follow these links and then return here to continue with the example.
+With the service in place, let's open up an HTTP testing tool such as Insomnia or Postman to test it out. As with all DreamFactory APIs, you'll first need to [create a role](../generating-a-database-backed-api/#creating-a-role)
+ and [API key](../generating-a-database-backed-api/#creating-an-application). If you don't already know how to do this follow these links and then return here to continue with the example.
 
-To call your service you'll create a `GET` request pointing to `https://YOUR_DREAMFACTORY_DOMAIN/api/v2/openweather`, passing along parameters associated with the desired geographical destination. You can find a list of supported parameters in the [OpenWeather API documentation](https://openweathermap.org/current). Note we're also passing along the `X-DreamFactory-Api-Key` header. This API key was created when following along with the [previously mentioned instructions](https://guide.dreamfactory.com/docs/chapter03/creating-an-application.html) found elsewhere in the guide.
+To call your service you'll create a `GET` request pointing to `https://YOUR_DREAMFACTORY_DOMAIN/api/v2/openweather`, passing along parameters associated with the desired geographical destination. You can find a list of supported parameters in the [OpenWeather API documentation](https://openweathermap.org/current). Note we're also passing along the `X-DreamFactory-Api-Key` header. This API key was created when following along with the [previously mentioned instructions](../generating-a-database-backed-api/#creating-an-application) found elsewhere in the guide.
 
 In the following screenshot queries for weather assocated with the United States zip code 43016:
 

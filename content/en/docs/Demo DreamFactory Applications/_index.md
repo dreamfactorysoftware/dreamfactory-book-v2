@@ -49,7 +49,7 @@ The device information is stored in a database table called `devices`. Naturally
 	  PRIMARY KEY (`id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
-After generating the API within your DreamFactory instance (see [chapter 3](../chapter03/README.md) to learn how to create a database-based API), it's time to create the web page which will interact with the API and present the data. We started by creating a new web page containing a simple HTML5 template. There are plenty such templates online, however we're fans of the version provided by [SitePoint](https://www.sitepoint.com/a-basic-html5-template/). Here's what the starter file looks like:
+After generating the API within your DreamFactory instance (see [Generating a Database-backed API](../generating-a-database-backed-api/) to learn how to create a database-based API), it's time to create the web page which will interact with the API and present the data. We started by creating a new web page containing a simple HTML5 template. There are plenty such templates online, however we're fans of the version provided by [SitePoint](https://www.sitepoint.com/a-basic-html5-template/). Here's what the starter file looks like:
 
 	<html lang="en">
 	<head>
@@ -125,7 +125,7 @@ Next up is the JavaScript. We've purposely chosen to use standard JavaScript for
 	};
 	</script>
 
-The only required change you'll need to make to the above snippet is replacement of the `YOUR_API_KEY_GOES_HERE` with the actual API key you've configured to communicate with the API. If you don't know how to configure an API key, please refer to [chapter 3](../chapter03/README.md).
+The only required change you'll need to make to the above snippet is replacement of the `YOUR_API_KEY_GOES_HERE` with the actual API key you've configured to communicate with the API. If you don't know how to configure an API key, please refer to [Generating a Database Backed Api](../generating-a-database-backed-api/).
 
 All that remains is the HTML. In the following snippet you'll see we've defined a simple HTML table, adorned with CSS classes exposed by the Bootstrap library. The `tbody` element is assigned the `rows` ID, which is what the above JavaScript will use to insert the table rows into the appropriate page location:
 

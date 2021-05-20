@@ -37,7 +37,7 @@ Installers are available for Linux, Windows, and Mac OS X. Download your desired
 
 If you're using DreamFactory's commercial Bitnami edition and would like to configure Oracle, follow these instructions:
 
-* [Configuring Oracle with Bitnami](./bitnami-oracle.md)
+* [Configuring Oracle with Bitnami](./#using-the-bitnami-installers)
 
 ### Cloud Images
 
@@ -57,13 +57,13 @@ This guide is under heavy development, and certain parts are incomplete. We sugg
 
 Server configuration is going to vary according to your operating system. To ensure the instructions are as specific and straightforward as possible, we've broken them out into subchapters:
 
-* [Debian / Ubuntu](./ubuntu-server-configuration.md)
+* [Debian / Ubuntu](./#configuring-your-ubuntu-server)
 
 If you plan on using PHP in conjunction with one of the following databases, please review the pertinent subchapters presented below:
 
-* [Microsoft SQL Server](./microsoft-sql-server.md)
-* [SAP SQL Anywhere](./sap-sql-anywhere.md)
-* [Firebird](./firebird.md)
+* [Microsoft SQL Server](./#configuring-microsoft-sql-server-for-dreamfactory)
+* [SAP SQL Anywhere](./#configuring-sap-sql-anywhere)
+* [Firebird](./#configuring-firebird-for-dreamfactory)
 
 ### Server Hardware Requirements
 
@@ -933,6 +933,14 @@ Once done, save the changes and restart your web server. Confirm PHP's CLI envir
     sqlanywhere
 		
 Next, confirm PHP's web environment recognizes the module by creating a file named phpinfo.php in your web document root directory and adding the following
+
+## Configuring Your Ubuntu Server
+
+## Configuring the Web Server
+
+### Apache
+
+### NGINX
 
 ## Useful System Administration Notes
 
