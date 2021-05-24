@@ -1,8 +1,12 @@
-# Setting Up a Local Development Environment
+# Getting Started with DreamFactory
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f60d78a3-0f5f-4819-bfa4-308d70154a02/deploy-status)](https://app.netlify.com/sites/frosty-goldberg-9f8df9/deploys)
+
+## Configuring Your Development Environment
 
 _The Following Instructions are based on an installation in an Ubuntu Virtual Machine, but this project can be run in any 64bit OS_
 
-## Installing Hugo
+### Installing Hugo
 
 We'll use a Vagrant Ubuntu 18.04 VM to run the book website locally:
 
@@ -49,7 +53,7 @@ hugo version
 hugo v0.83.1-5AFE0A57+extended linux/amd64 BuildDate=2021-05-02T14:38:05Z VendorInfo=gohugoio
 ```
 
-## Regarding node and npm
+### Regarding node and npm
 
 You will need a Node version above 6 for the required npm packages. An easy way to update is using the `n` package:
 
@@ -59,7 +63,7 @@ sudo npm install -g n
 sudo n stable
 ```
 
-## Cloning and Booting up the Web Server
+### Cloning and Booting up the Web Server
 
 Return to your VM home directory and clone the book repository:
 
@@ -85,25 +89,23 @@ Start the Hugo server using `hugo server --bind 0.0.0.0` and go to http://localh
 
 ## DreamFactory Styling:
 
-Primary Color: `$primary: #6666CC;`
-Tip Success Color: `$success: #41BA83;`
-Tip Warning Color: `$warning: #E7C000;`
-Tip Danger Color `$danger: #CC0202;`
+The scss variables can be changed in `assets/scss/_variables_project.scss`.
 
-Font is lato:
+* Primary Color: `$primary: #6666CC;`
+* Tip Success Color: `$success: #41BA83;`
+* Tip Warning Color: `$warning: #E7C000;`
+* Tip Danger Color `$danger: #CC0202;`
+
+The font is lato:
 
 ```
 $google_font_name: "Lato";
 $google_font_family: "Lato:300,300i,400,400i,700,700i";
 ```
 
-## Making Changes to dreamfactory-book-v2
-
-* scss variables can be changed in assets/scss/_variables_project.scss
-
 ### Favicons
 
-* Are located in static/favicons
+* Favicons are located in static/favicons
 
 ### Footer
 
@@ -111,7 +113,8 @@ $google_font_family: "Lato:300,300i,400,400i,700,700i";
 
 ### Homepage
 
-* The homepage is the _index.html localted in the root of the `content/en` directory. You can use the following layout to structure your page:
+* The homepage is in `_index.html`, located in the root of the `content/en` directory. You can use the following layout to structure your page:
+
 ```
 /// Hero Section (Full View Height)
 {{< blocks/cover title="Main Title" height="full" color="<color></color>" >}}
@@ -163,6 +166,7 @@ Slugs are hyphonated lowercase versions of the folder names.
 Note that you will most likely need to play around with the height, width, and viewbox in the `<svg>` tag in the inspector until you have something thats fits nicely.
 
 ### Making Alerts
+
 ```
 {{< alert >}}This is an alert.{{< /alert >}}
 {{< alert title="Note" >}}This is an alert with a title.{{< /alert >}}
@@ -175,6 +179,7 @@ Note that you will most likely need to play around with the height, width, and v
 ### Navbar Changes
 
 * Navbar changes (internal links)can be made by going to the relevant root _index.md file (eg content/en/about) and adding a title and linkTitle.
+
 ```
 ---
 title: Getting Started With DreamFactory
@@ -184,8 +189,11 @@ menu:
     weight: 10
 ---
 ```
+
 `weight` corresponds to the order of tabs from the left.
+
 * External hyperlinks can be added to the navbar by adding the following in the config.toml file
+
 ```
 [[menu.main]]
     name = "<title of link>"
@@ -193,6 +201,7 @@ menu:
     url = "https://<site>"
     pre = "<i class='fas fa-link'></i>"
 ```
+
 `pre` will show on the left of the link, `post` will show on the right of the link
 
 * The default navbar setting on the homepage is to match the background color until you scroll down 1 viewport, this can be removed by deleting the `td-navbar-cover` class from navbar.html
@@ -202,12 +211,14 @@ menu:
 * On netlify, after choosing "New site from Git" and selecting your repo, you will need to apply the following deploy settings:
 1. The build command should specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`
 2. In advanced build settings you will need two new variables:
+
 ```
 HUGO_VERSION 0.83.1
 HUGO_ENV production
 ```
 
 * Make sure that your package.json has the following dependencies in it:
+
 ```
 "devDependencies": {
     "autoprefixer": "^9.8.6",
@@ -215,6 +226,7 @@ HUGO_ENV production
     "postcss": "^8.0.0"
   }
 ```
+
 `postcss` and `postcss-cli` should be set to versions 8 or higher.
 
 ## Troubleshooting
