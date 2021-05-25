@@ -61,3 +61,12 @@
 /docs/chapter08/ /docs/securing-your-dreamfactory-environment/ 301
 /docs/chapter08/environment-this-installation-is-running-in-local-production-default.html /docs/securing-your-dreamfactory-environment/#environment-this-installation-is-running-in-local-production-default 301
 /docs/chapter08/security.html /docs/securing-your-dreamfactory-environment/#security 301
+
+/docs/chapter09/ /docs/performance-considerations/ 301
+/docs/chapter09/adding-redis-caching.html /docs/performance-considerations/#adding-redis-caching 301
+/docs/chapter09/compiling-the-dreamfactory-code-with-opcache.html /docs/performance-considerations/##compiling-the-dreamfactory-code-with-opcache 301
+/docs/chapter09/conclusion.html /docs/performance-considerations/#conclusion 301
+/docs/chapter09/load-balancing-your-dreamfactory-environment.html /docs/performance-considerations/#load-balancing-your-dreamfactory-environment 301
+/docs/chapter09/optimizing-dreamfactorys-database-apis.html /docs/performance-considerations/#optimizing-dreamfactorys-database-apis 301
+/docs/chapter09/performance-benchmarks.html /docs/performance-considerations/#performance-benchmarks 301
+/docs/chapter09/third-party-resources.html /docs/performance-considerations/#third-party-resources 301
