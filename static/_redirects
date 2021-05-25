@@ -80,3 +80,20 @@
 /docs/chapter11/creating-a-simple-status-dashboard.html /docs/demo-dreamfactory-applications/#creating-a-simple-status-dashboard 301
 /docs/chapter11/dynamic-dashboard-with-pagination-sorting-and-filtering.html /docs/demo-dreamfactory-applications/#dynamic-dashboard-with-pagination-sorting-and-filtering 301
 /docs/chapter11/progressive-web-application.html /docs/demo-dreamfactory-applications/#progressive-web-application 301
+
+/docs/chapter12/ /docs/creating-file-system-apis/ 301
+/docs/chapter12/creating-an-aws-rest-api.html /docs/creating-file-system-apis/#creating-an-aws-s3-rest-api 301
+/docs/chapter12/creating-an-sftp-rest-api.html /docs/creating-file-system-apis/#creating-an-sftp-rest-api 301
+
+/docs/chapter13/ /docs/integrating-salesforce-data/301
+/docs/chapter13/conclusion.html /docs/integrating-salesforce-data/#conclusion 301
+/docs/chapter13/configuring-the-salesforce-service.html /docs/integrating-salesforce-data/#configuring-the-salesforce-service 301
+/docs/chapter13/interacting-with-the-salesforce-api.html /docs/integrating-salesforce-data/#interacting-with-the-salesforce-api 301
+
+/docs/chapter14/ /docs/using-remote-http-and-soap-connectors/ 301
+/docs/chapter14/configuring-the-http-service-connector.html /docs/using-remote-http-and-soap-connectors/#configuring-the-http-service-connector 301
+/docs/chapter14/converting-soap-to-rest.html /docs/using-remote-http-and-soap-connectors/#converting-soap-to-rest 301
+/docs/chapter14/proxying-a-remote-http-api.html /docs/using-remote-http-and-soap-connectors/#proxying-a-remote-http-api 301
+/docs/chapter14/video-based-learning.html /docs/using-remote-http-and-soap-connectors/#video-based-learning 301
+
+
