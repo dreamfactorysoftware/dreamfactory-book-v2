@@ -28,6 +28,15 @@
 /docs/chapter03/obfuscating-a-table-endpoint.html /docs/generating-a-database-backed-api/#obfuscating-a-table-endpoint
 /docs/chapter03/troubleshooting.html /docs/generating-a-database-backed-api/#troubleshooting
 
+/docs/chapter04/ /docs/authenticating-your-apis/
+/docs/chapter04/adding-okta-users-to-the-dreamfactory-application.html /docs/authenticating-your-apis/#adding-okta-users-to-the-dreamfactory-application
+/docs/chapter04/authenticating-with-azure-active-directory-oauth.html /docs/authenticating-your-apis/#authenticating-with-azure-active-directory-oauth
+/docs/chapter04/authenticating-with-basic-http-authentication.html /docs/authenticating-your-apis/#authenticating-with-basic-http-authentication
+/docs/chapter04/authenticating-with-okta.html /docs/authenticating-your-apis/#authenticating-with-okta
+/docs/chapter04/authenticating-with-openid-connect.html /docs/authenticating-your-apis/#authenticating-with-openid-connect
+/docs/chapter04/authentication-fundamentals.html /docs/authenticating-your-apis/#authentication-fundamentals
+/docs/chapter04/debugging-ldap-and-active-directory.html /docs/authenticating-your-apis/#debugging-ldap-and-active-directory
+/docs/chapter04/managing-user-profiles.html /docs/authenticating-your-apis/#managing-user-profiles
 
 /docs/chapter06/ /docs/integrating-business-logic-into-your-apis/
 /docs/chapter06/resources-available-to-scripts.html /docs/integrating-business-logic-into-your-apis/#resources-available-to-scripts 301
