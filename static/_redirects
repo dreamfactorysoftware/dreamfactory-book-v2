@@ -1,42 +1,57 @@
-/docs/chapter01/ /docs/introducing-rest-and-dreamfactory/
-/docs/chapter01/introducing-rest.html /docs/introducing-rest-and-dreamfactory/#introducing-rest
-/docs/chapter01/dissecting-rest-requests-and-responses.html /docs/introducing-rest-and-dreamfactory/#dissecting-rest-requests-and-responses
-/docs/chapter01/introducing-dreamfactory.html /docs/introducing-rest-and-dreamfactory/#introducing-dreamfactory
-/docs/chapter01/conclusion.html /docs/introducing-rest-and-dreamfactory/#conclusion
+/docs/chapter01/ /docs/introducing-rest-and-dreamfactory/ 301
+/docs/chapter01/introducing-rest.html /docs/introducing-rest-and-dreamfactory/#introducing-rest 301
+/docs/chapter01/dissecting-rest-requests-and-responses.html /docs/introducing-rest-and-dreamfactory/#dissecting-rest-requests-and-responses 301
+/docs/chapter01/introducing-dreamfactory.html /docs/introducing-rest-and-dreamfactory/#introducing-dreamfactory 301
+/docs/chapter01/conclusion.html /docs/introducing-rest-and-dreamfactory/#conclusion 301
 
-/docs/chapter02/ /docs/installing-and-configuring-dreamfactory/
-/docs/chapter02/choosing-a-dreamfactory-version.html /docs/installing-and-configuring-dreamfactory/#choosing-a-dreamfactory-version
-/docs/chapter02/installing-and-configuring-dreamfactory-from-source.html /docs/installing-and-configuring-dreamfactory/#installing-and-configuring-dreamfactory-from-source
-/docs/chapter02/installing-and-configuring-dreamfactory-on-centos.html /docs/installing-and-configuring-dreamfactory/#installing-and-configuring-dreamfactory-on-centos
-/docs/chapter02/choosing-an-http-client.html /docs/installing-and-configuring-dreamfactory/#choosing-an-http-client
-/docs/chapter02/running-dreamfactory-in-a-high-availability-load-balanced-environment.html /docs/installing-and-configuring-dreamfactory/#running-dreamfactory-in-a-high-availability-load-balanced-environment
-/docs/chapter02/bitnami-oracle.html /docs/installing-and-configuring-dreamfactory/#using-the-bitnami-installers
-/docs/chapter02/conclusion.html /docs/installing-and-configuring-dreamfactory/#conclusion
-/docs/chapter02/firebird.html /docs/installing-and-configuring-dreamfactory/#configuring-firebird-for-dreamfactory
-/docs/chapter02/microsoft-sql-server.html /docs/installing-and-configuring-dreamfactory/#configuring-microsoft-sql-server-for-dreamfactory
-/docs/chapter02/sap-sql-anywhere.html /docs/installing-and-configuring-dreamfactory/#configuring-sap-sql-anywhere
-/docs/chapter02/ubuntu-server-configuration.html /docs/installing-and-configuring-dreamfactory/#configuring-your-ubuntu-server
+/docs/chapter02/ /docs/installing-and-configuring-dreamfactory/ 301
+/docs/chapter02/choosing-a-dreamfactory-version.html /docs/installing-and-configuring-dreamfactory/#choosing-a-dreamfactory-version 301
+/docs/chapter02/installing-and-configuring-dreamfactory-from-source.html /docs/installing-and-configuring-dreamfactory/#installing-and-configuring-dreamfactory-from-source 301
+/docs/chapter02/installing-and-configuring-dreamfactory-on-centos.html /docs/installing-and-configuring-dreamfactory/#installing-and-configuring-dreamfactory-on-centos 301
+/docs/chapter02/choosing-an-http-client.html /docs/installing-and-configuring-dreamfactory/#choosing-an-http-client 301
+/docs/chapter02/running-dreamfactory-in-a-high-availability-load-balanced-environment.html /docs/installing-and-configuring-dreamfactory/#running-dreamfactory-in-a-high-availability-load-balanced-environment 301
+/docs/chapter02/bitnami-oracle.html /docs/installing-and-configuring-dreamfactory/#using-the-bitnami-installers 301
+/docs/chapter02/conclusion.html /docs/installing-and-configuring-dreamfactory/#conclusion 301
+/docs/chapter02/firebird.html /docs/installing-and-configuring-dreamfactory/#configuring-firebird-for-dreamfactory 301
+/docs/chapter02/microsoft-sql-server.html /docs/installing-and-configuring-dreamfactory/#configuring-microsoft-sql-server-for-dreamfactory 301
+/docs/chapter02/sap-sql-anywhere.html /docs/installing-and-configuring-dreamfactory/#configuring-sap-sql-anywhere 301
+/docs/chapter02/ubuntu-server-configuration.html /docs/installing-and-configuring-dreamfactory/#configuring-your-ubuntu-server 301
 
-/docs/chapter03/ /docs/generating-a-database-backed-api/
-/docs/chapter03/conclusion.html /docs/generating-a-database-backed-api/#conclusion
-/docs/chapter03/creating-a-role.html /docs/generating-a-database-backed-api/#creating-a-role
-/docs/chapter03/creating-an-application.html /docs/generating-a-database-backed-api/#creating-an-application
-/docs/chapter03/generating-a-mysql-backed-api.html /docs/generating-a-database-backed-api/#generating-a-mysql-backed-api
-/docs/chapter03/interacting-with-the-api.html /docs/generating-a-database-backed-api/#interacting-with-the-api
-/docs/chapter03/interacting-with-your-api-via-the-api-docs-tab.html /docs/generating-a-database-backed-api/#interacting-with-your-api-via-the-api-docs-tab
-/docs/chapter03/interaction-using-postman.html /docs/generating-a-database-backed-api/#interaction-using-postman
-/docs/chapter03/obfuscating-a-table-endpoint.html /docs/generating-a-database-backed-api/#obfuscating-a-table-endpoint
-/docs/chapter03/troubleshooting.html /docs/generating-a-database-backed-api/#troubleshooting
+/docs/chapter03/ /docs/generating-a-database-backed-api/ 301
+/docs/chapter03/conclusion.html /docs/generating-a-database-backed-api/#conclusion 301
+/docs/chapter03/creating-a-role.html /docs/generating-a-database-backed-api/#creating-a-role 301
+/docs/chapter03/creating-an-application.html /docs/generating-a-database-backed-api/#creating-an-application 301
+/docs/chapter03/generating-a-mysql-backed-api.html /docs/generating-a-database-backed-api/#generating-a-mysql-backed-api 301
+/docs/chapter03/interacting-with-the-api.html /docs/generating-a-database-backed-api/#interacting-with-the-api 301
+/docs/chapter03/interacting-with-your-api-via-the-api-docs-tab.html /docs/generating-a-database-backed-api/#interacting-with-your-api-via-the-api-docs-tab 301
+/docs/chapter03/interaction-using-postman.html /docs/generating-a-database-backed-api/#interaction-using-postman 301
+/docs/chapter03/obfuscating-a-table-endpoint.html /docs/generating-a-database-backed-api/#obfuscating-a-table-endpoint 301
+/docs/chapter03/troubleshooting.html /docs/generating-a-database-backed-api/#troubleshooting 301
 
-/docs/chapter04/ /docs/authenticating-your-apis/
-/docs/chapter04/adding-okta-users-to-the-dreamfactory-application.html /docs/authenticating-your-apis/#adding-okta-users-to-the-dreamfactory-application
-/docs/chapter04/authenticating-with-azure-active-directory-oauth.html /docs/authenticating-your-apis/#authenticating-with-azure-active-directory-oauth
-/docs/chapter04/authenticating-with-basic-http-authentication.html /docs/authenticating-your-apis/#authenticating-with-basic-http-authentication
-/docs/chapter04/authenticating-with-okta.html /docs/authenticating-your-apis/#authenticating-with-okta
-/docs/chapter04/authenticating-with-openid-connect.html /docs/authenticating-your-apis/#authenticating-with-openid-connect
-/docs/chapter04/authentication-fundamentals.html /docs/authenticating-your-apis/#authentication-fundamentals
-/docs/chapter04/debugging-ldap-and-active-directory.html /docs/authenticating-your-apis/#debugging-ldap-and-active-directory
-/docs/chapter04/managing-user-profiles.html /docs/authenticating-your-apis/#managing-user-profiles
+/docs/chapter04/ /docs/authenticating-your-apis/ 301
+/docs/chapter04/adding-okta-users-to-the-dreamfactory-application.html /docs/authenticating-your-apis/#adding-okta-users-to-the-dreamfactory-application 301
+/docs/chapter04/authenticating-with-azure-active-directory-oauth.html /docs/authenticating-your-apis/#authenticating-with-azure-active-directory-oauth 301
+/docs/chapter04/authenticating-with-basic-http-authentication.html /docs/authenticating-your-apis/#authenticating-with-basic-http-authentication 301
+/docs/chapter04/authenticating-with-okta.html /docs/authenticating-your-apis/#authenticating-with-okta 301
+/docs/chapter04/authenticating-with-openid-connect.html /docs/authenticating-your-apis/#authenticating-with-openid-connect 301
+/docs/chapter04/authentication-fundamentals.html /docs/authenticating-your-apis/#authentication-fundamentals 301
+/docs/chapter04/debugging-ldap-and-active-directory.html /docs/authenticating-your-apis/#debugging-ldap-and-active-directory 301
+/docs/chapter04/managing-user-profiles.html /docs/authenticating-your-apis/#managing-user-profiles 301
 
-/docs/chapter06/ /docs/integrating-business-logic-into-your-apis/
+/docs/chapter05/ /docs/creating-scripted-services-and-endpoints/ 301
+/docs/chapter05/creating-a-scripted-service.html /docs/creating-scripted-services-and-endpoints/ 301
+
+/docs/chapter06/ /docs/integrating-business-logic-into-your-apis/ 301
 /docs/chapter06/resources-available-to-scripts.html /docs/integrating-business-logic-into-your-apis/#resources-available-to-scripts 301
+/docs/chapter06/adding-http-headers-query-parameters-or-curl-options-to-api-calls.html /docs/integrating-business-logic-into-your-apis/#adding-http-headers-query-parameters-or-curl-options-to-api-calls 301
+/docs/chapter06/creating-standalone-scripted-services.html /docs/integrating-business-logic-into-your-apis/#creating-standalone-scripted-services 301
+/docs/chapter06/example-scripts.html /docs/integrating-business-logic-into-your-apis/#example-scripts 301
+/docs/chapter06/modifying-existing-api-endpoint-logic.html /docs/integrating-business-logic-into-your-apis/#modifying-existing-api-endpoint-logic 301
+/docs/chapter06/more-information.html /docs/integrating-business-logic-into-your-apis/#more-information 301
+/docs/chapter06/queued-scripting-setup.html /docs/integrating-business-logic-into-your-apis/#queued-scripting-setup 301
+/docs/chapter06/scheduled-tasks.html /docs/integrating-business-logic-into-your-apis/#scheduled-tasks 301
+/docs/chapter06/stopping-script-execution.html /docs/integrating-business-logic-into-your-apis/#stopping-script-execution 301
+/docs/chapter06/supported-scripting-engines.html /docs/integrating-business-logic-into-your-apis/#supported-scripting-engines 301
+/docs/chapter06/using-third-party-libraries.html /docs/integrating-business-logic-into-your-apis/#using-third-party-libraries 301
+
+
