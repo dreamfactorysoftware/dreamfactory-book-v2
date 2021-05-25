@@ -70,3 +70,13 @@
 /docs/chapter09/optimizing-dreamfactorys-database-apis.html /docs/performance-considerations/#optimizing-dreamfactorys-database-apis 301
 /docs/chapter09/performance-benchmarks.html /docs/performance-considerations/#performance-benchmarks 301
 /docs/chapter09/third-party-resources.html /docs/performance-considerations/#third-party-resources 301
+
+/docs/chapter10/ /docs/installing-dreamfactory-on-raspberry-pi/ 301
+/docs/chapter10/home-automation-ideas.html /docs/installing-dreamfactory-on-raspberry-pi/#home-automation-ideas 301
+/docs/chapter10/installing-dreamfactory.html /docs/installing-dreamfactory-on-raspberry-pi/#installing-dreamfactory 301
+
+/docs/chapter11/ /docs/demo-dreamfactory-applications/ 301
+/docs/chapter11/conclusion.html /docs/demo-dreamfactory-applications/#conclusion 301
+/docs/chapter11/creating-a-simple-status-dashboard.html /docs/demo-dreamfactory-applications/#creating-a-simple-status-dashboard 301
+/docs/chapter11/dynamic-dashboard-with-pagination-sorting-and-filtering.html /docs/demo-dreamfactory-applications/#dynamic-dashboard-with-pagination-sorting-and-filtering 301
+/docs/chapter11/progressive-web-application.html /docs/demo-dreamfactory-applications/#progressive-web-application 301
