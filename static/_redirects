@@ -54,4 +54,10 @@
 /docs/chapter06/supported-scripting-engines.html /docs/integrating-business-logic-into-your-apis/#supported-scripting-engines 301
 /docs/chapter06/using-third-party-libraries.html /docs/integrating-business-logic-into-your-apis/#using-third-party-libraries 301
 
+/docs/chapter07/ /docs/limiting-and-logging-api-requests/ 301
+/docs/chapter07/dreamfactory-api-rate-limiting.html /docs/limiting-and-logging-api-requests/#dreamfactory-api-rate-limiting 301
+/docs/chapter07/logging.html /docs/limiting-and-logging-api-requests/#logging 301
 
+/docs/chapter08/ /docs/securing-your-dreamfactory-environment/ 301
+/docs/chapter08/environment-this-installation-is-running-in-local-production-default.html /docs/securing-your-dreamfactory-environment/#environment-this-installation-is-running-in-local-production-default 301
+/docs/chapter08/security.html /docs/securing-your-dreamfactory-environment/#security 301
