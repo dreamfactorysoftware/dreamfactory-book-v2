@@ -1,8 +1,10 @@
+/docs/chapter01/ /docs/introducing-rest-and-dreamfactory/
 /docs/chapter01/introducing-rest.html /docs/introducing-rest-and-dreamfactory/#introducing-rest
 /docs/chapter01/dissecting-rest-requests-and-responses.html /docs/introducing-rest-and-dreamfactory/#dissecting-rest-requests-and-responses
 /docs/chapter01/introducing-dreamfactory.html /docs/introducing-rest-and-dreamfactory/#introducing-dreamfactory
 /docs/chapter01/conclusion.html /docs/introducing-rest-and-dreamfactory/#conclusion
 
+/docs/chapter02/ /docs/installing-and-configuring-dreamfactory/
 /docs/chapter02/choosing-a-dreamfactory-version.html /docs/installing-and-configuring-dreamfactory/#choosing-a-dreamfactory-version
 /docs/chapter02/installing-and-configuring-dreamfactory-from-source.html /docs/installing-and-configuring-dreamfactory/#installing-and-configuring-dreamfactory-from-source
 /docs/chapter02/installing-and-configuring-dreamfactory-on-centos.html /docs/installing-and-configuring-dreamfactory/#installing-and-configuring-dreamfactory-on-centos
@@ -15,4 +17,5 @@
 /docs/chapter02/sap-sql-anywhere.html /docs/installing-and-configuring-dreamfactory/#configuring-sap-sql-anywhere
 /docs/chapter02/ubuntu-server-configuration.html /docs/installing-and-configuring-dreamfactory/#configuring-your-ubuntu-server
 
+/docs/chapter06/ /docs/integrating-business-logic-into-your-apis/
 /docs/chapter06/resources-available-to-scripts.html /docs/integrating-business-logic-into-your-apis/#resources-available-to-scripts 301
