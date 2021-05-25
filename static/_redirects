@@ -112,3 +112,48 @@
 /docs/chapter17/ /docs/modifying-the-service-definition/ 301
 /docs/chapter17/exporting-api-documentation.html /docs/modifying-the-service-definition/#exporting-api-documentation 301
 /docs/chapter17/modifying-existing-api-documentation.html /docs/modifying-the-service-definition/#modifying-existing-api-documentation 301
+
+/docs/appendix-a/ /docs/appendices/a-configuration-parameter-reference/ 301
+/docs/appendix-a/api.html /docs/appendices/a-configuration-parameter-reference/#api 301
+/docs/appendix-a/cache.html /docs/appendices/a-configuration-parameter-reference/#cache 301
+/docs/appendix-a/database-settings.html /docs/appendices/a-configuration-parameter-reference/#database-settings 301
+/docs/appendix-a/event-broadcasting.html /docs/appendices/a-configuration-parameter-reference/#event-broadcasting 301
+/docs/appendix-a/freetds-configuration-linux-and-os-x-only.html /docs/appendices/a-configuration-parameter-reference/#freetds-configuration-linux-and-os-x-only 301
+/docs/appendix-a/limits.html /docs/appendices/a-configuration-parameter-reference/#limits 301
+/docs/appendix-a/other-settings.html /docs/appendices/a-configuration-parameter-reference/#other-settings 301
+/docs/appendix-a/queuing.html /docs/appendices/a-configuration-parameter-reference/#queuing 301
+/docs/appendix-a/server-side-scripting.html /docs/appendices/a-configuration-parameter-reference/#server-side-scripting 301
+/docs/appendix-a/storage.html /docs/appendices/a-configuration-parameter-reference/#storage 301
+/docs/appendix-a/user-management.html /docs/appendices/a-configuration-parameter-reference/#user-management 301
+
+/docs/appendix-b/ /docs/appendices/b-security-faq/ 301
+
+/docs/appendix-c/ /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/ 301
+/docs/appendix-c/api-automation-platform.html /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/#api-automation-platform 301
+/docs/appendix-c/data-portability.html /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/#data-portability 301
+/docs/appendix-c/data-protection-officer-dpo.html /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/#data-protection-officer-dpo 301
+/docs/appendix-c/executive-overview.html /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/#executive-overview 301
+/docs/appendix-c/general-data-protection-regulation-gdpr.html /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/#general-data-protection-regulation-gdpr 301
+/docs/appendix-c/pii-personally-identifiable-information.html /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/#pii-personally-identifiable-information 301
+/docs/appendix-c/right-to-be-forgotten.html /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/#right-to-be-forgotten 301
+/docs/appendix-c/summary.html /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/#summary 301
+/docs/appendix-c/what-databases-are-we-talking-about.html /docs/appendices/c-leveraging-an-api-gateway-for-gdpr-readiness/#what-databases-are-we-talking-about 301
+
+/docs/appendix-d/ /docs/appendices/d-architecture-faq/ 301
+/docs/appendix-d/access-control.html /docs/appendices/d-architecture-faq/#access-control 301
+/docs/appendix-d/anatomy-of-a-storage-call.html /docs/appendices/d-architecture-faq/#anatomy-of-a-storage-call 301
+/docs/appendix-d/anatomy-of-an-api-call.html /docs/appendices/d-architecture-faq/#anatomy-of-an-api-call 301
+/docs/appendix-d/api-processing.html /docs/appendices/d-architecture-faq/#api-processing 301
+/docs/appendix-d/basic-system-architecture.html /docs/appendices/d-architecture-faq/#basic-system-architecture 301
+/docs/appendix-d/database-and-file-storage-access.html /docs/appendices/d-architecture-faq/#database-and-file-storage-access 301
+/docs/appendix-d/dreamfactory-components.html /docs/appendices/d-architecture-faq/#dreamfactory-components 301
+/docs/appendix-d/in-conclusion.html /docs/appendices/d-architecture-faq/#in-conclusion 301
+/docs/appendix-d/routing.html /docs/appendices/d-architecture-faq/#routing 301
+/docs/appendix-d/server-side-scripting.html /docs/appendices/d-architecture-faq/#server-side-scripting 301
+
+/docs/appendix-e/ /docs/appendices/e-scalability/ 301
+/docs/appendix-e/cloud-scaling.html /docs/appendices/e-scalability/#cloud-scaling 301
+/docs/appendix-e/conclusion.html /docs/appendices/e-scalability/#conclusion 301
+/docs/appendix-e/horizontal-scaling.html /docs/appendices/e-scalability/#horizontal-scaling 301
+/docs/appendix-e/performance-benchmarks.html /docs/appendices/e-scalability/#performance-benchmarks 301
+/docs/appendix-e/vertical-scaling.html /docs/appendices/e-scalability/#vertical-scaling 301
