@@ -400,6 +400,113 @@ As with authenticated users, you'll pass along a payload that looks like this:
 
 For more information about managing custom user attributes, check out [this wiki page](https://wiki.dreamfactory.com/DreamFactory/Tutorials/Managing_user_custom_data).
 
+## Configuring DreamFactory with LDAP and LDAPS
+
+Setting up LDAP-based authentication into your DreamFactory workflow is a simple process, and even with LDAPS requries little configuration on the client (DreamFactory) side. 
+
+### Testing your LDAP connection
+
+Before actually creating an LDAP service, the best way to test that DreamFactory is able to connect to your LDAP server is by creating the following script from within your DreamFactory environment.
+
+`vim connection.php`
+```php
+<?php
+
+$connection = ldap_connect('<YourLDAPURI>');
+        ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, 3);
+        ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
+
+$search = ldap_search($connection, '<YourBaseDN>', '(uid=<someUser>)');
+
+$result = ldap_get_entries($connection, $search);
+   if (isset($result[0]['dn'])) {
+     echo $result[0]['dn'];
+    }
+```
+The LDAP uri will be along the lines of `ldap://host:port(if necessary)`
+The BaseDN will be, for example, `dc=practice,dc=net`
+The uid can be any user you wish to test with.
+
+Save and run `php connection.php` and, if succesful, you will get a return looking like:
+```
+`uid=tomo,ou=Employee,dc=practice,dc=net`
+```
+This shows that DreamFactory can see your LDAP server, and we will be able to configure our service.
+
+### Creating an LDAP Service.
+
+When creating a standard LDAP connector on DreamFactory, the config tab will have a a few fields for your to fill out:
+
+* Default Role: The role that will be assigned to all users signing in using this LDAP service
+* Role per App: Here you can configure more details on which App per Role that users logging in via this service will have.
+* Host: The host name of your ldap server (ldap://....)
+* Base DN: the base DN for the domain, i.e `dc=foo,dc=bar`
+* Account Suffix: This is optional, but for example can be the organizational units associated with the domain.
+
+A completed form will look something like:
+
+<p>
+    <img src="/images/04/ldap-config.png" />
+</p>
+
+Now log out of DreamFactory, and you will notice that the login page now has a "Services" dropdown.
+
+<p>
+    <img src="/images/04/ldap-login.png" />
+</p>
+
+Select your new ldap authentication method, and you will be able to login with the username (uid) and userPassword.
+
+If you log out, and log back in as the administrator, you will now notice that in the Users Tab, the user you signed in with over ldap has been added.
+
+<p>
+    <img src="/images/04/ldap-user.png" />
+</p>
+
+### Creating an LDAPS Service
+
+For LDAPS, the process is much the same as described above, however you will need to go into your DreamFactory server, and make the following change / addition to `/etc/ldap/ldap.conf`
+
+```
+TLS_REQCERT allow
+```
+(you can also use `TLS_REQCERT never`)
+
+Now your php test script should be succesful, as will creating the service. Remember that your host will be ldap**s**:// and your port will also be different to ldap (default for ldaps is 636).
+
+### API Endpoint for LDAP(S)
+
+You can make the following API call for your ldap service:
+```
+POST https://your-url/api/v2/user/session?service={ldap_service_name}
+```
+and in the body, as JSON:
+```json
+{
+    "username": "uid",
+    "password": "userPassword"
+}
+```
+An example response would be:
+```json
+{
+    "session_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmNDdmNTcxN2ZlNzFiYjg0YWQ3ZDg4ZDBjYjEzMmI5NCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvYXBpL3YyL3VzZXIvc2Vzc2lvbiIsImlhdCI6MTYyMjcwODcwMCwiZXhwIjoxNjIyNzk1MTAwLCJuYmYiOjE2MjI3MDg3MDAsImp0aSI6IkhKWnsfgafgafeghaTFRvVmRzUlAiLCJ1c2VyX2lkIjo5LCJmb3JldmVyIjpmYWxzZX0.Fz6IJolnuuQ0i8bT0HJZm1eALrtmmi6my4mewg2TG78",
+    "session_id": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmNDdmNTcxN2ZlNzFiYjg0YWQ3ZDg4ZDBjYjEzMmI5NCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvYXBpL3YyL3VzZXIvc2VsfgafhgsImlhdCI6MTYyMjcwODcwMCwiZXhwIjoxNjIyNzk1MTAwLCJuYmYiOjE2MjI3MDg3MDAsImp0aSI6IkhKWndPRVNBTFRvVmRzUlAiLCJ1c2VyX2lkIjo5LCJmb3JldmVyIjpmYWxzZX0.Fz6IJolnuuQ0i8bT0HJZm1eALrtmmi6my4mewg2TG78",
+    "id": 9,
+    "name": "Tomo Norman",
+    "first_name": "Tomo",
+    "last_name": "norman",
+    "email": "tomo+dreamfactoryldap@practice.net",
+    "is_sys_admin": false,
+    "last_login_date": "2021-06-03 08:25:00",
+    "host": "ef362f431a16",
+    "role": "ldapuser",
+    "role_id": 12,
+    "groupMembership": [],
+    "is_root_admin": false
+}
+```
+
 ## Debugging LDAP and Active Directory
 
 You can use the following PHP script to determine whether your host, base DN, and credentials are correct:
