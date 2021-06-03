@@ -225,13 +225,11 @@ This will start a simple PHP server running on `127.0.0.1` port `8000`. Open you
 
 It is often helpful to have different configuration values based on the environment where the application is running. For example, you may wish to use a different cache driver locally than you do on your production server.
 
-To make this a cinch, Laravel utilizes the [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vance Lucas. In a fresh Laravel installation, the root directory of your application will contain a `.env.example` file. If you install Laravel via Composer, this file will automatically be renamed to `.env`. Otherwise, you should rename the file manually. For more information, please see the official documentation from Laravel.
-
-[Laravel Docs on .env](https://laravel.com/docs/5.5/configuration#environment-configuration)
+To make this a cinch, Laravel utilizes the [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vance Lucas. In a fresh Laravel installation, the root directory of your application will contain a `.env.example` file. If you install Laravel via Composer, this file will automatically be renamed to `.env`. Otherwise, you should rename the file manually. For more information, please see the [official Laravel documentation](https://laravel.com/docs/5.5/configuration#environment-configuration)
 
 ### Enabling Debugging and Logging
 
-By default, DreamFactory does not enable debugging. Debugging, while a great tool to help monitor your application, can be a large performance sink inside of a production environment. In the example `.env` file below you can see where these options live.
+By default, DreamFactory does not enable debugging due to performance issues. However, it can easily be enabled. In the example `.env` file below you can see where these options live.
 
 ```php
 ##==============================================================================
@@ -934,14 +932,6 @@ Once done, save the changes and restart your web server. Confirm PHP's CLI envir
 		
 Next, confirm PHP's web environment recognizes the module by creating a file named phpinfo.php in your web document root directory and adding the following
 
-## Configuring Your Ubuntu Server
-
-## Configuring the Web Server
-
-### Apache
-
-### NGINX
-
 ## Useful System Administration Notes
 
 ### Creating a New Sudo User
@@ -970,11 +960,87 @@ Next, you'll add the user to the `sudo` group:
 
     $ usermod -aG sudo wjgilmore
 
-Once done, you can
+Once done, you can execute elevated commands by prefixing the command with `sudo`:
+
+	$ sudo ./build_system.sh
 
 See these resources for more information:
 
 * https://linuxize.com/post/how-to-create-a-sudo-user-on-debian/
+
+## Upgrading Your DreamFactory Instance
+
+DreamFactory very much falls into the "set it and forget it" software category, often serving APIs in the background for months if not years without further human intervention. Nevertheless, we encourage users to regularly upgrade to take advantage of new features, not to mention enhanced performance and stability. Also, DreamFactory relies upon a great many dependencies such as PHP which are occasionally associated with security vulnerabilities. Accordingly, you'll want to take care to ensure the operating system and dependecies are patched.
+
+Fortunately, upgrading DreamFactory to the latest version is a pretty straightforward process. In this section we'll walk you through the process.
+### Step #1. Back Up Your Current DreamFactory Configuration Settings
+
+A file named `.env` resides in your current DreamFactory instance's root directory. This file contains many key system settings, including database credentials, caching preferences, and other key configurations. To backup your `.env` file, navigate to the DreamFactory root directory and copy the file to another directory:
+
+```
+$ cd /opt/dreamfactory
+$ cp .env ~/.env
+```
+
+Next, use SFTP or another available file transfer mechanism to move the `.env` copy to another location outside of the server. Please be sure to take this additional precaution to avoid losing any unforeseen issues which may result in file loss. 
+
+### Step #2. Back Up Your DreamFactory System Database
+
+Next we'll create a backup copy of the production DreamFactory system database. Four system databases are supported, including MySQL, PostgreSQL, MS SQL Server, and SQLite. We will demonstrate backing up a MySQL database here, however rest assured similarly easy backup mechanisms exist for the other vendors. Just keep in mind you'll want to backup *both* the data and data structures. To backup a MySQL database, you'll use the `mysqldump` command:
+
+```
+$ mysqldump -u df_admin -p --databases dreamfactory --no-create-db > ~/dump.sql
+Enter password:
+```
+
+You can use the MySQL credentials found in your `.env` file to perform the backup. If your database name is not `dreamfactory` then update the value passed to `--databases` accordingly. The `--no-create-db` flag tells the mysqldump command to not generate a `create database` command in the dump file. Finally, the redirection operator `>` is used to redirect the dump output elsewhere, which in this case is a file named `dump.sql` that resides in the executing user's home directory. Note this file doesn't need to exist before executing the mysqldump command.
+
+Once complete, be sure to copy the `dump.sql` file to a safe place just as was done with the `.env` file.
+ 
+### Step #3. Prepare a New Host Serve and Run Installer
+
+Earlier in this chapter we referred to the automated installers that are included with the platform ([learn more here](https://github.com/dreamfactorysoftware/dreamfactory/tree/master/installers)]. We recommend downloading one of these installers from the [DreamFactory repository](https://github.com/dreamfactorysoftware/dreamfactory) and running them in the manner previously described. Four operating systems are currently supported, including CentOS, Debian, Fedora, and Ubuntu. Ideally the operating system will be newly installed, ensuring the server is free of baggage.
+
+At the installer's conclusion you'll be prompted to create the first administration account. Go ahead and create one, however we'll soon be importing your existing administrator(s) from the production DreamFactory instance so ultimately the new account won't hold any importance.
+
+### Step #4. Disable MySQL's Strict Mode Setting
+
+If your production DreamFactory instance uses MySQL for the system database, then you may need to disable something known as strict mode in the new MySQL database. This is because MySQL 5.7 changed how MySQL behaves in certain instances, such as whether `0000-00-00` can be treated as a valid date. Therefore if your production MySQL version is 5.6 or earlier, then you'll almost certainly need to disable strict mode. Fortunately, this is easily done by navigating to your new DreamFactory instance's root directory and opening `config/database.php` using a text editor like Nano or Vim. Scroll down to the `mysql` array and add this key/value pair:
+
+```
+'strict' => false
+```
+
+### Step #5. Import the System Database Backup
+
+Next we'll import the MySQL database backup from your current production environment into the newly installed DreamFactory environment. Before doing so, we'll first need to delete the contents (schema and data) of the *new* system database. To do so, navigate to your new DreamFactory installation's root directory and run these commands:
+
+```
+$ php artisan migrate:fresh
+$ php artisan migrate:reset
+```
+
+Next, import the backup into the new database. Recall that this backup is found in the `dump.sql` file. Transfer the file to your new DreamFactory instance, and run this command:
+
+```
+$ mysql -u db_user -p dreamfactory_db < dump.sql
+Enter password:
+```
+
+You'll need to substitute `db_user` and `dreamfactory_db` with the database username and password you supplied to the installer. Next, we'll run the migrations command to ensure the system database contains all of the latest table structures and seed data:
+
+```
+$ php artisan migrate --seed
+```
+
+Finally, clear the cache:
+
+```
+$ php artisan cache:clear
+$ php artisan config:clear
+```
+
+Congratulations, you've successfully upgraded your DreamFactory instance! Navigate to the designated domain, and login using administrative credentials associated with your old instance.
 
 ## Conclusion
 
