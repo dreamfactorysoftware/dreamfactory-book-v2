@@ -304,7 +304,7 @@ To perform this action at a service level, we can create a scripted service by g
 
 ### Call the service
 
-From any REST client, make the request GET /api/v2/<apinamespace>and you should get a status 200. A simple REST client can be found at <your_instance_url>/test_rest.html. Remember if you are not an admin user your user role must allow access to the custom scripting service.
+From any REST client, make the request GET /api/v2/apinamespace and you should get a status 200. A simple REST client can be found at <your_instance_url>/test_rest.html. Remember if you are not an admin user your user role must allow access to the custom scripting service.
 
 ## Clear the DreamFactory Service Cache
 
