@@ -207,7 +207,7 @@ Of course, this is an incredibly simple example which can be quickly built upon 
     $ ./create-service.sh production
 
 
-## Creating a script to perform Bulk Actions
+## Creating a Scripted Service to perform Bulk Actions
 
 There is a useful DreamFactory feature that allows the administrator to add a database function to a column so when that column is retrieved by the API, the function runs in its place. For instance, imagine if you want to always retrieve an employee's name in all capital letters. You could use ORACLE's TO_DATE() function to do that:
 
@@ -222,8 +222,8 @@ To perform this action at a service level, we can create a scripted service by g
     $patch = $api->patch;
     $options = [];
     set_time_limit(800000);
-    // Get all tables URL
-    $url = 'lyntst/_table';
+    // Get all tables URL. Replace the databaseservicename with your API namespace
+    $url = '<API_Namespace>/_table';
 
     // Call parent API
     $result = $get($url);
@@ -241,7 +241,7 @@ To perform this action at a service level, we can create a scripted service by g
     
     foreach ($result['content']['resource'] as $table) {
         // Get all fields URL
-        $url = "lyntst/_schema/" . $table['name'] . "?refresh=true";
+        $url = "<API_Namespace>/_schema/" . $table['name'] . "?refresh=true";
         $result = $get($url);
          
         if ($result['status_code'] == 200) {
@@ -250,7 +250,7 @@ To perform this action at a service level, we can create a scripted service by g
                 if (strpos($field['db_type'], 'date') !== false || strpos($field['db_type'], 'Date') !== false || strpos($field['db_type'], 'DATE') !== false) {
                     // Patch field URL
                     $fieldCount++;
-                    $url = "lyntst/_schema/" . $table['name'] . "/_field";
+                    $url = "<API_Namespace>/_schema/" . $table['name'] . "/_field";
                     
                     // Skip fields that already have the function
                     if ($field['db_function'][0]['function'] === "TO_DATE({value}, 'DD-MON-YY HH.MI.SS AM')") continue;
