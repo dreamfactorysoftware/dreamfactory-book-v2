@@ -206,6 +206,104 @@ Of course, this is an incredibly simple example which can be quickly built upon 
 
     $ ./create-service.sh production
 
+
+## Creating a script to perform Bulk Actions
+
+There is a useful DreamFactory feature that allows the administrator to add a database function to a column so when that column is retrieved by the API, the function runs in its place. For instance, imagine if you want to always retrieve an employee's name in all capital letters. You could use ORACLE's TO_DATE() function to do that:
+
+    TO_DATE({value}, 'DD-MON-YY HH.MI.SS AM')
+
+DreamFactory can be configured to do this by adding TO_DATE({value}, 'DD-MON-YY HH.MI.SS AM')to the field's DB Function Use setting, which is found by going to the Schema tab, choosing a database, then choosing a table. Then click on one of the fields found in the fields section. 
+
+To perform this action at a service level, we can create a scripted service by going to Services -> Scirpt -> And selecting a language of your choice. We will select PHP. The script below adds the datbase function to all the coloumns and allows us to performs this as a Bulk Action.
+
+    $api = $platform['api'];
+    $get = $api->get;
+    $patch = $api->patch;
+    $options = [];
+    set_time_limit(800000);
+    // Get all tables URL
+    $url = 'lyntst/_table';
+
+    // Call parent API
+    $result = $get($url);
+    $fieldCount = 0;
+    $tableCount = 0;
+    $tablesNumber = 0;
+
+    // Check status code
+    if ($result['status_code'] == 200) {
+    // If parent API call returns 200, call a MySQL API
+        $tablesNumber = count($result['content']['resource']);
+    
+    // The next line is to limit number of tables to first 5 to see the successfull run of the script
+    //$result['content']['resource'] = array_slice($result['content']['resource'], 0, 5, true);
+    
+    foreach ($result['content']['resource'] as $table) {
+        // Get all fields URL
+        $url = "lyntst/_schema/" . $table['name'] . "?refresh=true";
+        $result = $get($url);
+         
+        if ($result['status_code'] == 200) {
+            $tableCount++;
+            foreach ($result['content']['field'] as $field) {
+                if (strpos($field['db_type'], 'date') !== false || strpos($field['db_type'], 'Date') !== false || strpos($field['db_type'], 'DATE') !== false) {
+                    // Patch field URL
+                    $fieldCount++;
+                    $url = "lyntst/_schema/" . $table['name'] . "/_field";
+                    
+                    // Skip fields that already have the function
+                    if ($field['db_function'][0]['function'] === "TO_DATE({value}, 'DD-MON-YY HH.MI.SS AM')") continue;
+                    // Remove broken function
+                    $field['db_function'] = null;
+                    $payload = ['resource' => [$field]];
+                    $result = $patch($url, $payload);
+                    
+                    // Add correct function
+                    $field['db_function'] = [['function' => "TO_DATE({value}, 'DD-MON-YY HH.MI.SS AM')", "use" => ["INSERT", "UPDATE"]]];
+                    $payload = ['resource' => [$field]];
+                    $result = $patch($url, $payload);
+                    
+                    if ($result['status_code'] == 200) {
+                        echo("Function successfully added to " . $field['label'] . " field in " . $table['name'] . " table \n");
+                        \Log::debug("Function successfully added to " . $field['label'] . " field in " . $table['name'] . " table");
+
+                    } else {
+                        $event['response'] = [
+                            'status_code' => 500,
+                            'content' => [
+                                'success' => false,
+                                'message' => "Could not add function to " . $field['label'] . " in " . $table['name'] . " table;"
+                            ]
+                        ];
+
+                    }
+                } 
+            }
+            \Log::debug("SCRIPT DEBUG: Total tables number " . $tablesNumber . " -> Tables  " . $tableCount . " fieldCount " . $fieldCount);
+        } else {
+            $event['response'] = [
+                'status_code' => 500,
+                'content' => [
+                    'success' => false,
+                    'message' => "Could not get all fields."
+                ]
+            ];
+        }
+    }
+    } else {
+    $event['response'] = [
+        'status_code' => 500,
+        'content' => [
+            'success' => false,
+            'message' => "Could not get list of tables."
+        ]
+    ];
+    }
+    return "Script finished";
+
+
+
 ## Clear the DreamFactory Service Cache
 
 For performance purposes DreamFactory caches all service definitions so the configuration doesn't have to be repeatedly read from the system database. Therefore when editing a service you'll need to subsequently clear the service cache in order for your changes to take effect. To clear the cache for a specific service, issue a `DELETE` request to the following URI, appending the service ID to it:
