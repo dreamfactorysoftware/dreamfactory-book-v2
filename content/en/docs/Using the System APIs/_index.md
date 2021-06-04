@@ -209,7 +209,7 @@ Of course, this is an incredibly simple example which can be quickly built upon 
 
 ## Creating a Scripted Service to perform Bulk Actions
 
-There is a useful DreamFactory feature that allows the administrator to add a database function to a column so when that column is retrieved by the API, the function runs in its place. For instance, imagine if you want to always retrieve an employee's name in all capital letters. You could use ORACLE's TO_DATE() function to do that:
+There is a useful DreamFactory feature that allows the administrator to add a database function to a column so when that column is retrieved by the API, the function runs in its place. For instance, imagine if you want to change the format of the date field, you could use ORACLE's TO_DATE() function to do that:
 
     TO_DATE({value}, 'DD-MON-YY HH.MI.SS AM')
 
