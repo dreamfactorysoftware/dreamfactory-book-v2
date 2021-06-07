@@ -400,11 +400,11 @@ As with authenticated users, you'll pass along a payload that looks like this:
 
 For more information about managing custom user attributes, check out [this wiki page](https://wiki.dreamfactory.com/DreamFactory/Tutorials/Managing_user_custom_data).
 
-## Configuring DreamFactory with LDAP and LDAPS
+## LDAP Authentication with DreamFactory
 
-Setting up LDAP-based authentication into your DreamFactory workflow is a simple process, and even with LDAPS requries little configuration on the client (DreamFactory) side. 
+Setting up LDAP-based authentication for your users into your DreamFactory workflow is a simple process, and even with LDAPS requires little configuration on the client (DreamFactory) side. In the following section we will guide you through setting up this process. If you would like to create an LDAP server to test, then we have also provided a tutorial [below](#creating-an-ldap-server) to setup a basic directory with two users.
 
-### Testing your LDAP connection
+### Testing Your LDAP Connection
 
 Before actually creating an LDAP service, the best way to test that DreamFactory is able to connect to your LDAP server is by creating the following script from within your DreamFactory environment.
 
@@ -433,29 +433,59 @@ Save and run `php connection.php` and, if succesful, you will get a return looki
 ```
 This shows that DreamFactory can see your LDAP server, and we will be able to configure our service.
 
-### Creating an LDAP Service.
+### Configuring LDAP
 
-When creating a standard LDAP connector on DreamFactory, the config tab will have a a few fields for your to fill out:
-
-* Default Role: The role that will be assigned to all users signing in using this LDAP service
-* Role per App: Here you can configure more details on which App per Role that users logging in via this service will have.
-* Host: The host name of your ldap server (ldap://....)
-* Base DN: the base DN for the domain, i.e `dc=foo,dc=bar`
-* Account Suffix: This is optional, but for example can be the organizational units associated with the domain.
-
-A completed form will look something like:
+To configure LDAP, login to your DreamFactory instance using an administrator account and click on the Services tab:
 
 <p>
-    <img src="/images/04/ldap-config.png" />
+    <img src="/images/03/navbar-services.png" />
 </p>
 
-Now log out of DreamFactory, and you will notice that the login page now has a "Services" dropdown.
+On the left side of the interface you'll see the `Create` button. Click this button to begin. You'll be presented with a single dropdown form control titled `Select Service Type`. You'll often use this dropdown to generate new APIs as well as configuring authenetication options. For now, lets navigate to `LDAP` and then `Standard LDAP`
+
+<p>
+    <img src="/images/04/service-type-ldap.png" />
+</p>
+
+After selecting `Standard LDAP`, you'll be presented with the following form:
+
+<p>
+    <img src="/images/04/ldap-service-info-tab.png" />
+</p>
+
+Let's review these fields:
+
+* **Name**: The name will form part of the API URL, so use a lowercase string with no spaces or special characters. Further, you'll want to typically choose something which alloways you to easily identify its purpose. For your LDAP authentication you might choose a name such as `ldap`, `users`, or `developers`. Lowercasing is a requirement.
+* **Label**: The label is used for referential purposes within the administration interface, and will also be used when selecting the authentication type when logging in (more on this later). Something less terse is ok here, such as "LDAP User Login".
+* **Description**: Like the label, the description is used for referential purposes within the administration interface and system-related API responses.
+
+After completing these fields, click on the `Config` tab localted at the top of the interface. You'll be presented with the following form:
+
+<p>
+    <img src="/images/04/ldap-service-config-tab.png" />
+</p>
+
+There are not too many fields here, so lets go through them:
+
+* **Host**: The directory server's host address. This may be an IP address or domain name. Enter the port number here as well.
+* **Default Role**: DreamFactory can automatically assign a default role (see more [here](../generating-a-database-backed-api/#creating-a-role)) to a user following successful login. You can identify that role here.
+* **Role per App**: If assigning a blanket role through the **Default Role** setting is not desired, you can instead use this setting to assign roles on a per application basis.
+* **Base DN**: i.e the starting point wher eyour LDAP server searches for users. For example `dc=example,dc=com`
+* **Account Suffix**:  Usually the same as your Base DN, e.g. `@example.com`
+
+{{< alert color="success" title="Tip" >}}
+Remember the default port for LDAP (ldap://) is 389, and for LDAPS (ldaps://) is 636.
+{{</ alert >}}
+
+After completion, press the `save` button to generate. After a moment you'll see a pop up message indicating `Service Saved Succesfully`. Congratulations!
+
+Now log out of DreamFactory, and you will notice that the login page now has a "Services" dropdown. The service will correspond to the label you assigned when creating the LDAP service.
 
 <p>
     <img src="/images/04/ldap-login.png" />
 </p>
 
-Select your new ldap authentication method, and you will be able to login with the username (uid) and userPassword.
+Select your new ldap authentication method, and you will be able to login with a username (uid) and userPassword.
 
 If you log out, and log back in as the administrator, you will now notice that in the Users Tab, the user you signed in with over ldap has been added.
 
@@ -463,7 +493,7 @@ If you log out, and log back in as the administrator, you will now notice that i
     <img src="/images/04/ldap-user.png" />
 </p>
 
-### Creating an LDAPS Service
+### Configuring LDAPS
 
 For LDAPS, the process is much the same as described above, however you will need to go into your DreamFactory server, and make the following change / addition to `/etc/ldap/ldap.conf`
 
@@ -471,8 +501,6 @@ For LDAPS, the process is much the same as described above, however you will nee
 TLS_REQCERT allow
 ```
 (you can also use `TLS_REQCERT never`)
-
-Now your php test script should be succesful, as will creating the service. Remember that your host will be ldap**s**:// and your port will also be different to ldap (default for ldaps is 636).
 
 ### API Endpoint for LDAP(S)
 
@@ -506,6 +534,246 @@ An example response would be:
     "is_root_admin": false
 }
 ```
+### Troubleshooting LDAPS
+
+#### Client Side
+
+The only client side configuration change you will need to make (as mentioned previously) is having `TLS_REQCERT allow` in your `ldap.conf` file. If you are using a client certificate, then make sure the `TLS_CACERT` option is pointing to the right file also. (You can also use `TLS_CACERTDIR` to point to a directory rather than a specific file). Remember to also run `sudo update-ca-certificates` after installing your certificate.
+
+#### Server Side
+
+As you are no doubt aware, configuring LDAPS can be somewhat of a nightmare. Given everyone's setup is different, it can be difficult to offer any advice serverside, however we have found the following settings to work:
+
+* Check the certificate permissions and ownership (should be given to openldap):
+```
+sudo chgrp openldap /etc/ldap/<certficatefile>_key.pem
+sudo chmod 0640 /etc/ldap/<certificatefile>_key.pem
+```
+
+* Add the following olc configurations:
+```
+dn: cn=config
+add: olcTLSCipherSuite
+olcTLSCipherSuite: NORMAL
+-
+add: olcTLSCRLCheck
+olcTLSCRLCheck: none
+-
+add: olcTLSVerifyClient
+olcTLSVerifyClient: never
+```
+
+* Remember to add ldaps:/// to your `/etc/default.slapd` file. The `SLAPD_SERVICES` line should look like the following:
+```
+SLAPD_SERVICES="ldap:/// ldapi:/// ldaps:///"
+```
+
+## Creating an LDAP Server
+
+If you would like to have a try at creating an LDAP server, or just want something simple to test with, we have prepared the following tutorial to help setup a local LDAP server. The following has been made with ubuntu as the OS.
+
+{{< alert color="success" title="Tip" >}}
+Remember to have ports 389 and 636 open!
+{{</ alert >}}
+
+1. In your server, first run `sudo apt update` and `sudo apt upgrade` to make sure everything is up to date.
+2. Now we can start the configuration process. `sudo apt install slapd ldap-utils`. This will then ask you to create your administrator password. Once you have done so run `sudo dpkg-reconfigure slapd` and follow the below instructions:
+    * Omit OpenLDAP Server Configuration? -> No
+    * DNS Domain Name: E.g. practice.net
+    * Organization Name: E.g. Practice
+    * Password -> The same that you previoulsy created
+    * Database Backend -> use MDB
+    * Database removed when slapd is purged? -> No
+    * Move Old Database? -> Yes
+
+    You can check everything has installed correctly by running `sudo tree /etc/ldap/slapd.d`. You should get something back looking like this:
+    ```
+    /etc/ldap/slapd.d
+    ├── cn=config
+    │   ├── cn=module{0}.ldif
+    │   ├── cn=schema
+    │   │   ├── cn={0}core.ldif
+    │   │   ├── cn={1}cosine.ldif
+    │   │   ├── cn={2}nis.ldif
+    │   │   └── cn={3}inetorgperson.ldif
+    │   ├── cn=schema.ldif
+    │   ├── olcBackend={0}mdb.ldif
+    │   ├── olcDatabase={0}config.ldif
+    │   ├── olcDatabase={-1}frontend.ldif
+    │   └── olcDatabase={1}mdb.ldif
+    └── cn=config.ldif
+
+    2 directories, 11 files
+    ```
+
+### Adding Entries
+
+Lets create a couple of entries. We will need a distinguished name, object class, the organizational unit (attributes associated with the class), and the entries themselves. Whenever we add (or modify), we need to create a file in the `.ldif` format.
+
+Create a file `sudo vim add_entries.ldif` and add the following (edit as you wish):
+```
+dn: ou=Employee, dc=practice, dc=net
+objectClass: organizationalUnit
+ou: Employee
+
+dn: ou=Groups, dc=practice, dc=net
+objectClass: organizationalUnit
+ou:Groups
+
+dn: cn=developers, ou=Groups, dc=practice, dc=net
+objectClass: posixGroup
+cn: developers
+gidNumber: 5000
+
+dn: uid=tomo, ou=Employee, dc=practice, dc=net
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: tomo
+sn: norman
+givenName: Tomo
+cn: Tomo Norman
+displayName: Tomo Norman
+uidNumber: 10000
+gidNumber: 5000
+userPassword: tomo123
+homeDirectory: /home/tomo
+
+dn: uid=alex, ou=Employee, dc=practice, dc=net
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: alex
+sn: Vieira
+givenName: Alex
+cn: Alex Vieira
+displayName: Alex Vieira
+uidNumber: 20000
+gidNumber: 5000
+userPassword: alex123
+homeDirectory: /home/alex
+```
+Notice we have created two organizational units; Employee, and Groups. We've then created a "Developers" group, and two employees who belong to the Employee organizational unit, and who are both "Developers" (through gidNumber). To add our new group and employees:
+```
+ldapadd -x -D cn=admin,dc=practice,dc=net -W -f add_entries.ldif
+```
+It will prompt you for your password, and then return the following:
+```
+adding new entry "ou=Employee, dc=practice, dc=net"
+
+adding new entry "ou=Groups, dc=practice, dc=net"
+
+adding new entry "cn=developers, ou=Groups, dc=practice, dc=net"
+
+adding new entry "uid=tomo, ou=Employee, dc=practice, dc=net"
+
+adding new entry "uid=alex, ou=Employee, dc=practice, dc=net"
+```
+We can confirm these entries are added by running `ldapsearch -x -LLL -b dc=practice,dc=net`.
+
+And you should be good to go! You can now create an LDAP authentication service in DreamFactory using the guide above.
+
+### Setting up LDAPS
+
+If you already have your own ssl certificate for your domain then you should use that. For the purposes of this excercise we will create our own self-signed certificate in order to get LDAPS up and running:
+
+1. First lets get the tools required to create our ssl certificates:
+    ```
+    sudo apt install gnutls-bin ssl-cert
+    ```
+2. Create a private key: 
+    ```
+    `sudo certtool --generate-privkey --bits 4096 --outfile /etc/ssl/private/mycakey.pem`.
+    ```
+3. Now we will create a template file for our self-signed certificate. `sudo vim /etc/ssl/ca.info` and add the following (edit to your liking):
+    ```
+    cn = Practice
+    ca
+    cert_signing_key
+    expiration_days = 3650
+    ```
+4. Create the self signed certificate:
+    ```
+    \sudo certtool --generate-self-signed \
+    --load-privkey /etc/ssl/private/mycakey.pem \
+    --template /etc/ssl/ca.info \
+    --outfile /usr/local/share/ca-certificates/mycacert.crt
+    ```
+    and run `sudo update-ca-certficates` and you should get a return stating a certificate has been added to the list of trusted CAs. Something like the following:
+    ```
+    Updating certificates in /etc/ssl/certs...
+    1 added, 0 removed; done.
+    Running hooks in /etc/ca-certificates/update.d...
+    done.
+    ```
+5. We need to then create a private key for the server. We can do so by running:
+    ```
+    sudo certtool --generate-privkey \
+    --bits 2048 \
+    --outfile /etc/ldap/practice_slapd_key.pem
+    ```
+    (Change the filename of the key to match your domain).
+6. Moving on, we will create a template for our server certificate (again, change filenames and common names to match your domain). `sudo vim /etc/ssl/localhost.info` and add the following:
+    ```
+    organization = Practice
+    cn = localhost         
+    tls_www_server
+    encryption_key
+    signing_key
+    expiration_days = 365
+    ```
+    and then create the server certificate using the just created template:
+    ```
+    sudo certtool --generate-certificate \
+    --load-privkey /etc/ldap/localhost_slapd_key.pem \
+    --load-ca-certificate /etc/ssl/certs/mycacert.pem \
+    --load-ca-privkey /etc/ssl/private/mycakey.pem \
+    --template /etc/ssl/localhost.info \
+    --outfile /etc/ldap/localhost_slapd_cert.pem
+    ```
+7. We need to adjust our permissions and ownership so that openldap can read our key:
+    ```
+    sudo chgrp openldap /etc/ldap/localhost_slapd_key.pem
+    sudo chmod 0640 /etc/ldap/localhost_slapd_key.pem
+    ```
+8. Almost there! Now we just need to tell slapd about our TLS configugration. Create a file `sudo vim certinfo.ldif` and point everything to the right place.
+    ```
+    dn: cn=config
+    add: olcTLSCACertificateFile
+    olcTLSCACertificateFile: /etc/ssl/certs/mycacert.pem
+    -
+    add: olcTLSCertificateFile
+    olcTLSCertificateFile: /etc/ldap/localhost_slapd_cert.pem
+    -
+    add: olcTLSCertificateKeyFile
+    olcTLSCertificateKeyFile: /etc/ldap/localhost_slapd_key.pem
+    -
+    add: olcTLSCipherSuite
+    olcTLSCipherSuite: NORMAL
+    -
+    add: olcTLSCRLCheck
+    olcTLSCRLCheck: none
+    -
+    add: olcTLSVerifyClient
+    olcTLSVerifyClient: never
+    ```
+    and then update: `sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f certinfo.ldif`
+9. Finally we just need to go to our slapd config file located at `/etc/default/slapd` and add ldaps to it. The `SLAPD_Service` line should end up looking like the below:
+    ```
+    SLAPD_SERVICES="ldap:/// ldapi:/// ldaps:///"
+    ```
+    Restarting slapd with `sudo systemctl restart slapd` will start our ldaps connection. If you run `sudo lsof -i -P -n | grep LISTEN` you should now see port 636 listening. The output will be similar to this:
+    ```
+    sshd       1269            root    3u  IPv4  19533      0t0  TCP *:22 (LISTEN)
+    sshd       1269            root    4u  IPv6  19544      0t0  TCP *:22 (LISTEN)
+    systemd-r  2836 systemd-resolve   13u  IPv4  26004      0t0  TCP 127.0.0.53:53 (LISTEN)
+    slapd     20316        openldap    8u  IPv4  55269      0t0  TCP *:389 (LISTEN)
+    slapd     20316        openldap    9u  IPv6  55270      0t0  TCP *:389 (LISTEN)
+    slapd     20316        openldap   11u  IPv4  55274      0t0  TCP *:636 (LISTEN)
+    slapd     20316        openldap   12u  IPv6  55275      0t0  TCP *:636 (LISTEN)
+    ```
+
+And thats it! You will now have an LDAP connection over port 389, and an LDAPS connection over port 636, ready to be hooked up to your client(s).
 
 ## Debugging LDAP and Active Directory
 
