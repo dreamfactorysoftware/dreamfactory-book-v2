@@ -1,7 +1,7 @@
 ---
 title: "Securing Your DreamFactory Environment"
 linkTitle: "Securing Your DreamFactory Environment"
-weight: 9
+weight: 10
 ---
 
 The DreamFactory platform is built atop the [Laravel](https://www.laravel.com) framework. Laravel is an amazing PHP-based framework that in just a few short years has grown in popularity to become one of the today's most popular framework solutions. There are several reasons for its popularity, including a pragmatic approach to convention over configuration, security-first implementation, fantastic documentation, and a comprehensive ecosystem (in addition to the framework itself, the Laravel team maintains a number of sibling projects, among them an e-commerce framework called Spark, an application adminstration toolkit called Nova, and an application deployment service called Envoyer). Regardless, like any application you're going to want to learn all you can about how to best go about maintaining and securing the environment.

@@ -1,7 +1,7 @@
 ---
 title: "Using the System APIs"
 linkTitle: "Using the System APIs"
-weight: 16
+weight: 17
 ---
 
 All DreamFactory versions include a web-based administration console used to manage all aspects of the platform. While this console offers a user-friendly solution for performing tasks such as managing APIs, administrators, and business logic, many companies desire to instead automate management through scripting. There are two notable reasons for doing so:

@@ -1,7 +1,7 @@
 ---
 title: "Installing DreamFactory on a Raspberry Pi"
 linkTitle: "Raspberry Pi Installation"
-weight: 11
+weight: 12
 ---
 
 For this tutorial we used Raspberry Pi's official [Raspbian](https://www.raspberrypi.org/downloads/) operating system. Raspbian is Debian-based, and although it doesn't include all of the requisites required by DreamFactory, as you'll see those can be installed easily enough.

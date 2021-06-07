@@ -1,7 +1,7 @@
 ---
 title: "Limiting and Logging API Requests"
 linkTitle: "Limiting and Logging API Requests"
-weight: 8
+weight: 9
 ---
 
 In this chapter you'll learn how to use DreamFactory's API limiting and logging capabilities to assign and monitor access to your restricted APIs.

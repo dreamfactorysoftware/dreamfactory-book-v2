@@ -1,7 +1,7 @@
 ---
 title: "Migrating Your System Database to a New Instance"
 linkTitle: "Migrating Your System Database to a New Instance"
-weight: 17
+weight: 18
 ---
 
 There can be a variety of reasons for wanting to copy all your data over to a new instance and this chapter goes over various ways to do so. We will cover using our Import/Export feature, System APIs, and manually moving the System Database to a new server.
