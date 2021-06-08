@@ -502,7 +502,9 @@ TLS_REQCERT allow
 ```
 (you can also use `TLS_REQCERT never`)
 
-### API Endpoint for LDAP(S)
+If you are using a client certificate, then make sure the `TLS_CACERT` option is pointing to the right file also. (You can also use `TLS_CACERTDIR` to point to a directory rather than a specific file). Remember to also run `sudo update-ca-certificates` after installing your certificate.
+
+### API Authentication Using LDAP
 
 You can make the following API call for your ldap service:
 ```
@@ -538,7 +540,7 @@ An example response would be:
 
 #### Client Side
 
-The only client side configuration change you will need to make (as mentioned previously) is having `TLS_REQCERT allow` in your `ldap.conf` file. If you are using a client certificate, then make sure the `TLS_CACERT` option is pointing to the right file also. (You can also use `TLS_CACERTDIR` to point to a directory rather than a specific file). Remember to also run `sudo update-ca-certificates` after installing your certificate.
+The only client side configuration change you will need to make (as mentioned previously) is having `TLS_REQCERT allow` in your `ldap.conf` file, and if you are using a client certificate, double checking the `TLS_CACERT` option is pointing to the right file, and that you have run `sudo update-ca-certificates`.
 
 #### Server Side
 
@@ -570,7 +572,7 @@ SLAPD_SERVICES="ldap:/// ldapi:/// ldaps:///"
 
 ## Creating an LDAP Server
 
-If you would like to have a try at creating an LDAP server, or just want something simple to test with, we have prepared the following tutorial to help setup a local LDAP server. The following has been made with ubuntu as the OS.
+If you would like to have a try at creating an LDAP server, or just want something simple to test with, we have prepared the following tutorial to help setup a local LDAP server. The following has been made with Ubuntu as the OS.
 
 {{< alert color="success" title="Tip" >}}
 Remember to have ports 389 and 636 open!
