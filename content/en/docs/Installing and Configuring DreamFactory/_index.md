@@ -211,6 +211,14 @@ Immediately following this prompt you'll be informed of successful setup:
 	* your instance using a browser. You can run "php artisan serve"
 	* to try out your instance without setting up a web server.
 	**********************************************************
+After creating an Admin, your instance may show the following error:
+```
+Admins
+There is no root administrator selected. Some functionality might not work. Use df:root_admin command to choose one.
+```
+
+A very simple approach to solve it, is to reset the root from inside your container:
+`$ php artisan df:root_admin`
 
 If you've installed and configured DreamFactory to run on a web server, then you can open your browser and navigate to the IP address or domain name. Otherwise, if you haven't yet installed a web server, you can run `php artisan serve`:
 
