@@ -105,6 +105,28 @@ Because DreamFactory connects to your database on behalf of this user, the resul
 
 Further, keep in mind this can serve as an excellent way to further lock down your API. Although as you'll later learn DreamFactory offers some excellent security-related features for restricting API access, it certainly wouldn't hurt to additionally configure the connecting database user's privileges to reflect the desired API capabilities. For instance, if you intend for the API to be read-only, then create a database user with read-only authorization. If API read and create capabilities are desired, then configure the user accordingly.
 
+### How to Setup a MySQL API Through an SSH Tunnel
+
+If you prefer DreamFactory to connect to your MySQL database through an SSH tunnel, then this is a relatively easy process, and can be done by starting an SSH tunnel from within your DreamFactory server. First you will need to add your database server's key to where your DreamFactory Instance is located. Then open up a terminal window and enter in the following command, replacing where necessary:
+
+```
+ssh -N -L <anOpenHostPort>:127.0.0.1:<mySqlPortOfDBServer> computerUser@<ip> -i <pathToKey>
+```
+For example, if I want to use port 3307 on my DreamFactory server to connect to the default database port of my MySQL server (3306), and "admin" is the remote SSH user who has the necessary privileges, the command may look like:
+```
+ssh -N -L 3307:127.0.0.1:3306 admin@10.0.0.10 -i ./server_key
+``` 
+
+Now, once the connection has been established, in the DreamFactory interface, we can create our service in the same manner as described above, but instead of pointing to the MySQL server, we will point it to the SSH tunnel (localhost).
+
+<img src="/images/03/mysql-ssh-tunnel.png" width="500">
+
+And that's it! You now have the same capabilties as you would with a standard MySQL-backed API, just connected through SSH.
+
+{{< alert color="warning" title="Reminder!" >}}
+Remember that your _SSH user_ (which you will use when creating your tunnel from the command line) will most likely be different to your _MySQL user_ (which you will add in DreamFactory when creating your service).
+{{< /alert >}}
+
 ## Interaction using Postman
 
 ### Installation
