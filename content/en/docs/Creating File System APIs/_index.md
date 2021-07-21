@@ -136,13 +136,13 @@ Further, because the API is part of the DreamFactory API management ecosystem, y
 To generate your S3 API, log into DreamFactory and click on the `Services` tab, then click the `Create` link located on the left side of the page. Click on the `Select Service Type` dropdown, navigate to the `File` category, and select `AWS S3`:
 
 <p>
-<img src="https://share.getcloudapp.com/GGuWGR5q" width="600">
+<img src="/images/aws-s3/new-service.png" width="600">
 </p>
 
 You'll be prompted to supply an API name, label, and description. Keep in mind the name must be lowercase and alphanumeric, as it will be used as the namespace within your generated API URI structure. The label and description are used for reference purposes within the administration console so you're free to title these as you please:
 
 <p>
-<img src="https://share.getcloudapp.com/NQuoQrpG" width="600">
+<img src="/images/aws-s3/service-info.png" width="600">
 </p>
 
 Next, click the `Config` tab. There you'll supply the AWS S3 bucket connection credentials. There are however only 3 required fields:
@@ -154,7 +154,7 @@ Next, click the `Config` tab. There you'll supply the AWS S3 bucket connection c
 
 
 <p>
-<img src="https://share.getcloudapp.com/d5uAKEJp" width="600">
+<img src="/images/aws-s3/service-config.png" width="600">
 </p>
 
 
@@ -170,12 +170,12 @@ To download a file you'll send a GET request to the AWS S3 API, identifying the 
 If you're using a tool such as Insomnia, you can view many file types within the response preview:
 
 <p>
-<img src="https://share.getcloudapp.com/eDuydPPq" width="600">
+<img src="/images/aws-s3/s3call.png" width="600">
 </p>
 
 Snapshot of the file on S3
 
 
 <p>
-<img src="https://share.getcloudapp.com/6qurqPQg" width="600">
+<img src="/images/aws-s3/bucket.png" width="600">
 </p>
