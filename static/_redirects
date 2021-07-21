@@ -1,5 +1,6 @@
 / /docs/ 301!
 
+/docs/chaper01.html /docs/introducing-rest-and-dreamfactory/ 301
 /docs/chapter01/ /docs/introducing-rest-and-dreamfactory/ 301
 /docs/chapter01/introducing-rest.html /docs/introducing-rest-and-dreamfactory/#introducing-rest 301
 /docs/chapter01/dissecting-rest-requests-and-responses.html /docs/introducing-rest-and-dreamfactory/#dissecting-rest-requests-and-responses 301
@@ -19,6 +20,7 @@
 /docs/chapter02/sap-sql-anywhere.html /docs/installing-and-configuring-dreamfactory/#configuring-sap-sql-anywhere 301
 /docs/chapter02/ubuntu-server-configuration.html /docs/installing-and-configuring-dreamfactory/#configuring-your-ubuntu-server 301
 
+/docs/chapter03.html /docs/generating-a-database-backed-api/ 301
 /docs/chapter03/ /docs/generating-a-database-backed-api/ 301
 /docs/chapter03/conclusion.html /docs/generating-a-database-backed-api/#conclusion 301
 /docs/chapter03/creating-a-role.html /docs/generating-a-database-backed-api/#creating-a-role 301
@@ -30,6 +32,7 @@
 /docs/chapter03/obfuscating-a-table-endpoint.html /docs/generating-a-database-backed-api/#obfuscating-a-table-endpoint 301
 /docs/chapter03/troubleshooting.html /docs/generating-a-database-backed-api/#troubleshooting 301
 
+/docs/chapter04.html /docs/authenticating-your-apis/ 301
 /docs/chapter04/ /docs/authenticating-your-apis/ 301
 /docs/chapter04/adding-okta-users-to-the-dreamfactory-application.html /docs/authenticating-your-apis/#adding-okta-users-to-the-dreamfactory-application 301
 /docs/chapter04/authenticating-with-azure-active-directory-oauth.html /docs/authenticating-your-apis/#authenticating-with-azure-active-directory-oauth 301
@@ -43,6 +46,7 @@
 /docs/chapter05/ /docs/creating-scripted-services-and-endpoints/ 301
 /docs/chapter05/creating-a-scripted-service.html /docs/creating-scripted-services-and-endpoints/ 301
 
+/docs/chapter06.html /docs/integrating-business-logic-into-your-apis/ 301
 /docs/chapter06/ /docs/integrating-business-logic-into-your-apis/ 301
 /docs/chapter06/resources-available-to-scripts.html /docs/integrating-business-logic-into-your-apis/#resources-available-to-scripts 301
 /docs/chapter06/adding-http-headers-query-parameters-or-curl-options-to-api-calls.html /docs/integrating-business-logic-into-your-apis/#adding-http-headers-query-parameters-or-curl-options-to-api-calls 301
@@ -56,6 +60,7 @@
 /docs/chapter06/supported-scripting-engines.html /docs/integrating-business-logic-into-your-apis/#supported-scripting-engines 301
 /docs/chapter06/using-third-party-libraries.html /docs/integrating-business-logic-into-your-apis/#using-third-party-libraries 301
 
+/docs/chapter07.html /docs/limiting-and-logging-api-requests/ 301
 /docs/chapter07/ /docs/limiting-and-logging-api-requests/ 301
 /docs/chapter07/dreamfactory-api-rate-limiting.html /docs/limiting-and-logging-api-requests/#dreamfactory-api-rate-limiting 301
 /docs/chapter07/logging.html /docs/limiting-and-logging-api-requests/#logging 301
@@ -83,11 +88,12 @@
 /docs/chapter11/dynamic-dashboard-with-pagination-sorting-and-filtering.html /docs/demo-dreamfactory-applications/#dynamic-dashboard-with-pagination-sorting-and-filtering 301
 /docs/chapter11/progressive-web-application.html /docs/demo-dreamfactory-applications/#progressive-web-application 301
 
+/docs/chapter12.html /docs/creating-file-system-apis/ 301
 /docs/chapter12/ /docs/creating-file-system-apis/ 301
 /docs/chapter12/creating-an-aws-rest-api.html /docs/creating-file-system-apis/#creating-an-aws-s3-rest-api 301
 /docs/chapter12/creating-an-sftp-rest-api.html /docs/creating-file-system-apis/#creating-an-sftp-rest-api 301
 
-/docs/chapter13/ /docs/integrating-salesforce-data/301
+/docs/chapter13/ /docs/integrating-salesforce-data/ 301
 /docs/chapter13/conclusion.html /docs/integrating-salesforce-data/#conclusion 301
 /docs/chapter13/configuring-the-salesforce-service.html /docs/integrating-salesforce-data/#configuring-the-salesforce-service 301
 /docs/chapter13/interacting-with-the-salesforce-api.html /docs/integrating-salesforce-data/#interacting-with-the-salesforce-api 301
