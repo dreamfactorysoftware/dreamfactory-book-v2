@@ -95,6 +95,26 @@ If you receive an error regarding `Your requirements could not be resolved to an
 
 With the packages installed, you'll next need to configure your system database. This database will house various configuration settings associated with your instance. DreamFactory supports four databases for this purpose, including Microsoft SQL Server, MySQL, PostgreSQL, and SQLite. Keep in mind you'll need to first create this database along with an account DreamFactory will use to connect to it.
 
+{{< alert title="Example: PostgreSQL" >}}
+Once you have a PostgreSQL instance setup and the server running, you will need to create a user ("Role") for DreamFactory to login with, and a database to use. The simplest was to do so is to first switch over to the `postgres` user that will automatically have been created upon installation of PostgresSQL:
+```
+sudo -i -u postgres
+```
+Now open up `psql` and create your new Role and Database for DreamFactory to use.
+(Note that If you are connecting remotely to your database server you can use `psql -h <host> -U <ASuperUser> -p 5432` to directly get into psql):
+```
+CREATE ROLE dfadmin LOGIN PASSWORD 'pghwosfg78';
+CREATE DATABASE dreamfactory
+```
+**Note** The user must, at the very least, have LOGIN privileges
+
+Finally, its best to double check that PostgreSQL is setup to accept IPv6 connections using md5 (i.e password) login. Go to your `pg_hba.conf` file and check (or amend as necessary) you have something along the lines of the following:
+```
+host    all             all             ::1/128                 md5
+```
+{{< /alert >}}
+
+
 You'll configure the system database by running a terminal command and answering a few prompts about your database configuration.
 
 To do so, run the following command from inside your project's root directory:
