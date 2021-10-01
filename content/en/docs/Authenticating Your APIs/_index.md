@@ -779,6 +779,10 @@ And thats it! You will now have an LDAP connection over port 389, and an LDAPS c
 
 ## Debugging LDAP and Active Directory
 
+{{< alert title="LDAP / AD in Windows" >}}
+The equivalent location of `/etc/ldap/ldap.conf` in Windows is `c:\openldap\sysconf\ldap.conf`. You will have to create this directory yourself.
+{{< /alert >}}
+
 You can use the following PHP script to determine whether your host, base DN, and credentials are correct:
 
     <?php
