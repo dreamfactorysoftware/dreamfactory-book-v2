@@ -804,6 +804,185 @@ Please ensure that the [Users group has full control]() of these directories to 
 
 ---
 
+## Configuring Apache on Windows with DreamFactory
+
+Although DreamFactory's handy linux installers include configurations for both nginx and Apache out of the box, for Windows (if you want to use Apache rather than IIS as explained above) we will need to do some configuration. Below is a basic guide to installing Apache on Windows. You should contact your Windows Administrator for security controls and specific configurations your organization may require.
+
+{{< alert title="Reminder!" >}}
+Remember to run things (e.g. the command prompt) as an administrator when working with Windows.
+{{< /alert >}}
+
+### Installing Apache
+
+Installing Apache on Windows is a relatively painless task. A Win64 binary is available from [Apache Lounge](https://www.apachelounge.com/download/) and after download can be extracted to `c:\`. (Actually you can put it where you like, you just need to change the pathing in the `httpd.conf` file). After you have extracted the file, download the Visual C++ Redistributable `VC_redist.x64.exe`, which is also available on the Apache Lounge website, and run the program.
+
+Now, to test, open up a command prompt, go to `c:\Apache24\bin` and run the `httpd` command. If you go to localhost you should see "It Works!" in the browser window.
+
+### Configure PHP with Apache
+
+We must use the thread safe version of php in order for it to work with Apache. This can be downloaded from the [PHP Website](https://wwww.php.net/downloads.php) and for the sake of simplicity should be extracted to `c:\php`.
+
+The PHP .ini file, as a minimum, should have the following extensions uncommented:
+```
+curl
+ffi
+ftp
+gd2
+gettext
+ldap
+mbstring
+exif
+mysqli
+odbc
+openssl
+pdo_firebird
+pdo_mysql
+pdo_oci
+pdo_odbc
+pdo_pgsql
+pdo_sqlite
+pgsql
+shmop
+soap
+sockets
+sodium
+sqlite3
+tidy
+xmlrpc
+```
+
+PHP should then be added to to your path -> Search for "environment" in the Windows search box and then click "Edit the system environment variables", go to the advanced tab, and click "Environment Variables". Under System variables select "Path" and then "Edit" and then "New". Add `c:\php` and save. The path should be at the bottom of the list.
+
+Now we will tell Apache about PHP. Go to `c:\Apache24/conf` and open the `httpd/conf` configuration file. At the very bottom add the following:
+
+```
+#PHP 74 Module
+PHPIniDir "C:/php"
+LoadModule php7_module "C:/php/php7apache2_4.dll"
+AddType application/x-httpd-php .php
+```
+
+and then uncomment the following modules in the LoadModule section:
+
+```
+deflate_module
+filter_module
+access_compat_module
+rewrite_module
+```
+
+We can test everything is working by creating a `info.php` file at `Apache24/htdocs` with the following line:
+
+```
+<?php phpinfo() ?>
+```
+
+Restart `httpd` and go to `localhost/htdocs` and you should see the php information screen.
+
+### Configure DreamFactory with Apache
+
+Finally, we need to get DreamFactory and Apache talking to each other. For this example, it assumed that DreamFactory has been installed to `c:/dreamfactory`.
+
+First, go back to our `httpd.conf` file for Apache, and find the line `DocumentRoot "${SRVRoot/htdocs}"`. Here we will change the DocumentRoot, the Directory, and the configuration.
+
+Replace everything from 'DocumentRoot' to '</Directory>' with the following:
+
+```
+DocumentRoot “c:/dreamfactory/public”
+	<Directory “c:/dreamfactory/public”>
+	AddOutputFilterByType DEFLATE text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript
+	Options -Indexes +FollowSymLinks -MultiViews
+	AllowOverride All
+	AllowOverride None
+	Require all granted
+	RewriteEngine on
+	RewriteBase /
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^.*$ /index.php [L]
+
+	<LimitExcept GET HEAD PUT DELETE PATCH POST>
+		Allow from all
+	</LimitExcept>
+</Directory>
+```
+
+Save and run `httpd -t` from the command prompt (from `c:\Apache24\bin`) and you should not get any syntax errors. Start the server with `httpd` and go to `localhost/dreamfactory/dist` and you will be greeted by the login screen.
+
+### Setting up https on Apache
+
+We can setup https on Apache using Virtual Hosts. For this example we will have dreamfactory run over http on port 80, and over port 443 at https://\<yourservername>.
+
+Go to your Apache `httpd.conf` file and first uncomment the module `ssl_module` in the LoadModule section.
+
+Now, we will use our previous configuration, and assign it to a virtual host over port 80. Take the previous configuration and wrap it in a `<VirtualHost *:443> ... </VirtualHost>` tag and also provide a servername. It should end up looking like this:
+
+```
+Listen 80
+<VirtualHost *:80>
+	DocumentRoot “c:/dreamfactory/public”
+	ServerName <yourservername>
+	<Directory “c:/dreamfactory/public”>
+		AddOutputFilterByType DEFLATE text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript
+		Options -Indexes +FollowSymLinks -MultiViews
+		AllowOverride All
+		AllowOverride None
+		Require all granted
+		RewriteEngine on
+		RewriteBase /
+		RewriteCond %{REQUEST_FILENAME} !-f
+		RewriteCond %{REQUEST_FILENAME} !-d
+		RewriteRule ^.*$ /index.php [L]
+
+		<LimitExcept GET HEAD PUT DELETE PATCH POST>
+			Allow from all
+		</LimitExcept>
+	</Directory>
+</VirtualHost>
+```
+
+Now, copy everything and paste it below, changing the virtual host to 443, and adding the SSL configurations, so it ends up looking like the below:
+
+```
+Listen 443
+<VirtualHost *:443>
+	DocumentRoot “c:/dreamfactory/public”
+	ServerName <yourservername>
+	SSLEngine on
+	SSLCertificateFile "<path to your certificate>"
+	SSLCertificateKeyFile "<path to your key>"
+	<Directory “c:/dreamfactory/public”>
+		AddOutputFilterByType DEFLATE text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript
+		Options -Indexes +FollowSymLinks -MultiViews
+		AllowOverride All
+		AllowOverride None
+		Require all granted
+		RewriteEngine on
+		RewriteBase /
+		RewriteCond %{REQUEST_FILENAME} !-f
+		RewriteCond %{REQUEST_FILENAME} !-d
+		RewriteRule ^.*$ /index.php [L]
+
+		<LimitExcept GET HEAD PUT DELETE PATCH POST>
+			Allow from all
+		</LimitExcept>
+	</Directory>
+</VirtualHost>
+```
+
+Restart the Apache server and you should now have two sites, one over localhost, and one over https://localhost
+
+{{< alert color="success "title="TIP" >}}
+If you want to redirect anything coming in over http to https, then you can simply edit the port 80 virtual host to the following:
+```
+Listen 80
+<VirtualHost *:80>
+	ServerName <yourservername>
+	Redirect / https://<yourservername>/
+</VirtualHost>
+```
+{{< /alert >}}
+
 ## Configuring SAP SQL Anywhere
 
 SAP SQL Anywhere is the namesake commercial database solution offered by software giant SAP SE. If your organization relies upon SQL Anywhere, you'll be pleased to know DreamFactory's Silver and Gold editions include support for this powerful database! In this chapter we'll walk you through the server configuration steps necessary to ensure your DreamFactory instance can interact with your SQL Anywhere database.
