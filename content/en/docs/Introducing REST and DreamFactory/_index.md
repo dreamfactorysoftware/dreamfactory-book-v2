@@ -15,13 +15,13 @@ This chapter introduces you to DreamFactory, an automated REST API generation, i
 
 If you were to design an ideal solution for passing data between computers ("computers" being an umbrella term used to represent servers, laptops, mobile phone, and any other Internet-connected device), what would it look like?
 
-For starters, we might consider HTTP for the transport protocol since applications can quickly be created that communicate over HTTP and HTTPS. Further, HTTP supports *request URLs*, which can be constructed to easily identify a particular target resource (e.g. https://www.example.com/employees/42), *request methods*, which identify what we'd like to do in conjunction with the target resource (e.g. GET (retrieve), POST (insert), PUT (update), DELETE (destroy)), and *request payloads* in the form of URL parameters and message bodies.
+For starters, we might consider HTTP for the transport protocol since applications can quickly be created that communicate over HTTP and HTTPS. Further, HTTP supports *request URLs*, which can be constructed to easily identify a particular target resource (e.g. https://www.example.com/employees/42 ), *request methods*, which identify what we'd like to do in conjunction with the target resource (e.g. GET (retrieve), POST (insert), PUT (update), DELETE (destroy)), and *request payloads* in the form of URL parameters and message bodies.
 
 We'd also want to incorporate an understandable and parseable messaging format such as XML or JSON; not only can programming languages easily construct and navigate these formats, but they're also relatively easy on the eyes for us humans.
 
 Finally, we would want the solution to be extensible, allowing for integration of capabilities such as caching, authentication, and load balancing. In doing so, we can create secure and scalable applications.
 
-If such a solution sounds appealing, then you're going to love working with REST APIs. Representational State Transfer (REST) is a term used to define a system that embodies several characteristics (see https://en.wikipedia.org/wiki/Representational_state_transfer):
+If such a solution sounds appealing, then you're going to love working with REST APIs. Representational State Transfer (REST) is a term used to define a system that embodies several characteristics (see [here](https://en.wikipedia.org/wiki/Representational_state_transfer) for more details):
 
 * **Client-server architecture**: By embracing the client-server model, REST API-based solutions can incorporate multiple application and database servers to create a distributed, secure, and maintainable environment.
 
