@@ -366,13 +366,160 @@ Just like in normal code execution, execution of a script is stopped prematurely
 
 ### Throwing An Exception
 
-If a parameter such as filter is missing, can throw an exception like so:
+If a parameter such as filter is missing, you can throw an exception like so:
 
     // PHP
     if (! array_key_exists('filter', $event['request']['parameters'])) {
         throw new \DreamFactory\Core\Exceptions\BadRequestException('Missing filter');
     }
 
+will return the following:
+
+```
+// JSON
+{
+    "error": {
+        "code": 400,
+        "context": null,
+        "message": "Missing filter",
+        "status_code": 400
+    }
+}
+```
+
+Using the same example above, we can also add our own internal error code by passing an integer as the second argument:
+
+```
+// PHP
+if (! array_key_exists('filter', $event['request']['parameters'])) {
+    throw new \DreamFactory\Core\Exceptions\BadRequestException('Missing filter', 123456);
+}
+
+```
+
+will return:
+
+```
+// JSON
+{
+    "error": {
+        "code": 123456,
+        "context": null,
+        "message": "Missing filter",
+        "status_code": 400
+    }
+}
+```
+(Note that "code" will return the status code of the exception unless you provide one).
+
+The Following Exceptions are available to you:
+|Exception                   |Returned Status Code     |Argument 1           |Argument 2      |Argument 3    |
+|----------------------------|-------------------------|---------------------|----------------|--------------|
+|BadRequestException         |400 Bad Request          |message (string)     |code (integer)  |              |
+|BatchException              |400 Bad Request          |resources (array)*   |message (string)|code (integer)|
+|ConflictResourceException   |409 Conflict             |message (string)     |code (integer)  |              |
+|DFException                 |500 Internal Server Error|Exception**          |                |              |
+|ForbiddenException          |403 Forbidden            |message (string)     |code (integer)  |              |
+|InternalServerErrorException|500 Internal Server Error|message (string)     |code (integer)  |              |
+|InvalidJsonException        |400 Bad Request          |message (string)     |code (integer)  |              |
+|NotFoundException           |404 Not Found            |message (string)     |code (integer)  |              |
+|NotImplementedException     |501 Not Implemented      |message (string)     |code (integer)  |              |
+|RestException               |Whatever you want***     |status code (integer)|message (string)|code (integer)|
+|ServiceUnavailableException |503 Service Unavailable  |message (string)     |code (integer)  |              |
+|TooManyRequestsException    |429 Too Many Requests    |message (string)     |code (integer)  |              |
+|UnauthorizedException       |401 Unauthorized         |message (string)     |code (integer)  |              |
+
+and can be implemented with (php) `throw new \DreamFactory\Core\Exceptions\<ExceptionFromAbove>(<arguments>)`
+
+\* The array of resources given as the first argument for a batch exception can contain "regular" data (e.g. data from a succesful call or a string saying "success") as well as instances of Exceptions. For example if we made a POST batch request, of which two failed, and one was succesful, you could use `BatchException` in the following manner (hardcoded but it should give you an idea):
+
+Our Script:
+```
+//PHP
+$errorOne = new \DreamFactory\Core\Exceptions\BadRequestException('Missing Name');
+$errorTwo = new \DreamFactory\Core\Exceptions\BadRequestException('Missing Location');
+
+$successfulCall = array("Name"=>"Tomo", "Location"=>"London");
+
+$errorArray = array($errorOne, $successfulCall, $errorTwo);
+
+throw new \DreamFactory\Core\Exceptions\BatchException($errorArray,'Some failed requests');
+```
+This would return:
+```
+//Json
+{
+    "error": {
+        "code": 1000,
+        "context": {
+            "error": [
+                0,
+                2
+            ],
+            "resource": [
+                {
+                    "code": 400,
+                    "context": null,
+                    "message": "Missing Name",
+                    "status_code": 400
+                },
+                {
+                    "Name": "Tomo",
+                    "Location": "London"
+                },
+                {
+                    "code": 400,
+                    "context": null,
+                    "message": "Missing Location",
+                    "status_code": 400
+                }
+            ]
+        },
+        "message": "Some failed requests",
+        "status_code": 400
+    }
+}
+```
+Here our "Error" array shows that the first (0) and third (2) "resource" failed, as can be seen in the "resource" object following.
+
+\** You can use the DFException if you want the status code to be a 500 internal error, but containing an instance of a seperate Exception. For example if we wanted to show our BadRequestException but throw it as a 500 our script may look something like:
+```
+\\PHP
+$error = new \DreamFactory\Core\Exceptions\BadRequestException('Missing Location');
+throw new \DreamFactory\Core\Exceptions\DFException($error);
+```
+Which would return a 500 status code response, _but_ the response itself would contain the following, including the status code of our actual error (in this case 400):
+```
+//JSON
+{
+    "error": {
+        "code": 400,
+        "context": null,
+        "message": "Missing Location"
+    }
+}
+```
+
+\*** By using a RestException, you can have the response be any accepted HTTP status code you like. It must be provided as the first argument, otherwise the Exception will simply return a 500.
+
+For example, to throw a "I'm a teapot" Exception, the end of your script might well be:
+```
+//PHP
+...
+throw new \DreamFactory\Core\Exceptions\RestException(418, "Sorry Mate");
+```
+and your response would be:
+```
+\\JSON
+{
+    "error": {
+        "code": 418,
+        "context": null,
+        "message": "Sorry Mate",
+        "status_code": 418
+    }
+}
+```
 ## Creating Standalone Scripted Services
 
 To create a standalone scripted service, you'll navigate to `Services > Create` and then click the `Select Service Type` dropdown. There you'll find a scripted service type called `Script`, and under it you'll find links to the supported scripting engine languages (PHP, Python, and NodeJS):
