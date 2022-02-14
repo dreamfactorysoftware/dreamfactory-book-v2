@@ -60,6 +60,10 @@ DreamFactory enables file-based caching by default, however you may opt to confi
  1. [YouTube - Setting up and using Redis](https://www.youtube.com/watch?v=2Xp_3oBcYXo)
  2. [Blog - Caching](https://blog.dreamfactory.com/new-dreamfactory-cache-service-supports-redis-memcahed-and-local-storage/)
 
+### Connection Pooling with Oracle
+
+If you are using an Oracle database, you may see performance improvements by setting up Connection Pooling. This should reduce the number of database connections being made. To do so with your DreamFactory Oracle connector, simple add `PDO::ATTR_PERSISTENT` `true` as a driver option on the configuration tab of your Oracle Service.
+
  ## Adding Redis Caching
 
 One of DreamFactory's great advantages is it is built atop Laravel, and as such, you can take advantage of Laravel's support for shared caching solutions, among other things. This is great because it means the caching solution has been extensively tested and proven in production environments.
