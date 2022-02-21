@@ -90,7 +90,9 @@ Note the `X-Folder-Name` field is identified as a header, meaning you'll need to
 
 To upload a file, you'll send a `POST` request to the SFTP API. You must specify the file name, and can do so either via the URL like this:
 
+```
 https://example.com/api/v2/sftp/dreamfactory-ebook.png
+```
 
 Alternatively you can use the `X-File-Name` in header to identify file name.
 
