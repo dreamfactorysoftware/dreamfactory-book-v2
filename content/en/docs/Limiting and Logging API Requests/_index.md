@@ -31,7 +31,7 @@ Here's an example of typical output sent to the log:
     [2019-02-14 22:35:45] local.INFO: [RESPONSE] {"Status Code":200,"Content-Type":null}
     [2019-02-14 22:35:45] local.INFO: [RESPONSE] {"Status Code":200,"Content-Type":"application/json"}
 
-#### Logstash
+## Logstash
 
 DreamFactory's Gold edition offers Elastic Stack (Elasticsearch, Logstash, Kibana) support via the Logstash connector. This connector can interface easily with the rest of the ELK stack (Elasticsearch, Logstash, Kibana) from [Elastic.io](https://www.elastic.co) or connect to other analytics and monitoring sources such as open source [Grafana](https://grafana.com/).
 
@@ -66,6 +66,109 @@ Valid options are:
 * info
 
 <img src="/images/07/logstash_service_config.png" alt="Logstash service config setup" width="800">
+
+### Default Data Objects that can be Captured
+
+<img src="/images/07/logstash_data_objects.png" alt="Logstash Data Objects" width="800">
+
+The screenshot above shows the default data objects we can catch and send to logstash by selecting the appropiate checkbox. (We can also create scripts to send custom data to logstash which will be explained further below). These data objects can be seperated into three "sections", Request, Response, and Platform. "Request" and "Response" will be sent to logstash within an "event" object, and "Platform" in its own object, i.e in the following manner:
+```
+{
+  ...,
+  ...,
+  "event": {
+    "request": {
+      "key": "value",
+      "key": "value"
+    },
+    "response": {
+      "key":"value",
+      "key":"value"
+    }
+  },
+  "platform": {
+    "key":"value",
+  }
+}
+```
+#### Request
+
+Data objects that can be captured within the "Request" section are as follows:
+
+|Data Object  |Will Provide                                                                                                             |
+|-------------|-------------------------------------------------------------------------------------------------------------------------|
+|Content      |The body of your api call (if any). For example the resource sent in a POST request.                                     |
+|Content-Type |The entity type, generally `application/json`                                                                            |
+|Headers      |Will include all headers including `host`, `origin`, `accept-enconding`, `accept`, `user-agent`, `referer`, `connection`, `content-type`, `x-dreamfactory-api-key`, `x-dreamfactory-session-token`, `accept-language`, `content-length`                           |
+|Parameters   |Any parameters added to the api request such as `fields`, `filter`, and `order`                                          |
+|Method       | i.e `GET`, `POST` etc.                                                                                                  |
+|Payload      |The resource been sent in the api call as a JSON object (such as in a POST request)                                      |
+|URI          |The uri of the request starting with `api/v2/`                                                                           |
+|Service      |The name of the api service being called, e.g. if you have a mysql connector called "mysql-db" it will display `mysql-db`|
+|Resource     |The endpoint being called of that service, e.g. `_table/employees?limit=1`                                               |
+|All          |All of the above                                                                                                         |
+
+Note: The `API Resource` option will show the endpoint of the service being called (e.g `employees` if calling the employees table in a database). It will not be nested inside the 'request' object.
+
+#### Response
+
+Data objects that can be captured within the "Response" section are as follows:
+
+|Data Object  |Will Provide                                                                                                  |
+|-------------|--------------------------------------------------------------------------------------------------------------|
+|Status Code  |The status code of the event (eg 200 for succesful, 401 for unauthorized )                                    |
+|Content      |A JSON object of the response content (such as the first employee details in a call to `/employeeslimit=1`)   |
+|Content-Type |The entity type, generally `application/json`                                                                 |
+|All          |All of the above                                                                                              |
+
+#### Platform
+
+Data objects that can be captured within the "Platform" section are as follows:
+
+|Data Object     |Will Provide                                                                                                  |
+|----------------|--------------------------------------------------------------------------------------------------------------|
+|Config          |Configuration of the DreamFactory Platform, e.g. scripting language paths, storage paths, whether windows authorization is enabled etc.                                   |
+|Session         |Will return the `session_token`, whether a role has been assigned to the service, and details of the dreamfactory user making the call.  |
+|Session User    |Details of the user making the call (e.g `username`, `email`, whether they are an admin etc.)                 |
+|Session API Key |The API key being used (this will be associated with the Role and its correspondong App)                      |
+|All             |All of the above                                                                                              |
+
+### Custom Logstash Messages
+
+Using DreamFactory's [scripting service](../integrating-business-logic-into-your-apis) we can send customized logs to logstash through a simple internal POST call. This can be a powerful tool as we can send additional information to logstash that otherwise might not be provided in a regular api call, or indeed we might want a simpler, more human message than what is provided in an api response.
+
+For example, whenever a new user is created, we may want to send that information, along with details of _who_ created that user to logstash. We can do so by adding the following script to our `system.user.post` endpoint:
+
+```PHP
+// Only send to logstash on successful creation
+if ($event['response']['status_code'] === 201) {
+
+  $email = '';
+  $userName = '';
+  $createdUser = $event['request']['payload']['resource'][0]['name'];
+  $createdUserEmail = $event['request']['payload']['resource'][0]['email'];
+
+  # Get details of the currently logged in user.
+  if ($platform['session']['user'] && $platform['session']['user']['email']){
+      $userEmail = $platform['session']['user']['email'];
+      $userName = $platform['session']['user']['name'];
+  }
+
+  $log = array(
+      "level" => "alert",
+      "message" => "New user created: {$createdUser}, Email: {$createdUserEmail}, New User Created by: {$userName}, Email: $userEmail"
+  );
+
+  # Send message to logstash
+  $api = $platform["api"];
+  $post = $api->post;
+  $url = '<theNameOfYourLogstashService';
+  $post($url, $log);
+}
+```
+(Replace `<theNameOfYourLogstashService>` with the name you assigned to your Logstash Service in DreamFactory).
+
+As can be seen above, the POST call takes two arguments, the url of the logstash connector (which we can make with an internal call so only the name of the logstash service is necessary) plus the log itself which should be an array containing the `level` and the `message`. The message can be interpolated to contain any variable you create.
 
 ### Filtering Sensitive Data from Elastic Stack
 
