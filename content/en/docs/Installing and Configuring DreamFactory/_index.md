@@ -522,44 +522,6 @@ Once restarted your DreamFactory Bitnami instance is capable of connecting to an
 
 Executing this endpoint will result in a list of tables being returned from the connected database.
 
-### Bitnami Windows Oracle
-
-Start by downloading the Oracle Instant Client [here](https://www.oracle.com/database/technologies/instant-client/downloads.html). Since the Windows Bitnami stack is 64-bit you need to download the 64-bit instant client.
-
-Upon successful download you can now extract the zip file to your preferred location, such as `C:\instantclient_X_X`.
-
-Edit the below line in your `php.ini` file (`C:\Bitnami\dreamfactory-x.x.x-x\php\php.ini`) by removing the semicolon before extension. If you installed Instant Client 19 at the beginning you will still leave the extension uncommented as 12c. This is the only way PHP will recognize the driver.
-
-	;extension=php_oci8_12c.dll  ; Use with Oracle Database 12c Instant Client
-
-Now we must make our Windows machine aware of the driver, go to Control Panel->System->Advanced System Settings.
-
-Click on Environment Variables and under System variables, double click on Path. At the end of the Variable value, add the path to the instant client directory. Use a semicolon to separate this new entry from the current last entry.
-
-	;C:\instantclient_X_X
-
-Restart the system.
-
-## Troubleshooting Oracle Connections
-
-DreamFactory uses PHP's [OCI8](https://www.php.net/manual/en/ref.oci8.php) library to connect to and interact with  databases. Therefore successful installation of the  client driver and SDK is a crucial part of the process. Sometimes it is useful to attempt a connection outside of DreamFactory in order to further isolate the problem. One way to do so is by placing the following PHP script on the same server where DreamFactory is installed:
-
-	<?php
-	    $conn=oci_connect("USERNAME","PASSWORD","HOST/DATABASE");
-		if (!$conn) {
-	        $e = oci_error();
-	        echo 'Could not connect to :';
-	        echo $e['message'];
-
-	    } else {
-	        echo 'Successfully connected to ';
-	    }
-
-	oci_close($conn);
-	?>
-
-Replace the `USERNAME`, `PASSWORD`, and `HOST/DATABASE` placeholders with your credentials, name the script `.php` or similar, and place it in the `public` directory of your DreamFactory installation. Then open a browser and navigate to `https://YOUR_DOMAIN/.php`. If the connection is successful you'll see a corresponding message; otherwise you should see some additional details pertaining to the nature of the error.
-
 ---
 
 ## Configuring Firebird for DreamFactory
@@ -985,6 +947,65 @@ Listen 80
 ```
 {{< /alert >}}
 
+## Configuring Oracle on Windows with DreamFactory
+
+On Linux, our installer can handle the process of configuring Oracle with DreamFactory for you. On Windows, the process is a little more involved, but is not too taxing. You will need to download three things:
+
+1. The Oracle "Basic" Instant Client Package from [the Oracle Website](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html) (for example `instantclient-basic-windows.x64-21.3.0.0.0.zip`).
+2. The Oracle "SDK" Instant Client Package from [the Oracle Website](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html) (for example `instantclient-sdk-windows.x64-21.3.0.0.0.zip`).
+3. The PHP oci8 extension (DLL) available at [pecl.php.net](https://pecl.php.net/package/oci8). By default, DreamFactory runs on PHP 7.4 so you will want the x64 package of that (version 2.2.0). If you are running DreamFactory using IIS as your webserver you will most likely be using the non thread safe version of PHP.
+
+{{< alert color="success "title="TIP" >}}
+On Windows you can run `php -i|findstr "Thread"` in a terminal to find out whether your PHP is the (Non) Thread Safe version.
+{{< /alert >}}
+
+* First create a folder where you would like to keep the oracle drivers, for example `C:\oracledrivers` and extract the Oracle "Basic" Instant Client there. The files will be extracted into a subdirectoy called `instantclient_<version>`. For example
+```
+C:\oracledrivers\instantclient21_3
+```
+* Next, we will extract our "SDK" Instant Client _to the same folder_ i.e. in this example `C:\oracledrivers`. We want the SDK package to extract into the same subdirectory that was created in the step above, not a seperate one. As a result your drivers folder would end up looking like this:
+
+<img src="/images/02/oracle-windows-directory.png" width="800">
+
+and our subdirectory (`instantclient_21_3` in this case) like this:
+
+<img src="/images/02/oracle-windows-subdirectory.png" width="800">
+
+You will note that there is now a `sdk` folder inside.
+
+Next, we need to add the full path of the Instant Client to the environment variables `OCI_LIB64` and `PATH`. In the Windows Control Panel go to  "System and Security" -> "System" -> "Advanced System Settings", click on Environment Variables and then:
+
+1. Under System Variables, create `OCI_LIB64` if it does not already exist. Set the value of `OCI_LIB64` to the full path of the location of Instant Client. 
+
+<img src="/images/02/ocilib64-variable.png" width="600">
+
+2. Under System Variables, edit PATH to include the same (`C:\oracledrivers\instantclient_21_3`)
+
+<img src="/images/02/oracle-path.png" width="400">
+
+Almost there! Now, the last thing to do is to extract our PHP OCI8 extension package (It will be named along the lines of `php_oci8-2.2.0-7.4-nts-vc15-x64`) and move the `php_oci8.dll` file to the `ext` directory where PHP is located on your system (e.g `PHP\v7.4\ext`). Once that is done add `extension=php_oci8.dll` to your `php.ini` file and then restart the server. Congratulations!
+
+## Troubleshooting Oracle Connections
+
+DreamFactory uses PHP's [OCI8](https://www.php.net/manual/en/ref.oci8.php) library to connect to and interact with  databases. Therefore successful installation of the  client driver and SDK is a crucial part of the process. Sometimes it is useful to attempt a connection outside of DreamFactory in order to further isolate the problem. One way to do so is by placing the following PHP script on the same server where DreamFactory is installed:
+
+	<?php
+	    $conn=oci_connect("USERNAME","PASSWORD","HOST/DATABASE");
+		if (!$conn) {
+	        $e = oci_error();
+	        echo 'Could not connect to :';
+	        echo $e['message'];
+
+	    } else {
+	        echo 'Successfully connected to ';
+	    }
+
+	oci_close($conn);
+	?>
+
+Replace the `USERNAME`, `PASSWORD`, and `HOST/DATABASE` placeholders with your credentials, name the script `.php` or similar, and place it in the `public` directory of your DreamFactory installation. Then open a browser and navigate to `https://YOUR_DOMAIN/.php`. If the connection is successful you'll see a corresponding message; otherwise you should see some additional details pertaining to the nature of the error.
+
+---
 ## Configuring SAP SQL Anywhere
 
 SAP SQL Anywhere is the namesake commercial database solution offered by software giant SAP SE. If your organization relies upon SQL Anywhere, you'll be pleased to know DreamFactory's Silver and Gold editions include support for this powerful database! In this chapter we'll walk you through the server configuration steps necessary to ensure your DreamFactory instance can interact with your SQL Anywhere database.
