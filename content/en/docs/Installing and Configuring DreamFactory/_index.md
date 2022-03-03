@@ -45,6 +45,33 @@ Cloud environments are the hosting solution of choice these days, and for good r
 
 [https://www.dreamfactory.com/downloads](https://www.dreamfactory.com/downloads)
 
+## Using the DreamFactory Installer
+
+By far the simplest method of installing DreamFactory on Linux is by using our installer which can be found [here](https://github.com/dreamfactorysoftware/dreamfactory/blob/master/installers/dfsetup.run). The installer will determine your OS, and install all the necessary packages that DreamFactory requires to run, as well as a webserver (Nginx or Apache), and DreamFactory itself.
+
+To start we will download our installer `dfsetup.run`. You can do so either directly from the [GitHub page](https://github.com/dreamfactorysoftware/dreamfactory/blob/master/installers/dfsetup.run) and clicking download, or with wget:
+
+	wget https://github.com/dreamfactorysoftware/dreamfactory/raw/master/installers/dfsetup.run
+
+Now that we have the script on our server, let's make it executable.
+
+	chmod +x dfsetup.run
+
+Now we can run the script!
+
+	sudo ./dfsetup.run
+
+You will be greeted by an interactive menu, where if you wish you can choose additional installation options (such as with an Apache webserver) by pressing the corresponding number.
+
+<p>
+<img src="/images/02/install-script.png" width="800">
+</p>
+
+ A default installation (0) will install the Nginx web server, DreamFactory, and the required system and PHP extensions, but will **not install a database server** (unless you choose sqlite as your database). To see a full list of installation options check it our [here](https://github.com/dreamfactorysoftware/dreamfactory/tree/master/installers#installation-options). If you select option 5, then the installer will also setup a MySql Database to be used as the system database.
+
+After choosing your additional options (if any), hit enter and the installer will go about getting everything ready. 
+
+Fill out any prompts and then upon completion you can now go to your browser and access your instance!
 ## Installing and Configuring DreamFactory from Source
 
 If you've cloned the GitHub repository, you'll need to carry out a few additional steps before launching your DreamFactory instance. The first step involves ensuring your server requirements have been met. Let's tackle those first, followed by an overview of software installation.
@@ -427,31 +454,13 @@ Once the image is running we can enter it and begin installing DreamFactory.
 
 	$ docker exec -it {Container_ID} /bin/bash
 
-## Using the DreamFactory Install Scripts
+From here, rather than copying and pasting a lengthy list of commands, we can use the DreamFactory Installer as described [above](./#using-the-dreamfactory-installer).
 
-Instead of spending time copying and pasting a lengthy list of commands we are going to use our installation script that can be found [here](https://github.com/dreamfactorysoftware/dreamfactory/tree/master/installers).
-
-To start we will have to bring the script into our container by using `wget`.
-
-	wget -O cent.sh {RAW_GITHUB_SCRIPT_URL}
-
-Now that we have the script on our server, let's make it executable.
-
-	chmod +x cent.sh
-
-We can now run the script, but first let's take a look at additional configuration flags. You may pass several options into the script to alter its behavior. If you do not use these options, the script will install the Nginx web server, DreamFactory, and the required system and PHP extensions, but will **not install a database server**. To see a full list of installation options check it our [here](https://github.com/dreamfactorysoftware/df-genie#installation-options), otherwise we will be using the `--with-mysql` flag to be able to use MySQL as our system database.
-
-Now we can run the script!
-
-	sudo ./cent.sh --with-mysql
-
-You should now see the script running like so.
-
-<p>
-<img src="/images/02/install-script.png" width="600">
-</p>
-
-Upon completion you can now go to your browser and access your instance!
+```
+wget https://github.com/dreamfactorysoftware/dreamfactory/raw/master/installers/dfsetup.run
+chmod +x dfsetup.run
+sudo ./dfsetup.run
+```
 
 ## Choosing an HTTP Client
 
