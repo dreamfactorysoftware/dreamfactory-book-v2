@@ -579,6 +579,188 @@ Save the changes, making sure the script's `Active` checkbox is enabled. Then ma
 
 Of course, there's nothing stopping you from modifying the script logic to iterate over an array of returned records.
 
+## Working with Stored Procedures
+
+Stored procedure support via the REST API is just for discovery and calling what you have already created on your database, it is not for managing the stored procedures themselves. They can be accessed on each database service by the `_proc` resource.
+
+As with most database features, there are a lot of common things about stored procedures across the various database vendors, with of course, some pretty big exceptions. DreamFactory's blended API defines the difference between stored procedures and how they are used in the API as follows.
+
+Procedures can use input parameters ('IN') and output parameters ('OUT'), as well as parameters that serve both as input and output ('INOUT'). They can, except in the Oracle case, also return data directly.
+
+{{< alert color="warning" title="Database Vendor Exceptions" >}}
+* SQLite does not support procedures (or indeed functions).
+* PostgreSQL calls procedures and functions the same thing (a function) in PostgreSQL. DreamFactory calls them procedures if they have OUT or INOUT parameters or don't have a designated return type, otherwise functions.
+* SQL Server treats OUT parameters like INOUT parameters, and therefore require some value to be passed in.
+{{</ alert >}}
+
+### Listing Available Stored Procedures
+
+The following call will list the available stored procedures, based on role access allowed:
+```
+GET http(s)://<dfServer>/api/v2/<serviceName>/_proc
+
+```
+
+### Getting Stored Procedure Details
+
+We can use the `ids` url parameter and pass a comma delimited list of resource names to retrieve details about each of the stored procedures. For example if you have a stored procedure named `getCustomerByLastName` a GET call to `http(s)://<dfServer>/api/v2/<serviceName>?ids=getCustomerByLastName` will return:
+```
+{
+  "resource": [
+    {
+      "alias": null,
+      "name": "getCustomerByLastName",
+      "label": "GetCustomerByLastName",
+      "description": null,
+      "native": [],
+      "return_type": null,
+      "return_schema": [],
+      "params": [
+        {
+          "name": "LastName",
+          "position": 1,
+          "param_type": "IN",
+          "type": "string",
+          "db_type": "nvarchar",
+          "length": 25,
+          "precision": null,
+          "scale": null,
+          "default": null
+        }
+      ],
+      "access": 31
+    }
+  ]
+}
+
+```
+
+### Calling a Stored Procedure
+
+#### Using GET
+
+When passing no payload is required, any IN or INOUT parameters can be sent by passing the values in the order required inside parentheses
+```
+/api/v2/<serviceName>/_proc/myproc(val1, val2, val3)
+```
+or as URL parameters by parameter name
+```
+/api/v2/<serviceName>/_proc/myproc?param1=val1&param2=val2&param3=val3
+```
+In the below example, there is a stored procedure `getUsernameByDepartment` which takes two input parameters, a department code, and a userID. Making the following call:
+```
+/api/v2/<serviceName>/_proc/getUserNameByDepartment(AB,1234)
+```
+where AB is the department code and 1234 is the userID, will return:
+```
+{
+  "userID": "1234",
+  "username": "Tomo"
+}
+```
+
+#### Using POST
+
+If a payload is required, i.e. passing values that are not url compliant, or passing schema formatting data, include the parameters directly in order. The same call as above can be made with a POST request with the following in the body:
+```
+{
+  "params": ["AB", 1234]
+}
+```
+### Formatting Results
+
+For procedures that do not have INOUT or OUT parameters, the results can be returned as is, or formatted using the returns URL parameter if the value is a single scalar value, or the schema payload attribute for result sets.
+
+If INOUT or OUT parameters are involved, any procedure response is wrapped using the configured (a URL parameter wrapper) or default wrapper name (typically "resource"), and then added to the output parameter listing. The output parameter values are formatted based on the procedure configuration data types.
+
+Note that without formatting, all data is returned as strings, unless the driver (i.e. mysqlnd) supports otherwise. If the stored procedure returns multiple data sets, typically via multiple "SELECT" statements, then an array of datasets (i.e. array of records) is returned, otherwise a single array of records is returned.
+
+_schema_ - When a result set of records is returned from the call, the server will use any name-value pairs, consisting of "<field_name>": "<desired_type>", to format the data to the desired type before returning.
+
+_wrapper_ - Just like the URL parameter, the wrapper designation can be passed in the posted data.
+
+Request with formatting configuration...
+```
+{
+  "schema": {
+    "id": "integer",
+    "complete": "boolean"
+  },
+  "wrapper": "data"
+}
+```
+Response without formatting...
+```
+{
+  "resource": [
+    {
+      "id": "3",
+      "name": "Write an app that calls the stored procedure.",
+      "complete": 1
+    },
+    {
+      "id": "4",
+      "name": "Test the application.",
+      "complete": 0
+    }
+  ],
+  "inc": 6,
+  "count": 2,
+  "total": 5
+}
+```
+Response with formatting applied...
+```
+{
+  "data": [
+    {
+      "id": 3,
+      "name": "Write an app that calls the stored procedure.",
+      "complete": true
+    },
+    {
+      "id": 4,
+      "name": "Test the application.",
+      "complete": false
+    }
+  ],
+  "inc": 6,
+  "count": 2,
+  "total": 5
+}
+```
+
+### Using Symmetric Keys to Decrypt Data in a Stored Procedure (SQL Server)
+
+SQL Server has the ability to do column level encryption using symmetric keys which can be particular useful for storing sensitive information such as passwords. A good example of how to do so can be found [here](https://www.sqlshack.com/an-overview-of-the-column-level-sql-server-encryption/)
+
+Typically, you would then decrypt this column (assuming the user has access to the certificate) with a statement such as the below in your sql server workbench:
+```
+OPEN SYMMETRIC KEY SymKey
+DECRYPTION BY CERTIFICATE <CertificateName>;
+
+SELECT <encryptedColumn> AS 'Encrypted data',
+CONVERT(varchar, DecryptByKey(<encryptedColumn>)) AS 'decryptedColumn'
+FROM SalesLT.Address;
+```
+
+Now, we cannot call our table endpoint (e.g `/api/v2/<serviceName>/_table/<tableWithEncryptedField>`) and add this logic with DreamFactory, however we could put the same logic in a stored procedure, and have DreamFactory call that to return our decrypted result. As long as the SQLServer user has permissions to the certificate used for encryption, it will be able to decrypt the field. (You could then use [roles](../using-the-system-apis/#managing-roles) to make sure only certain users have access to this stored procedure).
+
+The stored procedure would look something like this: 
+```
+CREATE PROCEDURE dbo.<procedureName>
+AS
+BEGIN
+  SET NOCOUNT on;
+  OPEN SYMMETRIC KEY SymKey
+  DECRYPTION BY CERTIFICATE <CertificateName>;
+
+  SELECT <oneField>, CONVERT(nvarchar, DecryptByKey(<encryptedField>)) AS 'decrypted'  
+  FROM <table>;
+END
+return;
+```
+and then can be called by DreamFactory in with `/_proc/<procedureName>`
 ## Obfuscating a Table Endpoint
 
 Sometimes you might wish to completely obfuscate the DreamFactory-generated database API endpoints, and give users a URI such as `/api/v2/employees` rather than `/api/v2/mysql/_table/employees`. At the same time you don't want to limit the ability to perform all of the usual CRUD tasks. Fortunately this is easily accomplished using a scripted service. The following example presents the code for a scripted PHP service that has been assigned the namespace `employees`:
