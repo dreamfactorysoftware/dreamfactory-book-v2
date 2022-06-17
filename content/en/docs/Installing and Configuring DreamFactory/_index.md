@@ -270,6 +270,87 @@ This will start a simple PHP server running on `127.0.0.1` port `8000`. Open you
 
 <img src="/images/02/first_boot.png" width="800">
 
+### Using an Encrypted System Database
+
+By default, credential fields (such as passwords) stored in the DreamFactory system database will be encrypted. In addition, DreamFactory is more than happy to use a fully-encrypted database as an additional security layer. In this section you will find a basic tutorial to setup and configure MySQL (we will use MariaDB) for Data-At-Rest Encryption:
+
+1. Before installing DreamFactory, we will want to install MariaDB onto the server using the following commands:
+```
+sudo apt update -y
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.3/ubuntu focal main'
+sudo apt install mariadb-server
+```
+
+2. Next, we will generate some random encryption keys using `openssl rand` (in this case, five of them):
+```
+mkdir /etc/mysql/encryption
+for i in {1..5}; do openssl rand -hex 32 >> /etc/mysql/encryption/keyfile;  done;
+```
+
+3. Now, open the keyfile in `/etc/mysql/encryption/keyfile` with your preferred text editor and add some key ids. For the sake of simplicity in this tutorial, they will just be from one to five. The ids will be added before the start of each our hex encoded keys, followed by a semi-colon. You will end up with something looking like this:
+```
+1;e29c31c9b8e0386fe19409098ab7b3e54e11fb20ed0793e3e0a956e17f375562
+2;114da537ee5dbea27503b96ba499012c9a554e9f01aadc419b8e35315600c7b6
+3;8c6cd07eb38f5ecfacd16415449246f78d9b9252fa35dec3e9758e8f9b11a778
+4;37109443404ac12d6a20f11df11dd2611aa6b399e1d66fa70284e202096d45d4
+5;53379594cfe6073e88dbcf55edf65968ffb4c2fb5c64c171755f700a38e073e3
+```
+
+4. Generate a random password using the same `openssl rand` command:
+```
+openssl rand -hex 128 > /etc/mysql/encryption/keyfile.key
+```
+
+5. and encrypt the keyfile
+```
+openssl enc -aes-256-cbc -md sha1 -pass file:/etc/mysql/encryption/keyfile.key -in /etc/mysql/encryption/keyfile -out /etc/mysql/encryption/keyfile.enc
+```
+Our encyption folder should now contain a `keyfile`, `keyfile.enc`, and `keyfile.key` files.
+
+6. We will add the following variables to the mysql configuration file, which can be found in `/etc/mysql/my.cnf`. These should be added in the daemon section, i.e `[mysqld]`:
+```
+[mysqld]
+...
+plugin_load_add = file_key_management
+file_key_management_filename = /etc/mysql/encryption/keyfile.enc
+file_key_management_filekey = FILE:/etc/mysql/encryption/keyfile.key
+file_key_management_encryption_algorithm = aes_cbc
+encrypt_binlog = 1
+
+innodb_encrypt_tables = ON
+innodb_encrypt_log = ON
+innodb_encryption_threads = 4
+innodb_encryption_rotate_key_age = 0 # Do not rotate key
+innodb_encrypt_tables = FORCE
+```
+The last variable `innodb_encrypt_tables = FORCE` will make all tables encrypted.
+Then start up mysql with `systemctl start mysql`.
+
+8. Now we will install DreamFactory. If using the installer, you can select option 5 at the start, and it will detect that mysql is already running. It will prompt you for the root password, and then create the database and the DreamFactory user on your behalf.
+
+<img src="/images/02/configure_mysql_database.png" width="800">
+
+Alternatively, if using `php artisan df:env`, or not selecting option 5 with the installer, you may create a database and a user beforehand (e.g a database named `dreamfactory` and a user called `dfadmin` with privileges to that that database). The installer, (or running `php artisan df:env`) will then prompt you for those details:
+
+<img src="/images/02/database_prompt.png" width="800">
+
+The installation will then complete, ask you for the first user, and you will have an encrypted system database. 
+
+This can be tested and confirmed by logging into the MySQL cli and running the following command:
+```
+select * from information_schema.innodb_tablespaces_encryption;
+```
+which will return something similar to the following:
+
+<img src="/images/02/encrypted_tables.png" width="800">
+
+We can also grep the tables using `strings` for, e.g., the first user we just created with the following:
+```
+strings /var/lib/mysql/dreamfactory/user.ibd | grep "<yourUserName>"
+```
+and you will note that it returns empty.
+
 ## Introducing the .env File
 
 It is often helpful to have different configuration values based on the environment where the application is running. For example, you may wish to use a different cache driver locally than you do on your production server.
