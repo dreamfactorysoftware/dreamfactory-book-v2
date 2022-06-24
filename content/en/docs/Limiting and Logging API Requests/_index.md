@@ -181,6 +181,60 @@ Sensitive information such as social security numbers, dates of birth, and genet
       }
     }
 
+### Configuring Logstash with Splunk
+
+As an alternative to the ELK stack, it is possible to hook Logstash up with Splunk to index your DreamFactory logs. The process is relatively simple, however will require some minor modification to your logstash configuration. For the purposes of this tutorial, we will be using Splunk Cloud, although it is a similar process for Splunk Enterprise.
+
+1. In the Splunk Dashboard, go to `Settings->Data inputs->Http Event Collector`. First, check and amend the "Global Settings", making sure that "All Tokens" are enabled, and, if you wish, setup your "Default Source Type" and "Default Index" accordingly (they do not need to be assigned).
+
+<img style="margin-bottom: 16px;" src="/images/07/splunk_global_settings.png" alt="Splunk Global Settings" width="800">
+
+2. Click "New Token", and follow the prompts, assigning a Name, Source name override if you wish, and a description. Then choose your allowed index, for this example we will use the "main" index. Generate your token, and copy paste it somewhere for later. You will end up with something like the below screenshot (which can be found by clicking on your token in the HTTP Event Collector dashboard):
+
+<img style="margin-bottom: 16px;" src="/images/07/splunk_token_settings.png" alt="Splunk Token Settings" width="800">
+
+3. For your Logstash configuration file, we will use `http` for our output, turn off ssl verification for testing purposes, and amend our DreamFactory "message" object (which is what comes into Logstash) to "event" (which is what Splunk accepts). So our bare-bones configuration file will look something like this:
+
+```
+# What logstash is listening on, and what DreamFactory is sending to:
+input {
+  http {
+    host => "127.0.0.1"
+    port => "12201"
+  }
+}
+
+output {
+
+  http {
+    # ssl verification is turned off just for testing.
+    ssl_verification_mode => none
+    format => "json"
+    http_method => "post"
+      # Splunk Cloud's port by default will be 8088. /services/collector is where to send our logs to.
+      url => "<splunkURL>:<port>/services/collector"
+      # Your token should be preceeded by "Splunk " (the space is important!)
+      headers => ["Authorization", "Splunk <splunkToken>"]
+      mapping => {
+        # We will send our "message" to splunk, but the root key needs to be renamed to "event"
+        "event" => "%{message}"
+      }
+  }
+}
+```
+
+{{< alert color="warning" title="Remember!" >}}
+SSL verification is turned off just for our testing / dev environments. You will not want this off in production!
+{{< /alert>}}
+
+4. With our Logstash server running, and DreamFactory configured appropiately, you should now see logs appearing in Splunk's "main" index. You can see this by clicking on "Search and Reporting" in the Splunk dashboard and running a search on `index="main"`. Here is a picture of the DreamFactory Configuration:
+
+<img style="margin-bottom: 16px;" src="/images/07/dreamfactory_logstash_config.png" alt="DreamFactory Logstash Config" width="800">
+
+and the data that is sent to Splunk whenever the `system/admin` endpoint is called via a GET request.
+
+<img style="margin-bottom: 16px;" src="/images/07/splunk_event.png" alt="Splunk Event" width="800">
+
 ### Troubleshooting Your Logstash Environment
 
 If you're not seeing results show up within Kibana, the first thing you should do is determine whether Logstash is talking to Elasticsearch. You'll find useful diagnostic information in the Logstash logs, which are found in `LS_HOME/logs` or possibly within `/var/log/logstash`. If your Logstash environment is unable to talk to Elasticsearch you'll find an error message like this in the log:
