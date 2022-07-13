@@ -10,7 +10,7 @@ Instead of using traditional session management, where the server maintains the 
 makes horizontal scaling a breeze, as you’ll see below. For demanding deployments, we suggest using NGINX, more on that later.
 
 <p>
-<img src="/images/appendix/single-server-config.png" width="400">
+<img src="/images/appendix/single-server-config.png" width="400" alt="DreamFactory Single Server Configuration">
 </p>
 
 This is important because you can apply all the standard things you already know about scaling simple websites directly to scaling DreamFactory. This is not an accident. It makes DreamFactory easy to install on any server and easy to scale for massive deployments of mobile applications and Internet of Things (IoT) devices.
@@ -59,7 +59,7 @@ I’m going to take a small detour here and discuss some of the differences betw
 We considered using Node.js for the DreamFactory engine, but were concerned that a single thread would be insufficient to support a massively scalable mobile deployment. The workload in a sophisticated REST API platform is quite comparable to an HTML website written in Drupal or WordPress where multiple threads are required to process all the data.
 
 <p>
-<img src="/images/appendix/single-thread-node.png" width="400">
+<img src="/images/appendix/single-thread-node.png" width="400" alt="Single Threaded Node.js Implementation">
 </p>
 
 Another issue was the need for mature interfaces to a wide variety of SQL and NoSQL databases. This was a challenge with Node.js. Instead, we chose PHP because this language is in widespread use and has great frameworks such as Laravel. The main thing we liked about Node.js was the V8 engine. This allows developers to write JavaScript on the client and on the server. DreamFactory harnesses the power of the V8 engine by using the V8Js extension for PHP, except that DreamFactory runs it in parallel for scalability. The V8 engine is also sandboxed for security.
@@ -67,7 +67,7 @@ Another issue was the need for mature interfaces to a wide variety of SQL and No
 On an Apache server running DreamFactory, we use Prefork MPM to create a new child process with one thread for each connection. You need to be sure that the MaxClients configuration directive is big enough to handle as many simultaneous requests as you expect to receive, but small enough to ensure enough physical RAM for all processes.
 
 <p>
-<img src="/images/appendix/multi-threaded.png" width="400">
+<img src="/images/appendix/multi-threaded.png" width="400" alt="Multi-Threaded DreamFactory Implementation">
 </p>
 
 There is a danger that you will have more incoming requests than the server can handle. In this case, DreamFactory will issue an exponential backoff message telling the client to try again later. DreamFactory Enterprise offers additional methods of limiting calls per second. But still, the total number of transactions will be limited. Node.js can potentially handle a very large number of simultaneous requests with event-‐based callbacks, but in that situation you are stuck with a single thread for all of the data processing. In this situation, Node.js becomes a processing bottleneck for every REST API call.
@@ -79,7 +79,7 @@ If you expect a massive number of incoming requests, then consider running Dream
 This section discusses ways to use multiple servers to increase performance. The simplest model is just to run DreamFactory on a single server. When you do a Bitnami install, DreamFactory runs in a LAMP stack with the default SQL database and some local file storage. The next step up is to configure a separate server for the default SQL database. There are also SQL databases that are available as a hosted cloud service.
 
 <p>
-<img src="/images/appendix/seperate-database-config.png" width="400">
+<img src="/images/appendix/seperate-database-config.png" width="400" alt="Seperate Database Configuration">
 </p>
 
 ### Multiple Servers
@@ -89,7 +89,7 @@ You can use a load balancer to distribute REST API requests among multiple serve
 DreamFactory uses JWT (JSON Web Token) to handle user authentication and session in a completely stateless manner. Therefore, a REST API request can be sent to any one of the web servers at any time without the need to maintain user session/state across multiple servers. Each REST API call to a DreamFactory Instance can pass JWT in the request header, the URL query string, or in the request payload. The token makes the request completely aware of its own state, eliminating the need to maintain state on the server.
 
 <p>
-<img src="/images/appendix/multiple-server-config.png" width="400">
+<img src="/images/appendix/multiple-server-config.png" width="400" alt="Multiple Server Configuration">
 </p>
 
 ### Shared Local Storage
@@ -109,7 +109,7 @@ Below are some results that show the vertical scalability of a single DreamFacto
 For this test, we conducted 1000 GET operations from the DreamFactory REST API. There were 100 concurrent users making the requests. Each operation searched, sorted, and retrieved 1000 records from a SQL database. This test was designed to exercise the server side processing required for a complex REST API call.
 
 <p>
-<img src="/images/appendix/complex-get.png" width="500">
+<img src="/images/appendix/complex-get.png" width="500" alt="DreamFactory Vertical Scaling Benchmark One">
 </p>
 
 Looking at the three m4 servers, we see a nice doubling of capacity that matches the extra processors and memory. This really shows the vertical scalability of a single DreamFactory instance. The complex GET scenario highlights the advantages of the additional processor power.
@@ -119,7 +119,7 @@ Next, we tried a similar test with a simple GET command that basically just retu
 Look at these results for 5000 simple GETs from the API. As you can see, performance does not fully double with additional processors. This demonstrates the diminishing returns of adding processors without scaling up other fixed assets.
 
 <p>
-<img src="/images/appendix/complex-get2.png" width="500">
+<img src="/images/appendix/complex-get2.png" width="500" alt="DreamFactory Vertical Scaling Benchmark Two">
 </p>
 
 By the way, we also looked at POST and DELETE transactions. The results were pretty much what you would expect and in line with the GET requests tested above.
@@ -131,7 +131,7 @@ Below are some results that show the horizontal scalability of a single DreamFac
 First we tested the complex GET scenario. The load balanced m4.xlarge servers ran at about the same speed as the m4.4xlarge server tested earlier. This makes sense because each setup had similar CPU and memory installed. Since this example was bound by processing requirements, there was not much advantage to horizontal scaling.
 
 <p>
-<img src="/images/appendix/complex-get3.png" width="500">
+<img src="/images/appendix/complex-get3.png" width="500" alt="Horizontal Vertical Scaling Benchmark">
 </p>
 
 Next we tested the simple GET scenario. In this case there appears to be some advantage to horizontal scaling. This is probably due to better network IO and the relaxation of other fixed constraints compared to the vertical scalability test.
@@ -147,15 +147,15 @@ The maximum time for the last request to finish will usually increase with the t
 The 16 processor server never experienced any degradation of performance all the way to 240 concurrent users. This is the maximum number of concurrent users supported by the Apache Bench test program. Even then, the worst round trip delay was less than 1⁄2 second. Imagine a real world scenario with 10,000 people logged into a mobile application. If 10% of them made a service request at the same time, you would expect a round trip delay of 1⁄2 second on average and a full second in the worst case.
 
 <p>
-<img src="/images/appendix/4-processors.png" width="600">
+<img src="/images/appendix/4-processors.png" width="600" alt="Concurrent User Benchmark with 4 Processors">
 </p>
 
 <p>
-<img src="/images/appendix/8-processors.png" width="600">
+<img src="/images/appendix/8-processors.png" width="600" alt="Concurrent User Benchmark with 8 Processors">
 </p>
 
 <p>
-<img src="/images/appendix/16-processors.png" width="600">
+<img src="/images/appendix/16-processors.png" width="600" alt="Concurrent User Benchmark with 16 Processors">
 </p>
 
 ### Your Mileage May Vary
@@ -171,7 +171,7 @@ Most of the Infrastructure as a Service (IaaS) vendors have systems that can sca
 We discussed Platform as a Service (PaaS) deployment options earlier. These systems do not support persistent local file storage, but the trade-‐off is that your application instance is highly scalable. You can simply specify the maximum number of instances that you would like to run. As traffic increases, additional instances are brought online. If a server stops responding, then the instance is simply restarted.
 
 <p>
-<img src="/images/appendix/paas-scalability.png" width="600">
+<img src="/images/appendix/paas-scalability.png" width="600" alt="DreamFactory Scalability Configuration">
 </p>
 
 ## Conclusion

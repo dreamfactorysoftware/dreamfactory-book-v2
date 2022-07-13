@@ -17,7 +17,7 @@ In this section you'll learn how to add the third-party [OpenWeather API](https:
 Connecting a remote HTTP API to DreamFactory is easily accomplished in a few short steps. As with all DreamFactory services, you'll begin by logging into your DreamFactory instance, selecting the `Services` tab, and clicking the `Create` link located in the left-hand menubar. From there you'll choose the `HTTP Service` connector located within the `Remote Service` category:
 
 <p>
-<img src="/images/remote-http-soap/http-service-connector.png" width="600">
+<img src="/images/remote-http-soap/http-service-connector.png" width="600" alt="Creating an HTTP Service Connector with DreamFactory">
 </p>
 
 Next you'll assign a name, label, and description. Recall from earlier chapters that the name will play a role as a namespace for the generated API URI structure, therefore you'll need to use alphanumeric characters only. I'll use the name `openweather` for purposes of this tutorial. The label and description are used as referential information and can be assigned anything you please.
@@ -25,7 +25,7 @@ Next you'll assign a name, label, and description. Recall from earlier chapters 
 Next, click on the `Config` tab. It's here where you'll tell DreamFactory how to connect to the remote service:
 
 <p>
-<img src="/images/remote-http-soap/http-service-config.png" width="800">
+<img src="/images/remote-http-soap/http-service-config.png" width="800" alt="HTTP Service Connector Configuration Screen">
 </p>
 
 The easiest solution involves pasting in the remote API's base URL. According to the current [OpenWeather API documentation](https://openweathermap.org/current) you'll use the URL https://api.openweathermap.org/data/2.5/weather as the base URL.
@@ -33,13 +33,13 @@ The easiest solution involves pasting in the remote API's base URL. According to
 Next scroll down to the `Parameters` section and click the plus sign located on the right-side of the section:
 
 <p>
-<img src="/images/remote-http-soap/parameters-section.png" width="800">
+<img src="/images/remote-http-soap/parameters-section.png" width="800" alt="Adding Parameters to Your HTTP Service">
 </p>
 
 Return to the [OpenWeather website](https://openweathermap.org/) and login to your account you'll find your API key under the section [API keys](https://home.openweathermap.org/api_keys). This API key is passed in as a *parameter*, meaning you'll need to add it to the `Parameters` section like so:
 
 <p>
-<img src="/images/remote-http-soap/parameters-section-values.png" width="800">
+<img src="/images/remote-http-soap/parameters-section-values.png" width="800" alt="Adding an API Key as a Parameter">
 </p>
 
 The parameter name is `APPID`, and the (grayed out) value is found in the `Value` field. The parameter is declared as `Outbound` because we're going to pass it on to the destination API. This is in contrast to the `Exclude` option which will prevent a particular parameter passed from the client from being passed on to the destination. You can also optionally cache the key for performance reasons by selecting the `Cache Key` option. Finally, we've declared the verbs for which this parameter is enabled. In this case the only verb declaration is `GET` because we're going to issue `GET` requests in order to retrieve weather data.
@@ -56,7 +56,7 @@ To call your service you'll create a `GET` request pointing to `https://YOUR_DRE
 In the following screenshot queries for weather assocated with the United States zip code 43016:
 
 <p>
-<img src="/images/remote-http-soap/http-service-insomnia.png" width="800">
+<img src="/images/remote-http-soap/http-service-insomnia.png" width="800" alt="Querying OpenWeather API using DreamFactory in Insomnia">
 </p>
 
 Because this request is being forwarded from DreamFactory to the OpenWeather API, the outbound request will look like this:
@@ -70,19 +70,19 @@ Admittedly, OpenWeather API's practice of requiring the API key be passed along 
 To add a header, click the plus sign located on the right-side of the `Headers` section:
 
 <p>
-<img src="/images/remote-http-soap/headers-section.png" width="800">
+<img src="/images/remote-http-soap/headers-section.png" width="800" alt="Adding Headers to DreamFactory HTTP Service">
 </p>
 
 The input fields are similar to those found in the `Parameters` header, with one notable difference. You can choose the `Pass From Client` option to pass headers from the requesting client. This is useful if your clients are working with a third-party service by way of your DreamFactory instance, and need to pass along their own custom headers. For instance, the following screenshot demonstrates passing along required Rakuten RapidAPI headers `X-RapidAPI-Host` and `X-RapidAPI-Key` from the client to DreamFactory:
 
 <p>
-<img src="/images/remote-http-soap/http-service-insomnia-rakuten.png" width="800">
+<img src="/images/remote-http-soap/http-service-insomnia-rakuten.png" width="800" alt="Using Pass From Client Option">
 </p>
 
 This is how the headers were configured inside DreamFactory to achieve this:
 
 <p>
-<img src="/images/remote-http-soap/rakuten-headers.png" width="800">
+<img src="/images/remote-http-soap/rakuten-headers.png" width="800" alt="Configured Headers Example">
 </p>
 
 ### Adding a Service Definition

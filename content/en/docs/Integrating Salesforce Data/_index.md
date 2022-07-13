@@ -13,7 +13,7 @@ Many companies desire to access and manage Salesforce data into other applicatio
 Connecting your Salesforce account to DreamFactory is easily accomplished in a few short steps. As with all DreamFactory services, you'll begin by logging into your DreamFactory instance, selecting the `Services` tab, and clicking the `Create` link located in the left-hand menubar. From there you'll choose the `Salesforce` service located within the `Database` category:
 
 <p>
-<img src="/images/salesforce/choose-salesforce.png" width="600">
+<img src="/images/salesforce/choose-salesforce.png" width="600" alt="Creating a DreamFactory SalesForce Service">
 </p>
 
 Next you'll assign a name, label, and description. Recall from earlier chapters that the name will play a role as a namespace for the generated API URI structure, therefore you'll need to use alphanumeric characters only. I'll use the name `salesforce` for purposes of this tutorial. The label and description are used as referential information and can be assigned anything you please.
@@ -30,7 +30,7 @@ Next, click on the `Config` tab. Here you'll enter authentication credentials us
 I'll presume you know your Salesforce account username and password, so let's turn attention to the security token. Login to your Salesforce account, and click on your account avatar located at the top right of the page:
 
 <p>
-<img src="/images/salesforce/account-settings.png">
+<img src="/images/salesforce/account-settings.png" alt="Obtaining a SalesForce Security Token">
 </p>
 
 Click the `Settings` link. On the left-side of the page you'll see a link titled `Reset My Security Token`. Click the `Reset Security Token` button to generate a new token.  the new token will be emailed to the e-mail address associated with your account. Paste this token into DreamFactory's `Security Token` field.
@@ -44,7 +44,7 @@ Keep in mind that if you've previously generated a security token, clicking this
 Next, let's obtain the Enterprise WSDL document. Login to your Salesforce account, and enter API in the search box located at the top of the page. Select API from the list of candidate results. You'll be taken to the following page:
 
 <p>
-<img src="/images/salesforce/api-wsdl.png" width="600">
+<img src="/images/salesforce/api-wsdl.png" width="600" alt="Obtaining the SalesForce Enterprise WSDL Document">
 </p>
 
 Click the `Generate Enterprise WSDL` link to generate the required WSDL document. A new tab will open containing the document contents. Copy the contents into a file named `enterprise.wsdl` (you can actually call the file anything you want, just made sure it uses the `wsdl` extension). Some browsers such as Chrome will prepend a warning message of sorts about the document content. For instance this is what Chrome adds:

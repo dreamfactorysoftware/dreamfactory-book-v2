@@ -14,7 +14,7 @@ CORS (Cross-Origin Resource Sharing) is a mechanism that allows a client to inte
 
 You can modify your CORS settings in DreamFactory under the `Config` tab. You'll be presented with the following interface:
 
-<img src="/images/10/cors.png" width="800">
+<img src="/images/10/cors.png" width="800" alt="DreamFactory CORS Configuration">
 
 To enable CORS for a specific originating network address such and an IP address or domain, press the plus `+` button located at the top of the screen. Doing so will enable all of the configuration fields found below:
 

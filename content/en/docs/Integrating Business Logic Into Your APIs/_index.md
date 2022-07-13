@@ -266,13 +266,13 @@ cURL options can include HTTP headers using CURLOPT_HTTPHEADER, but it's recomme
 
 The scripting interface is accessible via the `Scripts` tab located at the top of the DreamFactory administration console. Once entered, you'll be presented with a list of APIs hosted within your DreamFactory instance. Enter one of the APIs and you'll see a top-level summary of the endpoint branches associated with that API. For instance, if you enter a database-backed API you'll see branches such as `_func` (stored function), `_proc` (stored procedure), `_schema` (table structure), and `_table` (tables). For instance, this screenshot presents the top-level interface for a Microsoft SQL Server API:
 
-<img src="/images/06/scripting-sql-server.png" width="400">
+<img src="/images/06/scripting-sql-server.png" width="400" alt="Script Interface for SQL Server API">
 
 If you keep drilling down into the branch, you'll find you can apply logic to a very specific endpoint. Additionally, you can choose to selectively apply logic to the request (pre-process) or response (post-process) side of the API workflow, can queue logic for execution outside of the workflow, and can specify that the logic executes in conjunction with a specific HTTP verb (GET, POST, etc.). We'll talk more about these key capabilities later in the chapter.
 
 If you continue drilling down to a specific endpoint, you'll eventually arrive at the script editing interface. For instance in the following screenshot we've navigated to a SQL Server API's `customer` table endpoint. Specifically, this script will execute only when a `GET` request is made to this endpoint, and will fire *after* the data has been returned from the data source.
 
-<img src="/images/06/leaf-sql-server.png" width="800">
+<img src="/images/06/leaf-sql-server.png" width="800" alt="Script for Sql Server GET Table endpoint">
 
 {{< alert color="success" title="Tip" >}}
 DreamFactory's ability to display a comprehensive list of API endpoints is contingent upon availability of corresponding OpenAPI documentation. This documentation is automatically generated for the native connectors, however for connectors such as Remote HTTP and Scripted, you can supply the OpenAPI documentation in order to peruse the endpoints via the scripting interface. One great solution for generating OpenAPI documentation is [Stoplight.io](https://stoplight.io/).
@@ -524,7 +524,7 @@ and your response would be:
 
 To create a standalone scripted service, you'll navigate to `Services > Create` and then click the `Select Service Type` dropdown. There you'll find a scripted service type called `Script`, and under it you'll find links to the supported scripting engine languages (PHP, Python, and NodeJS):
 
-<img src="/images/06/choose-scripted-language.png" width="800">
+<img src="/images/06/choose-scripted-language.png" width="800" alt="Creating a Standalone Scripted Service">
 
 After choosing your desired language you'll be prompted to supply the usual namespace, label, and description for your API. Click the `Next` button and you'll be presented with a simple text editor. You're free to experiment by writing your script inside this editor, or could use the `Link to a service` option to reference a script stored in a file system, or within a repository. Keep in mind you'll first need to configure the source control or file API in order for it to be included in the `Link to a service` dropdown.
 
@@ -814,7 +814,7 @@ DreamFactory does not natively support scheduled tasks but you can setup a CRON 
 First we will create the script to call the API. One easy way to do so is by navigating to the `API Docs` tab and copying the cURL command for the appropriate call we would like to make. In this case we have business logic attached to `GET` on `_table/employees` that is synchronizing data between [two databases](../generating-a-database-backed-api/#synchronizing-records-between-two-databases).
 
 <p>
-<img src="/images/06/curl-schedule.png" width="800">
+<img src="/images/06/curl-schedule.png" width="800" alt="Creating a script for a Scheduled Task">
 </p>
 
 Once we have the cURL command we can convert it to PHP by using this [useful tool](https://incarnate.github.io/curl-to-php/). After we will create a file named `cron.php` in the `public` folder containing the generated PHP code.

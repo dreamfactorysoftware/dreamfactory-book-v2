@@ -64,7 +64,7 @@ Now we can run the script!
 You will be greeted by an interactive menu, where if you wish you can choose additional installation options (such as with an Apache webserver) by pressing the corresponding number.
 
 <p>
-<img src="/images/02/install-script.png" width="800">
+<img src="/images/02/install-script.png" width="800" alt="DreamFactory Installer Options">
 </p>
 
  A default installation (0) will install the Nginx web server, DreamFactory, and the required system and PHP extensions, but will **not install a database server** (unless you choose sqlite as your database). To see a full list of installation options check it our [here](https://github.com/dreamfactorysoftware/dreamfactory/tree/master/installers#installation-options). If you select option 5, then the installer will also setup a MySql Database to be used as the system database.
@@ -268,7 +268,7 @@ If you've installed and configured DreamFactory to run on a web server, then you
 
 This will start a simple PHP server running on `127.0.0.1` port `8000`. Open your browser and navigate to `http://127.0.0.1:8000` and you should see the following screen:
 
-<img src="/images/02/first_boot.png" width="800">
+<img src="/images/02/first_boot.png" width="800" alt="DreamFactory Login Screen">
 
 ### Using an Encrypted System Database
 
@@ -327,13 +327,13 @@ innodb_encrypt_tables = FORCE
 The last variable `innodb_encrypt_tables = FORCE` will make all tables encrypted.
 Then start up mysql with `systemctl start mysql`.
 
-8. Now we will install DreamFactory. If using the installer, you can select option 5 at the start, and it will detect that mysql is already running. It will prompt you for the root password, and then create the database and the DreamFactory user on your behalf.
+7. Now we will install DreamFactory. If using the installer, you can select option 5 at the start, and it will detect that mysql is already running. It will prompt you for the root password, and then create the database and the DreamFactory user on your behalf.
 
-<img src="/images/02/configure_mysql_database.png" width="800">
+<img src="/images/02/configure_mysql_database.png" width="800" alt="Setting the MySQL Root Password">
 
 Alternatively, if using `php artisan df:env`, or not selecting option 5 with the installer, you may create a database and a user beforehand (e.g a database named `dreamfactory` and a user called `dfadmin` with privileges to that that database). The installer, (or running `php artisan df:env`) will then prompt you for those details:
 
-<img src="/images/02/database_prompt.png" width="800">
+<img src="/images/02/database_prompt.png" width="800" alt="Setting the System Database">
 
 The installation will then complete, ask you for the first user, and you will have an encrypted system database. 
 
@@ -343,7 +343,7 @@ select * from information_schema.innodb_tablespaces_encryption;
 ```
 which will return something similar to the following:
 
-<img src="/images/02/encrypted_tables.png" width="800">
+<img src="/images/02/encrypted_tables.png" width="800" alt="Listing Encrypted Tables in MySQL">
 
 We can also grep the tables using `strings` for, e.g., the first user we just created with the following:
 ```
@@ -553,13 +553,13 @@ Fortunately, there are a number of HTTP clients which fill this void very well. 
 
 [Insomnia](https://insomnia.rest) is a cross-platform REST client, built on top of [Electron](https://electronjs.org/). Insomnia is realtively new on the scene compared to cURL and Postman but offers a bevy of features that certainly make it competitive.  They have a very slick UI, and a ton of features, including a team option.
 
-<img src="/images/02/insomnia.png" width="800">
+<img src="/images/02/insomnia.png" width="800" alt="Insomnia UI">
 
 ### Postman
 
 [Postman](https://www.getpostman.com) is a tried and true GUI interface with great docs to help you set up your testing environment.  They have plans for everyone, from free solo users to large, enterprise teams.  Postman also has a great feature called [API Network](https://www.getpostman.com/api-network/), which has sample API calls from all sorts of sources.  It is definitely worth a look.
 
-<img src="/images/02/postman1.png" width="800">
+<img src="/images/02/postman1.png" width="800" alt="Postman UI">
 
 ### cURL
 
@@ -569,7 +569,7 @@ Fortunately, there are a number of HTTP clients which fill this void very well. 
 
 Most high API volume request users are running DreamFactory in a highly-available, load balanced environment. The following diagram depicts this approach:
 
-<img src="/images/02/lb-ha-diagram.png" width="800">
+<img src="/images/02/lb-ha-diagram.png" width="800" alt="DreamFactory Load Balanced HA Environment">
 
 If you're not interested in running the DreamFactory platform itself in an HA cluster then disregard the "Secondary Environment" found in the "DreamFactory Application Cluster" tier however the remainder of the diagram would still apply in a purely load balanced environment. In either case, the load balanced DreamFactory instances would be backed by a caching and system database tier. For caching DreamFactory supports Memcached and Redis. On the system database side, DreamFactory supports MySQL, PostgreSQL, and Microsoft SQL Server.
 
@@ -687,7 +687,7 @@ Before beginning the installation download the **Web Platform Installer** for II
 
 * In the Web Platform Installer, navigate to the **Products** tab and choose **Frameworks** from the sidebar. Select the appropriate PHP version. In our example, we're using **PHP 7.4.1 (x64)**.
 
-<img src="/images/02/webplatfrominstaller-php.png" width="800">
+<img src="/images/02/webplatfrominstaller-php.png" width="800" alt="Installing PHP on IIS">
 
 
 * Click **Add**, then **Install** at the bottom. Follow the on screen prompts to accept the EULA to install PHP for IIS.
@@ -706,7 +706,7 @@ If the default handler mapping for PHP FastCGI isn't listed you will need to add
 * In the features pane in your IIS manager, double click on the Handler Mappings feature.
 
 
-<img src="/images/02/handlermapping.png" width="800">
+<img src="/images/02/handlermapping.png" width="800" alt="Configuring IIS Handler Mappings">
 
 
 Once open, click **Add Module Mapping** on the right hand side. Enter the following information with the path to the php-cgi executable local to the server:
@@ -718,7 +718,7 @@ Once open, click **Add Module Mapping** on the right hand side. Enter the follow
 | Executable     | "C:\Program Files\PHP\v7.4\php-cgi.exe"|
 | Name             | PHPviaFastCGI|
 
-<img src="/images/02/fastcgi-php.png" width="500">
+<img src="/images/02/fastcgi-php.png" width="500" alt="Setting fast-cgi in IIS">
 
 * Click **OK**, then click **Yes** to confirm.
 * Using Internet Information Services (IIS) Manager click on the server you are working with and click **Restart** from the actions pane.
@@ -740,7 +740,7 @@ To test PHP, we are going to create a php info file within the web root director
 
 * From a browser, navigate to the phpinfo file you just created. Typically, on a fresh server install it will be [http://localhost/info.php](http://localhost/info.php) in your web browser.
 
-<img src="/images/02/phpinfo.png" width="800">
+<img src="/images/02/phpinfo.png" width="800" alt="PHP info page in the Browser">
 
 * If you receive a 404.0 error, typically the problem is either that the extension is not .php or that file permissions are set incorrectly. If you receive a 403.3 error with the following message, MIME types must be set up correctly for PHP, please ensure that you followed the IIS PHP setup section above. If you are seeing a blank page, you may need to enable errors for debugging purposes in your php.ini file. Alternately, you can view the output of the php error.log for more info.
 
@@ -809,7 +809,7 @@ Follow the on-screen prompts to complete the setup.
 
 * Enter in all pertinent information in the dialog. In the Physical Path field, enter the path to your DreamFactory installation's `public` folder.
 
-<img src="/images/02/iis-website.png" width="800">
+<img src="/images/02/iis-website.png" width="800" alt="Adding DreamFactory Site to IIS Manager">
 
 * Enter your Host name as well for your instance.
 * Click OK to start the service.
@@ -826,7 +826,7 @@ You will need to add rewrite rules to IIS 7 manually. To accomplish this follow 
 * Navigate to the `.htaccess` file in the /public directory of your DreamFactory installation in the **Configuration File input**, then click **Import**. The `.htaccess` file will automatically be converted to XML for you.
 * In Tree View, find any rules that have a red X icon. Click on that rule and it will be highlighted in the **Rewrite Rules** dialog box.
 
-<img src="/images/02/url-rewrite.png" width="800">
+<img src="/images/02/url-rewrite.png" width="800" alt="Adding URL Rewrite Rules in IIS">
 
 * Remove that rule in the Rewrite Rules dialog box and repeat this for any additional rules until you see all green checkboxes.
 * Click **Apply** in the Actions column.
@@ -1055,11 +1055,11 @@ C:\oracledrivers\instantclient21_3
 ```
 * Next, we will extract our "SDK" Instant Client _to the same folder_ i.e. in this example `C:\oracledrivers`. We want the SDK package to extract into the same subdirectory that was created in the step above, not a seperate one. As a result your drivers folder would end up looking like this:
 
-<img src="/images/02/oracle-windows-directory.png" width="800">
+<img src="/images/02/oracle-windows-directory.png" width="800" alt="Installing Oracle Drivers on Windows">
 
 and our subdirectory (`instantclient_21_3` in this case) like this:
 
-<img src="/images/02/oracle-windows-subdirectory.png" width="800">
+<img src="/images/02/oracle-windows-subdirectory.png" width="800" alt="Diagram of subtree for Oracle Drivers on Windows">
 
 You will note that there is now a `sdk` folder inside.
 
@@ -1067,11 +1067,11 @@ Next, we need to add the full path of the Instant Client to the environment vari
 
 1. Under System Variables, create `OCI_LIB64` if it does not already exist. Set the value of `OCI_LIB64` to the full path of the location of Instant Client. 
 
-<img src="/images/02/ocilib64-variable.png" width="600">
+<img src="/images/02/ocilib64-variable.png" width="600" alt="Creating OCI_LIB64 System Variable">
 
 2. Under System Variables, edit PATH to include the same (`C:\oracledrivers\instantclient_21_3`)
 
-<img src="/images/02/oracle-path.png" width="400">
+<img src="/images/02/oracle-path.png" width="400" alt="Adding Oracle to the Windows PATH">
 
 Almost there! Now, the last thing to do is to extract our PHP OCI8 extension package (It will be named along the lines of `php_oci8-2.2.0-7.4-nts-vc15-x64`) and move the `php_oci8.dll` file to the `ext` directory where PHP is located on your system (e.g `PHP\v7.4\ext`). Once that is done add `extension=php_oci8.dll` to your `php.ini` file and then restart the server. Congratulations!
 

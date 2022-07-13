@@ -7,7 +7,7 @@ weight: 4
 ## Basic System Architecture
 
 <p>
-<img src="/images/appendix/basic-system-architecture.png" width="600">
+<img src="/images/appendix/basic-system-architecture.png" width="600" alt="DreamFactory System Architecture">
 </p>
 
 DreamFactory is an open source REST API backend that provides RESTful services
@@ -28,7 +28,7 @@ the code structure itself, they are useful in discussing the subsystems and
 functionality of the application, as well as the anatomy of the API call later on.
 
 <p>
-<img src="/images/appendix/dreamfactory-components.png" width="600">
+<img src="/images/appendix/dreamfactory-components.png" width="600" alt="DreamFactory Components">
 </p>
 
 ## Routing
@@ -90,13 +90,13 @@ utilities that support a majority of the storage options, thus giving the system
 ## Anatomy of an API Call
 
 <p>
-<img src="/images/appendix/anatomy-api-call.png" width="600">
+<img src="/images/appendix/anatomy-api-call.png" width="600" alt="Anatomy of an API Call">
 </p>
 
 ## Anatomy of a Storage Call
 
 <p>
-<img src="/images/appendix/storage-call.png" width="600">
+<img src="/images/appendix/storage-call.png" width="600" alt="Anatomy of a Storage Call">
 </p>
 
 ## In Conclusion

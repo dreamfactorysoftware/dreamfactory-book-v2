@@ -16,7 +16,7 @@ In this example (screenshot below), viewable at [https://tabulator.demo.dreamfac
 You can interact with a live version of this application at [https://tabulator.demo.dreamfactory.com/](https://tabulator.demo.dreamfactory.com/).
 {{< /alert >}}
 
-<img src="/images/javascript-examples/tabulator.png" width="1000">
+<img src="/images/javascript-examples/tabulator.png" width="1000" alt="Example DreamFactory Application with Tabulator">
 
 Check out the [GitHub project README](https://github.com/dreamfactorysoftware/dreamfactory-tabulator) for information regarding how DreamFactory was configured to expose this API, and how you can easily configure this project to consume your own API.
 
@@ -30,15 +30,15 @@ We've created a demo application (screenshots below) to suit this more ambitious
 You can interact with a live version of this application at [https://pwa.demo.dreamfactory.com/](https://pwa.demo.dreamfactory.com/). Use the test credentials alex.smith@dreamfactory.com / TE%W2E%g0Lud0q8Gej to login!
 {{< /alert >}}
 
-<img src="/images/javascript-examples/pwa-departments-mobile.png" style="border: 1px solid black;">
-<img src="/images/javascript-examples/pwa-customers-mobile.png" style="border: 1px solid black; margin-left: 20px;">
-<img src="/images/javascript-examples/pwa-customer-mobile.png" style="border: 1px solid black; margin-left: 20px;">
+<img src="/images/javascript-examples/pwa-departments-mobile.png" style="border: 1px solid black;" alt="Progressive Web Application Powered by DreamFactory">
+<img src="/images/javascript-examples/pwa-customers-mobile.png" style="border: 1px solid black; margin-left: 20px;" alt="DreamFactory PWA Application Customers Screen">
+<img src="/images/javascript-examples/pwa-customer-mobile.png" style="border: 1px solid black; margin-left: 20px;" alt="DreamFactory PWA Application Customer Show Page">
 
 ## Creating a Simple Status Dashboard
 
 This example demonstrates how to create a simple dashboard which will display status information (enabled or disabled) for a series of devices. Because a picture is worth a thousand words, let's start with a screenshot of the finished product:
 
-<img src="/images/javascript-examples/status-dashboard.png" width="800">
+<img src="/images/javascript-examples/status-dashboard.png" width="800" alt="Status Dashboard Application Powered by DreamFactory">
 
 The device information is stored in a database table called `devices`. Naturally any DreamFactory-supported database could be used, however for sake of example we'll include the MySQL table creation statement here:
 

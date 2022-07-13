@@ -69,7 +69,7 @@ DreamFactory’s API platform is unique in that it is the only "plug and play" p
 automatically generating a data gateway for any data resource.
 
 <p>
-<img src="/images/appendix/enabling-privacy-by-design.png" width="600">
+<img src="/images/appendix/enabling-privacy-by-design.png" width="600" alt="DreamFactory has privacy by design">
 </p>
 
 ## Right to be forgotten
@@ -126,7 +126,7 @@ consumers of your data, with:
 4. Reporting on all data activity
 
 <p>
-<img src="/images/appendix/gateway.png" width="600">
+<img src="/images/appendix/gateway.png" width="600" alt="DreamFactory Compliance Readiness">
 </p>
 
 ## What databases are we talking about?
@@ -134,7 +134,7 @@ The DreamFactory platform automatically creates RESTified Data Gateways for the 
 databases:
 
 <p>
-<img src="/images/appendix/databases.png" width="600">
+<img src="/images/appendix/databases.png" width="600" alt="DreamFactory Supported Databases">
 </p>
 
 As of the publication date of this paper, a SAP Hana integration is in late beta, while GraphQL

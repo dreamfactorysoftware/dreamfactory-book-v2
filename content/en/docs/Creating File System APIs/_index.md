@@ -20,13 +20,13 @@ In this tutorial we'll show you how to configure DreamFactory's SFTP connector, 
 To generate your SFTP API, log into DreamFactory and click on the `Services` tab, then click the `Create` link located on the left side of the page. Click on the `Select Service Type` dropdown, navigate to the `File` category, and select `SFTP File Storage`:
 
 <p>
-<img src="/images/12/sftp-select.png" width="600">
+<img src="/images/12/sftp-select.png" width="600" alt="Generating a DreamFactory SFTP API">
 </p>
 
 You'll be prompted to supply an API name, label, and description. Keep in mind the name must be lowercase and alphanumeric, as it will be used as the namespace within your generated API URI structure. The label and description are used for reference purposes within the administration console so you're free to title these as you please:
 
 <p>
-<img src="/images/12/sftp-create-info.png" width="600">
+<img src="/images/12/sftp-create-info.png" width="600" alt="DreamFactory SFTP Info Form">
 </p>
 
 Next, click the `Config` tab. There you'll supply the SFTP server connection credentials. There are however only 5 required fields:
@@ -42,7 +42,7 @@ The other fields (**Timeout**, **Host Finger Print**, **Private Key**) are not a
 After saving your changes, head over to the `API Docs` tab to review the generated documentation. You'll be presented with a list of 13 generated endpoints:
 
 <p>
-<img src="/images/12/sftp-api-docs.png" width="600">
+<img src="/images/12/sftp-api-docs.png" width="600" alt="DreamFactory SFTP API Documentation">
 </p>
 
 ### Listing Directory Contents
@@ -83,7 +83,7 @@ These endpoints are identical in functionality, but their URI signatures differ 
 Note the `X-Folder-Name` field is identified as a header, meaning you'll need to handle it accordingly when performing an API call outside of API Docs. The screenshot below shows you how this is handled in the great HTTP testing client Insomnia:
 
 <p>
-<img src="/images/12/sftp-create-directory.png" width="600">
+<img src="/images/12/sftp-create-directory.png" width="600" alt="DreamFactory SFTP Creating a Folder">
 </p>
 
 ### Uploading Files
@@ -117,7 +117,7 @@ To download a file you'll send a GET request to the SFTP API, identifying the pa
 If you're using a tool such as Insomnia, you can view many file types within the response preview:
 
 <p>
-<img src="/images/12/sftp-download-file.png" width="600">
+<img src="/images/12/sftp-download-file.png" width="600" alt="DreamFactory SFTP API Download File">
 </p>
 
 ## Creating an AWS S3 REST API
@@ -138,13 +138,13 @@ Further, because the API is part of the DreamFactory API management ecosystem, y
 To generate your S3 API, log into DreamFactory and click on the `Services` tab, then click the `Create` link located on the left side of the page. Click on the `Select Service Type` dropdown, navigate to the `File` category, and select `AWS S3`:
 
 <p>
-<img src="/images/aws-s3/new-service.png" width="600">
+<img src="/images/aws-s3/new-service.png" width="600" alt="Creating a DreamFactory AWS S3 API">
 </p>
 
 You'll be prompted to supply an API name, label, and description. Keep in mind the name must be lowercase and alphanumeric, as it will be used as the namespace within your generated API URI structure. The label and description are used for reference purposes within the administration console so you're free to title these as you please:
 
 <p>
-<img src="/images/aws-s3/service-info.png" width="600">
+<img src="/images/aws-s3/service-info.png" width="600" alt="AWS S3 API Info Screen">
 </p>
 
 Next, click the `Config` tab. There you'll supply the AWS S3 bucket connection credentials. There are however only 3 required fields:
@@ -156,7 +156,7 @@ Next, click the `Config` tab. There you'll supply the AWS S3 bucket connection c
 
 
 <p>
-<img src="/images/aws-s3/service-config.png" width="600">
+<img src="/images/aws-s3/service-config.png" width="600" alt="AWS S3 API Config Screen">
 </p>
 
 
@@ -172,14 +172,14 @@ To download a file you'll send a GET request to the AWS S3 API, identifying the 
 If you're using a tool such as Insomnia, you can view many file types within the response preview:
 
 <p>
-<img src="/images/aws-s3/s3call.png" width="600">
+<img src="/images/aws-s3/s3call.png" width="600" alt="Downloading a File from a DreamFactory S3 API">
 </p>
 
 Snapshot of the file on S3
 
 
 <p>
-<img src="/images/aws-s3/bucket.png" width="600">
+<img src="/images/aws-s3/bucket.png" width="600" alt="AWS S3 Dashboard">
 </p>
 
 ## Converting Excel to a JSON Response
@@ -189,19 +189,19 @@ DreamFactory's Excel connector is capable of turning an entire Excel workbook or
 To create an Excel connector, create a new service, and choose it from the Service Type Box:
 
 <p>
-<img src="/images/12/excel-service-info.png" width="600">
+<img src="/images/12/excel-service-info.png" width="600" alt="Converting Excel to a JSON Response with DreamFactory">
 </p>
 
 Next, on the config tab, we will set the file storage service. If you have already setup an, e.g. AWS S3 API, then this service will be available to you. For this example, we will use the local file storage service, and we will put our Excel file in `/opt/dreamfactory/storage/app` which means we will set the container path as `/` (the 'root' of where DreamFactory will look for locally stored files). You can also upload a spreadsheet directly using the `Browse` button:
 
 <p>
-<img src="/images/12/excel-service-config.png" width="600">
+<img src="/images/12/excel-service-config.png" width="600" alt="DreamFactory Excel Service Info">
 </p>
 
 The location of our Excel File.
 
 <p>
-<img src="/images/12/excel-storage-location.png" width="600">
+<img src="/images/12/excel-storage-location.png" width="600" alt="DreamFactory Excel Service Configuration">
 </p>
 
 {{< alert color="warning" title="Remember!" >}}
@@ -211,13 +211,13 @@ The root location for local file storage is `/opt/dreamfactory/storage/app`. If 
 Once configured, you will be to access the API endpoint documentation via the API Docs tab. Here we have an example call to our workbook `financial-sample.xlsx`:
 
 <p>
-<img src="/images/12/excel-api-docs.png" width="600">
+<img src="/images/12/excel-api-docs.png" width="600" alt="DreamFactory Excel API Configuration">
 </p>
 
 And after configuring our [Role](../generating-a-database-backed-api/#creating-a-role) and generating [an API Key](../generating-a-database-backed-api/#creating-an-application) we can interact with it. The below is a `GET` call to `/api/v2/<excelServiceName>/_spreadsheet/<excelFilename>`:
 
 <p>
-<img src="/images/12/excel-postman.png" width="600">
+<img src="/images/12/excel-postman.png" width="600" alt="Using the DreamFactory Excel API with Postman">
 </p>
 
 {{< alert color="warning" title="Remember!" >}}

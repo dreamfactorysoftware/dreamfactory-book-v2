@@ -22,7 +22,7 @@ If you're hosting yourself then you can make a GET request to `http://<gitserver
 Your config tab will thus look similar to this:
 
 <p>
-    <img src="/images/version-control/gitlab-subgroup-with-id.png" />
+    <img src="/images/version-control/gitlab-subgroup-with-id.png" alt="Configuring a gitlab Service" />
 </p>
 
 Create your service, and assign a role and app in the usual manner (For more information on roles see [here](../generating-a-database-backed-api/#creating-a-role). For more about applications, see [here](../generating-a-database-backed-api/#creating-an-application)). To interact with the API, we will make a GET request to `../api/v2/<gitlabservicename>/_repo` 
@@ -34,7 +34,7 @@ Your application will generate an API Key for you. The header in your API call s
 You will get a response containing details of all the repositories within your subgroup in JSON format:
 
 <p>
-    <img src="/images/version-control/gitlab-get-repo.png" />
+    <img src="/images/version-control/gitlab-get-repo.png" alt="JSON response of a gitlab API GET Request" />
 </p>
 
 #### Accessing Individual Repositories
@@ -42,19 +42,19 @@ You will get a response containing details of all the repositories within your s
 If you want to access one particular repository and its file structure, the process is much the same, but instead of giving the subgroup ID as the `Namespace/Group`, we need to give it `<groupName></subgroupName>`, i.e. our config tab will now look something like this:
 
 <p>
-    <img src="/images/version-control/gitlab-group-subgroup.png" />
+    <img src="/images/version-control/gitlab-group-subgroup.png" alt="Configuration to Access a gitlab Subgroup" />
 </p>
 
 Now we can make a GET request to `../api/v2/<gitlabservicename>/_repo/<repositoryname>`, and the JSON response will be the file structure of your repository.
 
 <p>
-    <img src="/images/version-control/gitlab-get-repo-reponame.png" />
+    <img src="/images/version-control/gitlab-get-repo-reponame.png" alt="JSON Response Getting gitlab File Structure" />
 </p>
 
 We can also add a file path to the end of our URI to get further details about an individual file (such as commit ids). Using the above image as an example, a call to `../_repo/subgrouptest1/somefiles/testdesign.css` returns the following:
 
 <p>
-    <img src="/images/version-control/gitlab-get-file.png" />
+    <img src="/images/version-control/gitlab-get-file.png" alt="JSON Response Getting gitlab File Data" />
 </p>
 
 Fantastic.

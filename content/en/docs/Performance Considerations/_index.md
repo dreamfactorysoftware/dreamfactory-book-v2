@@ -46,7 +46,7 @@ For database-backed APIs, there is no more impactful task one could take than pr
 
 Enable database API caching whenever practical, as it will undoubtedly improve performance.
 
-<img src="/images/10/database_caching.png" width="800">
+<img src="/images/10/database_caching.png" width="800" alt="Enable Database API Caching">
 
 DreamFactory instances may be load balanced, and can be configured to share the system database, cache details, and other information necessary to operate in a distributed environment. Below are some links that may help you configure a load balancer with some of the most common cloud providers.
 
@@ -107,7 +107,7 @@ The following diagram depicts a typical load-balanced, high-availability environ
 * Caching tier: If you load balance DreamFactory across multiple servers, you will need to use a caching solution such as Redis or Memcached for distributed cache management.
 * Database tier: In a load balanced environment the DreamFactory system database will need to be shared across the instances. You can use MySQL, PostgreSQL, or Microsoft SQL Server for this purpose.
 
-<img src="/images/performance/load-balanced-diagram.png">
+<img src="/images/performance/load-balanced-diagram.png" alt="Running DreamFactory in a Load Balanced Environment">
 
 ## Compiling the DreamFactory Code with OPcache
 
