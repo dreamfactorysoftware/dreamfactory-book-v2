@@ -1,1 +1,14 @@
 / /docs/ 301!
+
+/docs/chapter02.html /docs/installing-and-configuring-dreamfactory/ 301
+/docs/chapter02/firebird.html /docs/installing-and-configuring-dreamfactory/#configuring-firebird-for-dreamfactory 301
+/docs/chapter03.html /docs/generating-a-database-backed-api/ 301
+/docs/chapter03/interaction-using-postman.html /docs/generating-a-database-backed-api/#interaction-using-postman 301
+/docs/chapter06.html /docs/integrating-business-logic-into-your-apis/ 301
+/docs/chapter06/supported-scripting-engines.html /docs/integrating-business-logic-into-your-apis/#supported-scripting-engines 301
+/docs/chapter08/security.html /docs/securing-your-dreamfactory-environment/#security 301
+/docs/chapter09/load-balancing-your-dreamfactory-environment.html /docs/performance-considerations/#load-balancing-your-dreamfactory-environment 301
+/docs/chapter13/interacting-with-the-salesforce-api.html /docs/integrating-salesforce-data/#interacting-with-the-salesforce-api 301
+/docs/chapter14/configuring-the-http-service-connector.html /docs/using-remote-http-and-soap-connectors/#configuring-the-http-service-connector 301
+/docs/chapter14/proxying-a-remote-http-api.html /docs/using-remote-http-and-soap-connectors/#proxying-a-remote-http-api 301
+/docs/chapter15/create-a-database-api.html /docs/using-the-system-apis/#create-a-database-api 301
