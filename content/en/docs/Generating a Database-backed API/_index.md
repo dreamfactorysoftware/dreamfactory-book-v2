@@ -930,6 +930,31 @@ if (config('df.db.query_log_enabled')) {
 ```
 See [here](../limiting-and-logging-api-requests/) for more information about logging.
 
+### Using Extensions with your Databases (PostgreSQL)
+
+PostgreSQL has a number of extensions to enhance database capabilities. One of the most popular is PostGIS and its topology functionality for representing vector data. 
+
+If your PostgreSQL database uses this (or any other) extension, when using DreamFactory to make an API call (especially a function or procedure), you may see this error, or something similar to it:
+
+```json
+"error": {
+    "code": 500,
+    "context": null,
+    "message": "Failed to call database stored function.\nSQLSTATE[42883]: Undefined function: 7 ERROR:  function st_setsrid(public.geometry, integer) does not exist
+    ... 
+}
+```
+This is most likely occuring because the extension's functions are located in a different schema to the schema to the one of the database, and the postgreSQL user that DreamFactory has been assigned, as a result, cannot see it.
+
+In order for DreamFactory to be able to see the extension's functions, you should add this line to the `Additional SQL Statements` setting (change to match the extensions and schemas you are using) which you can find in the "Optional Advanced Settings" of your postgres service's config tab.
+
+```
+SET search_path TO "$user", public, postgis, topology;
+```
+
+<img src="/images/03/postgis_search_path.png" width="800" alt="Adding a search path to your postgres connection">
+
+This will allow DreamFactory to search through additional schemas to find the functions that the database requires when using any extensions.
 ## Conclusion
 
 Congratulations! In less than an hour you've successfully generated, secured, and deployed a database-backed API. In the next chapter, you'll learn how to add additional authentication and authorization solutions to your APIs.
