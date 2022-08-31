@@ -783,7 +783,71 @@ with the following body
     ]
 }
 ```
-You can add an id number of a role if you would like a default role for your application. (A default role will mean that anyone can call services associated with that roles permissions without having to login to DreamFactory first, i.e without  a session token, with only the API Key)
+You can add an id number of a role if you would like a default role for your application. (A default role will mean that anyone can call services associated with that roles permissions without having to login to DreamFactory first, i.e without  a session token, with only the API Key).
+
+##  Assigning Roles to Users
+
+Once you have your service, role, and app, you will most likely want to assign particular users to particular roles, giving them permission to call only what you want them to be able to, or indeed, want to be able to see what roles we have assigned to a particular user. To do so we will use the `user_to_app_to_role_by_user_id` relationship.
+
+### Role Assignment
+
+As an example let's say we want to assign user id 100 with a certain role for a certain app. If the role id is 7 and the app id is 4, the following would create the required relationship to assign that role to that user for that app.
+
+```
+PUT /api/v2/system/user/100?related=user_to_app_to_role_by_user_id
+```
+With the following body:
+```
+{
+	"user_to_app_to_role_by_user_id": [{
+		"app_id": "4",
+		"role_id": 7,
+		"user_id": 100
+	}]
+}
+```
+
+### Retrieving Role Assignments
+
+To see what roles have been assigned to a user, do a GET with the relationship 'user_to_app_to_role_by_user_id'. The last one is the one we just created above.
+
+```
+GET /api/v2/system/user/100?related=user_to_app_to_role_by_user_id
+```
+Will return something like the following:
+```
+{
+	"id": 100,
+	"user_to_app_to_role_by_user_id": [
+		{
+			"id": 23,
+			"user_id": 100,
+			"app_id": 1,
+			"role_id": 7
+		},
+		{
+			"id": 24,
+			"user_id": 100,
+			"app_id": 2,
+			"role_id": 7
+		},
+		{
+			"id": 25,
+			"user_id": 100,
+			"app_id": 3,
+			"role_id": 7
+		},
+		{
+			"id": 26,
+			"user_id": 100,
+			"app_id": 4,
+			"role_id": 7
+		}
+	]
+}
+```
+
+
 ## Clear the DreamFactory Service Cache
 
 For performance purposes DreamFactory caches all service definitions so the configuration doesn't have to be repeatedly read from the system database. Therefore when editing a service you'll need to subsequently clear the service cache in order for your changes to take effect. To clear the cache for a specific service, issue a `DELETE` request to the following URI, appending the service ID to it:
