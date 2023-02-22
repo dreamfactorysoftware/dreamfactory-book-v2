@@ -49,11 +49,10 @@ A sample output from this endpoint is below:
         ]
     }
 
->The sandbox parameter means that the script execution is bound by memory and time and is not allowed access to other operating system functionalities outside of PHP's context. This is currently only the case for V8Js. Therefore, be aware that DreamFactory cannot control what is done inside scripts using non-sandboxed languages on a server.
+>The sandbox parameter means that the script execution is bound by memory and time and is not allowed access to other operating system functionalities outside of PHP's context. Therefore, be aware that DreamFactory cannot control what is done inside scripts using non-sandboxed languages on a server.
 
 The following languages are typically supported on most DreamFactory installations:
 
-* V8Js
 * Node.js
 * PHP
 * Python
@@ -66,7 +65,7 @@ Scripts can be used within two places in DreamFactory, ***Event Scripting*** and
 
 When a script is executed, DreamFactory passes the script(s) two primary resources to allow the script to access many parts of the system including the state, configuration and even the ability call other internal APIs (services) or external APIs. They are the **event** and **platform** resources and are described below.
 
-> The "resource" term is used generically in this context. Depending on the scripting language being used, the resource could be an object (V8js, Node.js, Python) or an array (PHP)
+> The "resource" term is used generically in this context. Depending on the scripting language being used, the resource could be an object (Node.js, Python) or an array (PHP)
 
 ### The Event Resource
 

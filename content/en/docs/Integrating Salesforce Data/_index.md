@@ -156,7 +156,7 @@ Many DreamFactory users desire to synchronize Salesforce data with a database su
 
 To do so, navigate to the `Scripts` tab inside your DreamFactory administration console, choose the `salesforce` API, and then drill down until you reach the `salesforce._table.Account.get.post_process` endpoint. The `post_process` event handler was chosen because the associated business logic will execute *after* the account data has been returned from Salesforce.
 
-Here you'll be presented with the scripting interface. Four scripting engines are supported, including PHP, Python (2 and 3), NodeJS, and V8JS. You can link to a script found in a repository hosted on GitHub, GitLab, or BitBucket, however for the purposes of this example I'll just use the glorified text area included in the interface.
+Here you'll be presented with the scripting interface. Four scripting engines are supported, including PHP, Python (2 and 3), and NodeJS. You can link to a script found in a repository hosted on GitHub, GitLab, or BitBucket, however for the purposes of this example I'll just use the glorified text area included in the interface.
 
 Returning to our earlier example, recall that this request:
 
@@ -197,7 +197,7 @@ The JSON will automatically be converted into an array and made available to you
 
     return $result;
 
-Keep in mind the supported scripting engines (PHP, Python, NodeJS, V8JS) are not incomplete or hobbled versions. These are the very same engines installed on the same server as DreamFactory, and as such you are free to take advantage of any language-specific packages or libraries simply by installing them on the server.
+Keep in mind the supported scripting engines (PHP, Python, NodeJS) are not incomplete or hobbled versions. These are the very same engines installed on the same server as DreamFactory, and as such you are free to take advantage of any language-specific packages or libraries simply by installing them on the server.
 
 ## Conclusion
 
