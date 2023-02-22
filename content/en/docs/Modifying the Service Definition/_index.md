@@ -35,7 +35,7 @@ Now you have a fully functioning developer portal for your API!
 
 ## Modifying Existing API Documentation
 
-To modify existing API Documentation we will still need to donwload the Service Documentation. After we have the documentation we cannot modify it and change that existing Services documentation, but rather create a new Service with that documentation.
+To modify existing API Documentation we will still need to download the Service Documentation. After we have the documentation we cannot modify it and change that existing Services documentation, but rather create a new Service with that documentation.
 
 ### Customizing your Documentation
 

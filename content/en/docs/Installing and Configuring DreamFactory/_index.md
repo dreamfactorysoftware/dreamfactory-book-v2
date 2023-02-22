@@ -17,13 +17,13 @@ Cloning DreamFactory's OSS repository has long been by far the most popular way 
 
     $ git clone https://github.com/dreamfactorysoftware/dreamfactory/
 
-DreamFactory is built atop the very popular [Laravel Framework](https://www.laravel.com), which is in turn built atop PHP. This means DreamFactory is almost ubiquitously supported in all hosting environments; you'll just need to make sure your hosting environment is running PHP 7.2 or greater, a recent version of a web server such as Apache or NGINX, access to one of four databases for storing configuration data (MySQL/MariaDB, PostgreSQL, SQLite, and MS SQL Server are supported), and that you have adequate permissions to install a few requisite PHP extensions. You can learn more about the required software and extensions via our wiki:
+DreamFactory is built atop the very popular [Laravel Framework](https://www.laravel.com), which is in turn built atop PHP. This means DreamFactory is almost ubiquitously supported in all hosting environments; you'll just need to make sure your hosting environment is running PHP 8.1 or greater, a recent version of a web server such as Apache or NGINX, access to one of four databases for storing configuration data (MySQL/MariaDB, PostgreSQL, SQLite, and MS SQL Server are supported), and that you have adequate permissions to install a few requisite PHP extensions. You can learn more about the required software and extensions via our wiki:
 
 [https://wiki.dreamfactory.com/DreamFactory/Installation#GitHub](https://wiki.dreamfactory.com/DreamFactory/Installation#GitHub)
 
 ### Docker
 
-Our Docker container is increasingly popular, and includes everything you need to run DreamFactory including Ubuntu 16.04, PHP 7.1, and the NGINX web server. It also includes all of the required PHP extensions, meaning you should be able to begin experimenting with the latest DreamFactory version as quickly as you can spin up the container! To learn more about the container, head over to our df-docker repository:
+Our Docker container is increasingly popular, and includes everything you need to run DreamFactory including Ubuntu 22.04, PHP 8.1, and the NGINX web server. It also includes all of the required PHP extensions, meaning you should be able to begin experimenting with the latest DreamFactory version as quickly as you can spin up the container! To learn more about the container, head over to our df-docker repository:
 
 [https://github.com/dreamfactorysoftware/df-docker](https://github.com/dreamfactorysoftware/df-docker)
 
@@ -713,10 +713,10 @@ Once open, click **Add Module Mapping** on the right hand side. Enter the follow
 
 | Variables           | Values           |
 | --------------------|------------------|
-| Request Path       | *.php            |
-| Module             | FastCgiModule    |
-| Executable     | "C:\Program Files\PHP\v7.4\php-cgi.exe"|
-| Name             | PHPviaFastCGI|
+| Request Path        | *.php            |
+| Module              | FastCgiModule    |
+| Executable		  | "C:\Program Files\PHP\v7.4\php-cgi.exe"|
+| Name                | PHPviaFastCGI|
 
 <img src="/images/02/fastcgi-php.png" width="500" alt="Setting fast-cgi in IIS">
 
@@ -1043,7 +1043,7 @@ On Linux, our installer can handle the process of configuring Oracle with DreamF
 
 1. The Oracle "Basic" Instant Client Package from [the Oracle Website](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html) (for example `instantclient-basic-windows.x64-21.3.0.0.0.zip`).
 2. The Oracle "SDK" Instant Client Package from [the Oracle Website](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html) (for example `instantclient-sdk-windows.x64-21.3.0.0.0.zip`).
-3. The PHP oci8 extension (DLL) available at [pecl.php.net](https://pecl.php.net/package/oci8). By default, DreamFactory runs on PHP 7.4 so you will want the x64 package of that (version 2.2.0). If you are running DreamFactory using IIS as your webserver you will most likely be using the non thread safe version of PHP.
+3. The PHP oci8 extension (DLL) available at [pecl.php.net](https://pecl.php.net/package/oci8). By default, DreamFactory runs on PHP 8.1 so you will want the x64 package of that (version 3.2.1). If you are running DreamFactory using IIS as your webserver you will most likely be using the non thread safe version of PHP.
 
 {{< alert color="success "title="TIP" >}}
 On Windows you can run `php -i|findstr "Thread"` in a terminal to find out whether your PHP is the (Non) Thread Safe version.
@@ -1073,7 +1073,7 @@ Next, we need to add the full path of the Instant Client to the environment vari
 
 <img src="/images/02/oracle-path.png" width="400" alt="Adding Oracle to the Windows PATH">
 
-Almost there! Now, the last thing to do is to extract our PHP OCI8 extension package (It will be named along the lines of `php_oci8-2.2.0-7.4-nts-vc15-x64`) and move the `php_oci8.dll` file to the `ext` directory where PHP is located on your system (e.g `PHP\v7.4\ext`). Once that is done add `extension=php_oci8.dll` to your `php.ini` file and then restart the server. Congratulations!
+Almost there! Now, the last thing to do is to extract our PHP OCI8 extension package (It will be named along the lines of `php_oci8-3.2.1-8.1-nts-vc15-x64`) and move the `php_oci8.dll` file to the `ext` directory where PHP is located on your system (e.g `PHP\v8.1\ext`). Once that is done add `extension=php_oci8.dll` to your `php.ini` file and then restart the server. Congratulations!
 
 ## Troubleshooting Oracle Connections
 
@@ -1119,11 +1119,11 @@ If PDO doesn't appear in the list of installed extensions, just search your pack
 
 With the desired PHP version identified you can then install it:
 
-    $ yum install php72-php-pdo.x86_64
+    $ yum install php81-php-pdo.x86_64
 
 Next you'll want to install the SQL Anywhere driver. Confusingly enough, this driver is often identified as "Sybase" because SAP SQL Anywhere was known as Sybase SQL Anywhere prior to SAP's 2010 Sybase acquisition, and the PHP community hasn't gotten around to updating the extension's name. On Debian/Ubuntu you can install the driver using this command:
 
-    $ sudo apt install php7.2-sybase
+    $ sudo apt install php8.1-sybase
 
 On CentOS this driver is identified "pdo-dblib", because "dblib" is the name given to the library used to transfer data between the client and a database that supports a protocol known as tabular data stream (TDS - more about this in a bit). However as a convenience you can search the package manager for the term "sybase" and the desired drivers will be returned:
 
@@ -1136,7 +1136,7 @@ On CentOS this driver is identified "pdo-dblib", because "dblib" is the name giv
 
 Now that you know the name you can install the desired version:
 
-    $ sudo yum install php72-php-pdo-dblib.x86_64
+    $ sudo yum install php81-php-pdo-dblib.x86_64
 
 Once complete, run `php -m` again and confirm both PDO and the pdo_dblib extensions are installed:
 
@@ -1175,7 +1175,7 @@ Invoking PHP using the `-r` option will cause the command that follows to be exe
 
 ### Using the SAP PHP Extension
 
-A few years ago SAP released their own native SQL Anywhere PHP extension, with little background information regarding why this extension should be used in preference of PHP's PDO-based approach. To be clear, DreamFactory does *not* support the SAP PHP modules; instead we rely upon PHP's longstanding support for SQL Anywhere via the PDO and PDO_DBLIB extensions.
+A few years ago SAP released their own native SQL Anywhere PHP extension, with little background information regarding why this extension should be used in preference of PHP's PDO-based approach. **To be clear, DreamFactory does not support the SAP PHP modules**; instead we rely upon PHP's longstanding support for SQL Anywhere via the PDO and PDO_DBLIB extensions.
 
 That said, we recognize you might wish to use PHP to interact with a SQL Anywhere database outside of the DreamFactory-generated APIs and so because documentation on this matter is so woefully lacking we thought it might be useful to include some guidance on the matter for the benefit of all PHP users. To configure and test this module within your *custom* PHP application (not DreamFactory), follow these instructions:
 
@@ -1242,7 +1242,7 @@ Once done, save the changes and restart your web server. Confirm PHP's CLI envir
     $ php -m | grep sqlanywhere
     sqlanywhere
 		
-Next, confirm PHP's web environment recognizes the module by creating a file named phpinfo.php in your web document root directory and adding the following
+Next, confirm PHP's web environment recognizes the module by creating a file named phpinfo.php in your web document root directory and adding the following.
 
 ## Useful System Administration Notes
 
@@ -1311,7 +1311,11 @@ Once complete, be sure to copy the `dump.sql` file to a safe place just as was d
  
 ### Step #3. Prepare a New Host Serve and Run Installer
 
-Earlier in this chapter we referred to the automated installers that are included with the platform ([learn more here](https://github.com/dreamfactorysoftware/dreamfactory/tree/master/installers)]. We recommend downloading one of these installers from the [DreamFactory repository](https://github.com/dreamfactorysoftware/dreamfactory) and running them in the manner previously described. Four operating systems are currently supported, including CentOS, Debian, Fedora, and Ubuntu. Ideally the operating system will be newly installed, ensuring the server is free of baggage.
+{{< alert color="success" title="Tip" >}}
+If you do not use our automated installers, please follow our [Update to PHP 8.1](../upgrade-to-php-8.1/) guide.
+{{< /alert >}}
+
+Earlier in this chapter we referred to the automated installers that are included with the platform [learn more here](https://github.com/dreamfactorysoftware/dreamfactory/tree/master/installers). We recommend downloading one of these installers from the [DreamFactory repository](https://github.com/dreamfactorysoftware/dreamfactory) and running them in the manner previously described. Four operating systems are currently supported, including CentOS, Debian, Fedora, and Ubuntu. Ideally the operating system will be newly installed, ensuring the server is free of baggage.
 
 At the installer's conclusion you'll be prompted to create the first administration account. Go ahead and create one, however we'll soon be importing your existing administrator(s) from the production DreamFactory instance so ultimately the new account won't hold any importance.
 

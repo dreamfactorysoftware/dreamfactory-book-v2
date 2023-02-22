@@ -45,7 +45,7 @@ DreamFactory offers an extraordinarily powerful solution for creating APIs and a
 
 ### [Integrating Business Logic Into Your DreamFactory APIs](./integrating-business-logic-into-your-apis)
 
-The ability to merely auto-generate a REST API is already going to produce an immediate productivity boost, however eventually you're going to want to tweak one or more API endpoints' default behavior to accommodate more sophisticated project requirements. Most often this involves using DreamFactory’s scripting feature, which allows you to write custom code used to validating input parameters, call other APIs, and much more. In this chapter we'll walk through several real-world examples which highlight how easy it is to extend your API endpoints with one of four supported scripting engines (NodeJS, PHP, Python, and V8JS).
+The ability to merely auto-generate a REST API is already going to produce an immediate productivity boost, however eventually you're going to want to tweak one or more API endpoints' default behavior to accommodate more sophisticated project requirements. Most often this involves using DreamFactory’s scripting feature, which allows you to write custom code used to validating input parameters, call other APIs, and much more. In this chapter we'll walk through several real-world examples which highlight how easy it is to extend your API endpoints with one of four supported scripting engines (NodeJS, PHP, and Python).
 
 ### [Limiting and Logging API Requests](./limiting-and-logging-api-requests)
 
