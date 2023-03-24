@@ -1,12 +1,12 @@
 # Installing DreamFactory on Windows Server 2022
 
-The following instuctions are geared to a Windows Server 2022 installation, however the steps are going to be nearly identical for Windows Server 2019. 
+The following instructions are geared to a Windows Server 2022 installation, however the steps are going to be nearly identical for Windows Server 2019. 
 
 > This installation guide is meant for a "fresh" install of Windows Server 2022.
 
 ## Windows Server Prep
 
-Before begining the DreamFactory installation, there are some general server preperation steps that should be completed. Most of the following must be done with a Windows Administrator account. 
+Before beginning the DreamFactory installation, there are some general server preparation steps that should be completed. Most of the following must be done with a Windows Administrator account. 
 
 ### RDP
 While not essential to install DreamFactory, having RDP active on the server will make access and use much easier. To turn on RDP:
@@ -19,12 +19,12 @@ While not essential to install DreamFactory, having RDP active on the server wil
 ### Downloading files
 
 #### IE Enhanced Security
-By default, Windows Server 2022 comes with Microsoft Edge installed and downloads disabled with IE Enhanced Security. Within these instructions there will be multiple downloads of various tools and dependencies as well as the download of the DreamFactory code itself, to download these files on the Windows Server, IE Enhanced Security must be disabled. IE Enhanced Security can be disbaled in the server manager under "Local Server". 
+By default, Windows Server 2022 comes with Microsoft Edge installed and downloads disabled with IE Enhanced Security. Within these instructions there will be multiple downloads of various tools and dependencies as well as the download of the DreamFactory code itself, to download these files on the Windows Server, IE Enhanced Security must be disabled. IE Enhanced Security can be disabled in the server manager under "Local Server". 
 
 #### Transfering files
 Alternatively, you can download files on a different machine, and transfer them to the Windows Server. One tool great for this is [WinSCP](https://winscp.net/eng/index.php)
 
-> On Windows Server 2019, Edge may or may not be included, there are a few downloads in this guide that require a browser with Javescript functionality to download. It is recommended to either use another machine with a more modern browser, or download and install a different web browser on the Windows Server
+> On Windows Server 2019, Edge may or may not be included, there are a few downloads in this guide that require a browser with Javascript functionality to download. It is recommended to either use another machine with a more modern browser, or download and install a different web browser on the Windows Server
 
 ## Required Software 
 
@@ -32,7 +32,7 @@ There are a few things that must be installed and configured before downloading 
 
 ### IIS Version 10
 
-IIS version 10 comes pre installed on Windows Server 2022, however it may need to be activated to funciton. While you are activating IIS, we will also activate other features we will need later. 
+IIS version 10 comes pre-installed on Windows Server 2022, however it may need to be activated to function. While you are activating IIS, we will also activate other features we will need later. 
 
 To Enable:
 
@@ -41,8 +41,8 @@ To Enable:
 3. Click Next
 4. Ensure "Role based or feature based" is selected, click Next
 5. Ensure the server you're working on is selected, click Next
-6. Check Web Server(IIS) on server roles, insatll any admin tools if asked
-7. Your Webserver Role should look like (but will not say "installed"):
+6. Check Web Server(IIS) on server roles, install any admin tools if asked
+7. Your Web Server Role should look like (but will not say "installed"):
 
 <img src=“/images/02/windows_install/select_server_roles.jpg”>
 
@@ -50,7 +50,7 @@ To Enable:
 
 ### Git
 
-Installing Git is very straightforward. Simply get the installer [here](https://git-scm.com/download/win) and run using the defualt options. 
+Installing Git is very straightforward. Simply get the installer [here](https://git-scm.com/download/win) and run using the default options. 
 
 
 ### Visual C++ 2015-2019
@@ -85,8 +85,8 @@ Extract the contents of the PHP zip file into this directory. It will look somet
 <img src="/images/02/windows_install/php_81_install.jpg">
 
 Next, this directory must be added to your system path. To do so:
-1. Open Enviornment Variables by searching "enviornment" in the start menu
-2. Click "Enviornment Variables..."
+1. Open Environment Variables by searching "environment" in the start menu
+2. Click "Environment Variables..."
 3. Select the "Path" variable and click "Edit"
 4. Click "New" and add the `C:\PHP_8.1` directory
 5. save and close
@@ -106,9 +106,9 @@ If everything works, great! If not, here are some additional PHP installation re
 
 Within the `C:\PHP_8.1` directory, there are two sample .ini files. `php.ini-development` and `php.ini-production` . Take one of these and duplicate the file. Rename it to `php.ini` 
 
-> You may need to [turn on file extentions]() to rename the file appropriately. 
+> You may need to [turn on file extensions]() to rename the file appropriately. 
 
-> Typically during inital installation, we will use the `php.ini-development` file, and change to the `php.ini-production` one at a later date. This is entirely up to you. 
+> Typically during initial installation, we will use the `php.ini-development` file, and change to the `php.ini-production` one at a later date. This is entirely up to you. 
 
 Open `php.ini` and add the following to the bottom of the file:
 
@@ -144,7 +144,7 @@ opcache.enable=1
 
 ```
 
-> If you are also [installing drivers for sql server](), you can add those extentions here as well. 
+> If you are also [installing drivers for sql server](), you can add those extensions here as well. 
 
 #### handler mappings
 
@@ -154,10 +154,10 @@ Handler mappings are necessary to tell IIS how to run PHP files. To configure th
 3. Fill in the module mapping:
     - Request Path: *.php
     - Module: FastCgiModule (will autofill, select that option)
-    - Executeable: Use the `...` icon and select: `C:\php_8.1\php-cgi.exe`
+    - Executable: Use the `...` icon and select: `C:\php_8.1\php-cgi.exe`
         - You might have to change the "file type" selection when browsing
     - Name: PHP_via_FastCGI
-4. Open "Request Restricitons" and:
+4. Open "Request Restrictions" and:
     - Mapping: File or Folder
     - Verbs: all
     - Access: script
@@ -166,17 +166,17 @@ Handler mappings are necessary to tell IIS how to run PHP files. To configure th
 
 The PHP Manager is an IIS utility that gives greater insight and easier configuration options for a PHP installation. To download and install the PHP Manager:
 
-1. The download can be found at [this link](https://www.iis.net/downloads/community/2018/05/php-manager-150-for-iis-10) click the "download this extention" button to download the executeable.
+1. The download can be found at [this link](https://www.iis.net/downloads/community/2018/05/php-manager-150-for-iis-10) click the "download this extension" button to download the executable.
 2. run the downloaded file
 3. If IIS is opened, close and reopen it, you should see a PHP manager icon in the IIS dashboard
 
 #### Final PHP configurations
 
-Once PHP manager is installed, open it. If you see a warning about "non optimal PHP configuration" open the warning and apply all recomendations. 
+Once the PHP manager is installed, open it. If you see a warning about "non optimal PHP configuration" open the warning and apply all recommendations. 
 
-Click on `check phpinfo()` , once the site opens, you should see a `phpinfo()` screen that displays the version of PHP and various configurations and installed extentions. 
+Click on `check phpinfo()` , once the site opens, you should see a `phpinfo()` screen that displays the version of PHP and various configurations and installed extensions. 
 
-> The PHP manager can be used to install, enable, and disable extentions. Keep this utility in mind when troubleshooting PHP issues. 
+> The PHP manager can be used to install, enable, and disable extensions. Keep this utility in mind when troubleshooting PHP issues. 
 
 
 ### Installing Composer
@@ -197,7 +197,7 @@ Open a fresh command prompt window, navigate (cd) to the `C:\inetpub\wwwroot\` d
 
 `git clone https://github.com/dreamfactorysoftware/dreamfactory`
 
->This will create a `dreamfactory` directory and add the repo contents to it. This directory is refered to as "the dreamfactory directory" in documentation and support. 
+>This will create a `dreamfactory` directory and add the repo contents to it. This directory is referred to as "the dreamfactory directory" in documentation and support. 
 
 Once complete, open the dreamfactory directory in a new file explorer window.
 
@@ -205,9 +205,9 @@ Once complete, open the dreamfactory directory in a new file explorer window.
 
 ## Move composer files
 
-If running a licensed, commercial instance, you will have recieved 3 composer files (composer.json, composer-dist.json and composer.lock) Move these 3 files into the dreamfactory directory and overwrite the existing files if asked. 
+If running a licensed, commercial instance, you will have received 3 composer files (composer.json, composer-dist.json and composer.lock) Move these 3 files into the dreamfactory directory and overwrite the existing files if asked. 
 
-> WinSCP is a great tool for getting these files from your local PC to the sever. 
+> WinSCP is a great tool for getting these files from your local PC to the server. 
 
 
 ## composer command
@@ -224,12 +224,12 @@ Once the composer command finishes, from the dreamfactory directory run:
 
 `php artisan df:env`
 
-The installer will ask which type database should hold the DreamFactory system information. Sqlite is the easiest to get going the fastest, however multiple databases are supported. Choose a database that fits your needs and your use case. 
+The installer will ask which type of database should hold the DreamFactory system information. Sqlite is the easiest to get going the fastest, however multiple databases are supported. Choose a database that fits your needs and your use case. 
 
 When selecting a database name and user, we typically recommend "dreamfactory" and "dfadmin" respectively. However, these can be whatever you'd like. The user will need full permissions on that database. 
 
 > A note about system databases: 
->> The DreamFactory system database holds all of the configurations for your instance. Backups of this database are highly recommended when in production. You can also use a utility like `mysql dump` to pull down and later recreate the system database on another instance. This and the `.env` file will preserve all DreamFactory confugurations. 
+>> The DreamFactory system database holds all of the configurations for your instance. Backups of this database are highly recommended when in production. You can also use a utility like `mysql dump` to pull down and later recreate the system database on another instance. This and the `.env` file will preserve all DreamFactory configurations. 
 
 Once the command finishes, run the setup command:
 
@@ -239,7 +239,7 @@ This command will prompt you to create your first admin user. This will be the f
 
 ## add license key
 
-You will have receieved a licesnse key, this key will need to be added to the `.env` file in the dreamfactory directory. At the bottom of the file add:
+You will have received a license key, this key will need to be added to the `.env` file in the dreamfactory directory. At the bottom of the file add:
 
 `DF_LICENSE_KEY={YOUR LICENSE KEY}`
 
@@ -255,7 +255,7 @@ From the dreamfactory directory, run:
 
 This will start a small development server, the output will tell you the IP address and port number to navigate to. Usually this is http://127.0.0.1:8000
 
-Open your webbrowser to this address, and try to login with the user your created earlier. If you can see the DreamFactory UI and do **NOT** have a red banner at the top, you have done everything correctly. If not, go back and check your steps or [contact support](mailto:dspsupport@dreamfactory.com) if you need help. 
+Open your web browser to this address, and try to login with the user you created earlier. If you can see the DreamFactory UI and do **NOT** have a red banner at the top, you have done everything correctly. If not, go back and check your steps or [contact support](mailto:dspsupport@dreamfactory.com) if you need help. 
 
 # Adding DreamFactory to IIS
 
@@ -265,7 +265,7 @@ IIS must be configured to serve the DreamFactory content. The following section 
 
 Open IIS, if there is a Default Site on the left hand side, right click and stop it. 
 
-Right click on the "Sites" folder on the left side and selct "Add Website". Fill out the Add Website diagloge:
+Right click on the "Sites" folder on the left side and select "Add Website". Fill out the Add Website dialogue:
 
 - site name: whatever you'd like can go here, we usually recommend "dreamfactory"
     - You may optionally select a different Application pool here
@@ -382,7 +382,7 @@ This is a sample `web.config` file, yours may differ slightly, double check the 
 
 ## Import URL rewrite rules
 
-In the IIS window, open the "URL Rewrite" icon. TO import url rewtie rules:
+In the IIS window, open the "URL Rewrite" icon. TO import url rewrite rules:
 
 1. Click the "Import Rules" option on the right side
 2. Using the `...` icon, browse to `{dreamfactory_dir}/public/.htaccess` 
@@ -401,9 +401,9 @@ If everything was done correctly, from here you should be able to navigate in a 
 
 You can of course [contact support](mailto:dspsupport@dreamfactory.com) if you have additional questions or issues with your installation. 
 
-# DreamFactory debugging confugration
+# DreamFactory debugging configuration
 
-During the inital implementation phase of your instance, it might be useful to have debugging options on. These options are all found in the `.env` file within the dreamfactory directory. 
+During the initial implementation phase of your instance, it might be useful to have debugging options on. These options are all found in the `.env` file within the dreamfactory directory. 
 
 - `APP_DEBUG=true`
 - `APP_LOG_LEVEL=debug`
