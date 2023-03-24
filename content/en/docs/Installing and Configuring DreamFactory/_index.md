@@ -681,6 +681,10 @@ First, you'll want to download the ODBC driver if it's not already installed. Yo
 
 **Note:** These installation instructions assume a “Clean Install” for IIS. There may be sections which have already been accomplished or installed. If so, skip the sections which no longer apply to your situation. These instructions are concerned only with the installation of DreamFactory. Please consult your Windows Administrator for [hardening the web server and other security controls](https://msdn.microsoft.com/en-us/library/ff648653.aspx) which are outside the scope of these instructions.
 
+### Installing DreamFactory on Windows Server 2022 with IIS10
+
+Instructions can be found [here](./A-Installing-DreamFactory-on-Windows-Server/)
+
 ### *Install PHP for IIS*
 
 Before beginning the installation download the **Web Platform Installer** for IIS [here](https://www.microsoft.com/web/downloads/platform.aspx).
