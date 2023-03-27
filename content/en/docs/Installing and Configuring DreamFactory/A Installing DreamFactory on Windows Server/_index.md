@@ -216,7 +216,7 @@ In command prompt, navigate into the dreamfactory directory and run:
 
 `composer install --ignore-platform-reqs --no-dev --verbose`
 
-Sometimes this command can take quite a bit to run, if it feels like it's "hung" hit enter a couple times. If the command fails, it sometimes just needs to be ran again, you can [contact support](mailto:dspsupport@dreamfactory.com) if you run into issues. 
+Sometimes this command can take quite a bit to run, if it feels like it's "hung" hit enter a couple times. If the command fails, it sometimes just needs to be ran again, you can [contact support](https://www.dreamfactory.com/support/) if you run into issues. 
 
 ## DF setup commands
 
@@ -237,7 +237,7 @@ Once the command finishes, run the setup command:
 
 This command will prompt you to create your first admin user. This will be the first account available to log in, and additional administrator accounts can be created later if desired. 
 
-## add license key
+## Add license key
 
 You will have received a license key, this key will need to be added to the `.env` file in the dreamfactory directory. At the bottom of the file add:
 
@@ -255,7 +255,7 @@ From the dreamfactory directory, run:
 
 This will start a small development server, the output will tell you the IP address and port number to navigate to. Usually this is http://127.0.0.1:8000
 
-Open your web browser to this address, and try to login with the user you created earlier. If you can see the DreamFactory UI and do **NOT** have a red banner at the top, you have done everything correctly. If not, go back and check your steps or [contact support](mailto:dspsupport@dreamfactory.com) if you need help. 
+Open your web browser to this address, and try to login with the user you created earlier. If you can see the DreamFactory UI and do **NOT** have a red banner at the top, you have done everything correctly. If not, go back and check your steps or [contact support](https://www.dreamfactory.com/support/) if you need help. 
 
 # Adding DreamFactory to IIS
 
@@ -399,7 +399,7 @@ Within the dreamfactory directory, there are `storage` and `public` directories.
 
 If everything was done correctly, from here you should be able to navigate in a web browser to `localhost` and see DreamFactory. Ensure that you can login with the account created earlier. 
 
-You can of course [contact support](mailto:dspsupport@dreamfactory.com) if you have additional questions or issues with your installation. 
+You can of course [contact support](https://www.dreamfactory.com/support/) if you have additional questions or issues with your installation. 
 
 # DreamFactory debugging configuration
 
