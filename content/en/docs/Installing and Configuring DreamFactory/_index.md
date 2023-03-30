@@ -641,42 +641,27 @@ If you receive a 500 error with the message of `The Response content must be a s
 
 ---
 
-## Configuring Microsoft SQL Server for DreamFactory
+## Configuring Microsoft SQL Server for DreamFactory on Windows
 
-Configuring [Microsoft SQL Server](https://www.dreamfactory.com/hub/integrations/microsoft-sql-server/) for use with DreamFactory is a two-step process:
+Install both Microsoft ODBC Drivers [17](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16) and [18](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16#version-17).
 
-* Configure your SQL Server instance to accept ODBC connections.
-* Configure your DreamFactory server to allow PHP to talk to SQL Server.
+Download [SQL Server driver](https://github.com/microsoft/msphpsql/releases/download/v5.11.0/Windows-8.1.zip) package. Unpack downloaded `.zip` and move files `php_sqlsrv_81_nts.dll` , `php_pdo_sqlsrv_81_nts.dll` to your PHP extension directory. Get rid of the `_81_nts` sufix in both file names.
 
-This is a pretty straightforward process, with the former's instructions varying slightly according to SQL Server version. So to make things really easy, we've broken this chapter up accordingly.
+**Note:** To determine whether your installed version of PHP is thread-safe or not, you can execute the following command in your command prompt or terminal:
+```
+php -i|findstr "Thread"
+``` 
+This command will return one of the following lines:
 
-### Step #1. Configuring Your Microsoft SQL Server
+* Thread Safety => enabled: This means that your PHP installation is thread-safe.
+* Thread Safety => disabled: This means that your PHP installation is not thread-safe.
 
-#### Install the Microsoft ODBC Driver for SQL Server
-
-* Microsoft SQL Server 2017
-
-* Microsoft SQL Server 2013
-
-* Windows 7, Windows 8, Windows Server 2008 R2, Windows Server 2012, Windows Vista Service Pack 2
-
-https://www.microsoft.com/en-us/download/details.aspx?id=36434
-
-* Windows 10 , Windows 7, Windows 8
-
-* Windows Server 2008, Windows Server 2012, Windows Server 2016
-
-* Microsoft ODBC Driver for SQL Server
-
-First, you'll want to download the ODBC driver if it's not already installed. You can download the SQL Server 2011 driver from [here](https://www.microsoft.com/en-us/download/details.aspx?id=36434).
-
-## Microsoft SQL Server 2011
-
-## Microsoft ODBC Driver for SQL Server
-
-First, you'll want to download the ODBC driver if it's not already installed. You can download the SQL Server 2011 driver from [here](https://www.microsoft.com/en-us/download/details.aspx?id=36434).
-
-
+In your `php.ini` file add next lines:
+```
+extension=php_sqlsrv.dll
+extension=php_pdo_sqlsrv.dll
+```
+Lastly, in case of running PHP on a web server, it is recommended to restart the server. Afterwards, use the command php -m to retrieve a list of installed modules, and search for sqlsrv and pdo_sqlsrv within the list.
 ## Installing DreamFactory on Windows Server with IIS10
 
 **Note:** These installation instructions assume a “Clean Install” for IIS. There may be sections which have already been accomplished or installed. If so, skip the sections which no longer apply to your situation. These instructions are concerned only with the installation of DreamFactory. Please consult your Windows Administrator for [hardening the web server and other security controls](https://msdn.microsoft.com/en-us/library/ff648653.aspx) which are outside the scope of these instructions.
@@ -687,14 +672,50 @@ Instructions can be found [here](./A-Installing-DreamFactory-on-Windows-Server/)
 
 ### *Install PHP for IIS*
 
-Before beginning the installation download the **Web Platform Installer** for IIS [here](https://www.microsoft.com/web/downloads/platform.aspx).
+Before proceeding, ensure that you have installed Visual C++ Redistributable. The download link can be found in the [official documentation](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022) provided by Microsoft.
 
-* In the Web Platform Installer, navigate to the **Products** tab and choose **Frameworks** from the sidebar. Select the appropriate PHP version. In our example, we're using **PHP 7.4.1 (x64)**.
+It is unfortunate that the Web Platform Installer [has been retired](https://blogs.iis.net/iisteam/web-platform-installer-end-of-support-feed). However, there is no need to worry as we will demonstrate a quick method for manually installing PHP 8.1.
 
-<img src="/images/02/webplatfrominstaller-php.png" width="800" alt="Installing PHP on IIS">
+Use [this link](https://windows.php.net/downloads/releases/php-8.1.16-nts-Win32-vs16-x64.zip) to download the NTS PHP 8.1 package. Extract all files from downloaded `.zip` to the previously created folder e.g `C:\PHP8.1\`. 
 
+After extracting the files, you will need to choose either `php.ini-development` or `php.ini-production` and rename it to `php.ini`. This file is used to specify which extensions or settings to enable in PHP.
 
-* Click **Add**, then **Install** at the bottom. Follow the on screen prompts to accept the EULA to install PHP for IIS.
+To configure PHP properly, you will need to open the php.ini file and modify the following settings:
+
+* Set `extension_dir` to the `ext` folder located in your PHP directory (e.g. `C:\PHP8.1\ext`).
+
+* Uncomment (i.e., remove the `;` character from the beginning) some useful lines in the php.ini file. You can use the search function to locate these lines easily:
+
+```
+extension=ldap
+extension=curl
+extension=ffi
+extension=ftp
+extension=fileinfo
+extension=gd
+extension=intl
+extension=mbstring
+extension=exif
+extension=mysqli
+extension=odbc
+extension=openssl
+extension=pdo_mysq
+extension=pdo_odbc
+extension=pdo_pgsql
+extension=pdo_sqlite
+extension=pgsql
+extension=shmop
+extension=soap
+extension=sockets
+extension=sodium
+extension=sqlite3
+extension=tidy
+extension=xsl
+
+zend_extension=opcache
+
+opcache.enable=1
+```
 
 ### *Setup PHP Module Mapping in IIS 10 (If Needed)*
 
@@ -713,13 +734,13 @@ If the default handler mapping for PHP FastCGI isn't listed you will need to add
 <img src="/images/02/handlermapping.png" width="800" alt="Configuring IIS Handler Mappings">
 
 
-Once open, click **Add Module Mapping** on the right hand side. Enter the following information with the path to the php-cgi executable local to the server:
+Once open, click **Add Module Mapping** on the right hand side. Enter the following information with the path to the php-cgi executable local to the server. Here is our case:
 
 | Variables           | Values           |
 | --------------------|------------------|
 | Request Path        | *.php            |
 | Module              | FastCgiModule    |
-| Executable		  | "C:\Program Files\PHP\v7.4\php-cgi.exe"|
+| Executable		  | "C:\PHP8.1\php-cgi.exe"|
 | Name                | PHPviaFastCGI|
 
 <img src="/images/02/fastcgi-php.png" width="500" alt="Setting fast-cgi in IIS">
@@ -727,6 +748,7 @@ Once open, click **Add Module Mapping** on the right hand side. Enter the follow
 * Click **OK**, then click **Yes** to confirm.
 * Using Internet Information Services (IIS) Manager click on the server you are working with and click **Restart** from the actions pane.
 
+**Note:** Make sure that you added FastCgiModule while configuring your IIS web server.
 
 ### *Test PHP for IIS*
 
@@ -740,9 +762,9 @@ To test PHP, we are going to create a php info file within the web root director
     <?php phpinfo();
     ```
 
-* Save the file as info.php. Ensure the filename and extension are info.php, not info.php.txt. This would be not shown if Hide Extensions for known file types is enabled from Folder Options. Make sure this is unchecked, if need be from Folder Options:
+* Save the file as info.php. Ensure the filename and extension are phpinfo.php, not phpinfo.php.txt. This would be not shown if Hide Extensions for known file types is enabled from Folder Options. Make sure this is unchecked, if need be from Folder Options:
 
-* From a browser, navigate to the phpinfo file you just created. Typically, on a fresh server install it will be [http://localhost/info.php](http://localhost/info.php) in your web browser.
+* From a browser, navigate to the phpinfo file you just created. Typically, on a fresh server install it will be [http://localhost/phpinfo.php](http://localhost/phpinfo.php) in your web browser.
 
 <img src="/images/02/phpinfo.png" width="800" alt="PHP info page in the Browser">
 
@@ -755,7 +777,7 @@ Once you have PHP set up and working with IIS, you are ready to install DreamFac
 
 ### *Install DreamFactory on IIS 10*
 
-You will need to follow the [Required Software and Extensions](https://wiki.dreamfactory.com/DreamFactory/Installation) section to ensure you have Git, Composer, and optionally the MongoDB Driver, if needed. After completing that, the following describes how to install Dreamfactory on IIS 10.
+You need ensure you have [Git](https://git-scm.com/download/win), [Composer](https://getcomposer.org/doc/00-intro.md#using-the-installer), and optionally the [MongoDB Driver](https://wiki.dreamfactory.com/DreamFactory/Installation), if needed. After completing that, the following describes how to install Dreamfactory on IIS 10.
 
 **Note:** We will be using [SQL Server](https://wiki.dreamfactory.com/DreamFactory/Installation/Databases/SQLServer) as an external service database for DreamFactory. If you haven't already, you will need to purchase a DreamFactory subscription before installing, so the appropriate dependencies can be added to your installation. Please contact Support for additional information. If you decide to not upgrade, you can still install this by skipping the df:env command and go straight to the `df:setup` command. This will create an SQLite database as your system database (which is the default in all of our GitHub installs).
 
@@ -823,9 +845,12 @@ Follow the on-screen prompts to complete the setup.
 
 ### *Add URL Rewrite Rules to IIS*
 
-You will need to add rewrite rules to IIS 7 manually. To accomplish this follow the below steps:
+You will need to add rewrite rules to IIS 10 manually. To accomplish this follow the below steps:
 
 * Click on the DreamFactory site and then choose **URL Rewrite**.
+
+**Note:** If you clicked on the DreamFactory site but can't see URL Rewrite icon you will need to install IIS URL Rewrite 2.1. Follow this [link](https://www.iis.net/downloads/microsoft/url-rewrite) to download and install it.
+
 * From the Actions column, choose **Import Rules**.
 * Navigate to the `.htaccess` file in the /public directory of your DreamFactory installation in the **Configuration File input**, then click **Import**. The `.htaccess` file will automatically be converted to XML for you.
 * In Tree View, find any rules that have a red X icon. Click on that rule and it will be highlighted in the **Rewrite Rules** dialog box.
@@ -858,7 +883,12 @@ You will need to set permissions on the following directories to ensure they are
 * storage/logs/
 
 
-Please ensure that the [Users group has full control]() of these directories to enable creation of log files, cache files, etc. Optionally, if you are using the included sqlite database for testing, please ensure the storage/databases/ directory also has write and modify permissions as well. Restart your web server and navigate to your DreamFactory installation. If you are testing in the local environment, you can add a FQDN in your hosts file to allow navigating to the Dreamfactory site locally.
+Please ensure that the `Users group` has full control of these directories to enable creation of log files, cache files, etc. Optionally, if you are using the included sqlite database for testing, please ensure the storage/databases/ directory also has write and modify permissions as well. Restart your web server and navigate to your DreamFactory installation. If you are testing in the local environment, you can add a FQDN in your hosts file to allow navigating to the Dreamfactory site locally.
+
+{{< alert title="Reminder!" >}}
+Please ensure that the FastCGI settings are configured with the `Standard error mode` set to "IgnoreAndReturn200" as shown in the screenshot below:
+<img src="/images/02/fastcgi-php-seting.png" width="800" alt="Setting fast-cgi in IIS">
+{{< /alert >}}
 
 ---
 
@@ -878,7 +908,7 @@ Now, to test, open up a command prompt, go to `c:\Apache24\bin` and run the `htt
 
 ### Configure PHP with Apache
 
-We must use the thread safe version of php in order for it to work with Apache. This can be downloaded from the [PHP Website](https://wwww.php.net/downloads.php) and for the sake of simplicity should be extracted to `c:\php`.
+We must use the **thread safe** version of php in order for it to work with Apache. This can be downloaded from the [PHP Website](https://windows.php.net/download) and for the sake of simplicity should be extracted to `c:\php`.
 
 The PHP .ini file, as a minimum, should have the following extensions uncommented:
 ```
@@ -893,7 +923,6 @@ exif
 mysqli
 odbc
 openssl
-pdo_firebird
 pdo_mysql
 pdo_oci
 pdo_odbc
@@ -911,21 +940,25 @@ xmlrpc
 
 PHP should then be added to to your path -> Search for "environment" in the Windows search box and then click "Edit the system environment variables", go to the advanced tab, and click "Environment Variables". Under System variables select "Path" and then "Edit" and then "New". Add `c:\php` and save. The path should be at the bottom of the list.
 
-Now we will tell Apache about PHP. Go to `c:\Apache24/conf` and open the `httpd/conf` configuration file. At the very bottom add the following:
+Now we will tell Apache about PHP. Go to `c:\Apache24\conf` and open the `httpd.conf` configuration file. At the very bottom add the following:
 
 ```
-#PHP 74 Module
+# PHP 81 Module
+# configure the path to php.ini
 PHPIniDir "C:/php"
-LoadModule php7_module "C:/php/php7apache2_4.dll"
-AddType application/x-httpd-php .php
+# before PHP 8.0.0 the name of the module was php7_module
+LoadModule php_module "c:/php/php8apache2_4.dll"
+<FilesMatch \.php$>
+    SetHandler application/x-httpd-php
+</FilesMatch>
 ```
 
 and then uncomment the following modules in the LoadModule section:
 
 ```
+access_compat_module
 deflate_module
 filter_module
-access_compat_module
 rewrite_module
 ```
 
@@ -935,19 +968,19 @@ We can test everything is working by creating a `info.php` file at `Apache24/htd
 <?php phpinfo() ?>
 ```
 
-Restart `httpd` and go to `localhost/htdocs` and you should see the php information screen.
+Delete default `index.html` file, restart `httpd` and go to `localhost`. You should see the php information screen.
 
 ### Configure DreamFactory with Apache
 
 Finally, we need to get DreamFactory and Apache talking to each other. For this example, it assumed that DreamFactory has been installed to `c:/dreamfactory`.
 
-First, go back to our `httpd.conf` file for Apache, and find the line `DocumentRoot "${SRVRoot/htdocs}"`. Here we will change the DocumentRoot, the Directory, and the configuration.
+First, go back to our `httpd.conf` file for Apache, and find the line `DocumentRoot "${SRVRoot}/htdocs"`. Here we will change the DocumentRoot, the Directory, and the configuration.
 
-Replace everything from 'DocumentRoot' to '</Directory>' with the following:
+Replace everything from 'DocumentRoot' to '&lt;/Directory&gt;' with the following:
 
-```
-DocumentRoot “c:/dreamfactory/public”
-	<Directory “c:/dreamfactory/public”>
+```text
+DocumentRoot "c:/dreamfactory/public"
+<Directory "c:/dreamfactory/public">
 	AddOutputFilterByType DEFLATE text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript
 	Options -Indexes +FollowSymLinks -MultiViews
 	AllowOverride All
@@ -978,9 +1011,9 @@ Now, we will use our previous configuration, and assign it to a virtual host ove
 ```
 Listen 80
 <VirtualHost *:80>
-	DocumentRoot “c:/dreamfactory/public”
+	DocumentRoot "c:/dreamfactory/public"
 	ServerName <yourservername>
-	<Directory “c:/dreamfactory/public”>
+	<Directory "c:/dreamfactory/public">
 		AddOutputFilterByType DEFLATE text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript
 		Options -Indexes +FollowSymLinks -MultiViews
 		AllowOverride All
@@ -1004,12 +1037,12 @@ Now, copy everything and paste it below, changing the virtual host to 443, and a
 ```
 Listen 443
 <VirtualHost *:443>
-	DocumentRoot “c:/dreamfactory/public”
+	DocumentRoot "c:/dreamfactory/public"
 	ServerName <yourservername>
 	SSLEngine on
 	SSLCertificateFile "<path to your certificate>"
 	SSLCertificateKeyFile "<path to your key>"
-	<Directory “c:/dreamfactory/public”>
+	<Directory "c:/dreamfactory/public">
 		AddOutputFilterByType DEFLATE text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript
 		Options -Indexes +FollowSymLinks -MultiViews
 		AllowOverride All
@@ -1049,6 +1082,8 @@ On Linux, our installer can handle the process of configuring Oracle with DreamF
 2. The Oracle "SDK" Instant Client Package from [the Oracle Website](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html) (for example `instantclient-sdk-windows.x64-21.3.0.0.0.zip`).
 3. The PHP oci8 extension (DLL) available at [pecl.php.net](https://pecl.php.net/package/oci8). By default, DreamFactory runs on PHP 8.1 so you will want the x64 package of that (version 3.2.1). If you are running DreamFactory using IIS as your webserver you will most likely be using the non thread safe version of PHP.
 
+**Note:** If you followed our guide "Install PHP for IIS" to configure PHP 8.1, the `oci8` extension should already exist in your PHP extension directory. To activate it, just in your `php.ini` file find `extension=oci8_19` and uncomment it.
+
 {{< alert color="success "title="TIP" >}}
 On Windows you can run `php -i|findstr "Thread"` in a terminal to find out whether your PHP is the (Non) Thread Safe version.
 {{< /alert >}}
@@ -1077,7 +1112,14 @@ Next, we need to add the full path of the Instant Client to the environment vari
 
 <img src="/images/02/oracle-path.png" width="400" alt="Adding Oracle to the Windows PATH">
 
-Almost there! Now, the last thing to do is to extract our PHP OCI8 extension package (It will be named along the lines of `php_oci8-3.2.1-8.1-nts-vc15-x64`) and move the `php_oci8.dll` file to the `ext` directory where PHP is located on your system (e.g `PHP\v8.1\ext`). Once that is done add `extension=php_oci8.dll` to your `php.ini` file and then restart the server. Congratulations!
+{{< alert title="Reminder!" >}}
+When utilizing the IIS web server, it is essential to include a new variable PATH in your FastCGI environment.
+
+For example, a new variable could be: `%PATH%;C:\oracledrivers\instantclient_21_9`.
+<img src="/images/02/fastcgi-php-oracle-env.png" width="800" alt="Adding Oracle to the FastCGI PATH">
+{{< /alert >}}
+
+Almost there! Now, the last thing to do is to extract our PHP OCI8 extension package (It will be named along the lines of `php_oci8-3.2.1-8.1-nts-vc15-x64`) and move the `php_oci8.dll` file to the `ext` directory where PHP is located on your system (e.g `PHP\v8.1\ext`). Once that is done add `extension=php_oci8.dll` to your `php.ini` file and then restart the server (use `php -m` to make sure that the `oci8` extension is installed). Congratulations!
 
 ## Troubleshooting Oracle Connections
 
