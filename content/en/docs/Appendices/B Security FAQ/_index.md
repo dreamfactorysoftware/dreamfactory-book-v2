@@ -21,7 +21,7 @@ weight: 2
 
 **Does DreamFactory employ any staff members focused specifically on security?**
 
-* DreamFactory has a CISSP(TM) actively involved in its security assessment, procedures and review. Moreover, the business staffs Cybersecurity Masters trained leaders to support their approach. DreamFactory has additionally hired an incoming Director for Governance, Risk and Compliance who will be joining the team in May 2019.
+* DreamFactory has a CISSP(TM) actively involved in its security assessment, procedures and review. Moreover, the business staffs Cybersecurity Masters trained leaders to support their approach.
 * The software is open source and fully available for testing, at source level, by its customers. Currently the business satisfies the needs of several Fortune 100 customers.
 * Our incident response plan that brings together key company representatives from the leadership, legal, and technical teams for rapid assessment and remediation. It includes business continuity and disaster response elements as well as notification processes to ensure customers are fully informed.
 
