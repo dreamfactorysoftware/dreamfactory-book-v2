@@ -95,6 +95,8 @@ DreamFactory does not by default store any API data as it passes through the pla
 
 DreamFactory plugs into a variety of third-party data sources, including databases such as Microsoft SQL Server and MySQL, file systems such as S3, and third-party HTTP APIs such as Salesforce, Intercom, and Twitter. DreamFactory will then serve as a conduit for clients desiring to interacting with these data sources via an HTTP-based API. DreamFactory runs atop a standard web server such as Apache or Nginx, both of which support SSL-based communication. Provided HTTPS is enabled, all correspondence between DreamFactory and the respective clients will be encrypted.
 
+### Lost/Forgotten Admin UI Password
+
 **I lost my DreamFactory administrator password. How can I recover it?**
 
 DreamFactory uses one-way encryption for passwords, meaning that once they are encrypted they cannot be decrypted. If email-based password recovery has not been configured, you can create a new administrator account by logging into the terminal console included with all versions of DreamFactory. To do so, begin by SSHing into your DreamFactory server. Next, navigate to the DreamFactory root directory. For those who used an automated DreamFactory installer, the root directory will be `/opt/dreamfactory`. The path will vary in accordance to other installers.
