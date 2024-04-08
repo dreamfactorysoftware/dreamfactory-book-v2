@@ -1116,9 +1116,7 @@ Next, we need to add the full path of the Instant Client to the environment vari
 When utilizing the IIS web server, it is essential to include a new variable PATH in your FastCGI environment.
 
 For example, a new variable could be: `%PATH%;C:\oracledrivers\instantclient_21_9`.
-<img src="/images/02/fastcgi-php-oracle-env.png" width="800" alt="Adding Oracle to the FastCGI PATH">
 {{< /alert >}}
-
 Almost there! Now, the last thing to do is to extract our PHP OCI8 extension package (It will be named along the lines of `php_oci8-3.2.1-8.1-nts-vc15-x64`) and move the `php_oci8.dll` file to the `ext` directory where PHP is located on your system (e.g `PHP\v8.1\ext`). Once that is done add `extension=php_oci8.dll` to your `php.ini` file and then restart the server (use `php -m` to make sure that the `oci8` extension is installed). Congratulations!
 
 ## Troubleshooting Oracle Connections

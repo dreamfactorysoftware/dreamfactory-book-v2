@@ -44,7 +44,7 @@ To Enable:
 6. Check Web Server(IIS) on server roles, install any admin tools if asked
 7. Your Web Server Role should look like (but will not say "installed"):
 
-<img src=“/images/02/windows_install/select_server_roles.jpg”>
+<img src="/images/02/windows_install/select_server_roles.jpg" alt="Web Server Role">
 
 8. Click Next and then Install, and let the install run
 
