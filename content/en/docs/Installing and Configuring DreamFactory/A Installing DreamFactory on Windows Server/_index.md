@@ -82,7 +82,7 @@ To install PHP, begin by making a directory in the `C:\` for the PHP installatio
 
 Extract the contents of the PHP zip file into this directory. It will look something like:
 
-<img src="/images/02/windows_install/php_81_install.jpg">
+<img src="/images/02/windows_install/php_81_install.jpg" alt="Windows Installation Screenshot">
 
 Next, this directory must be added to your system path. To do so:
 1. Open Environment Variables by searching "environment" in the start menu
