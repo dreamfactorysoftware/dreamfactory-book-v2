@@ -676,7 +676,7 @@ Before proceeding, ensure that you have installed Visual C++ Redistributable. Th
 
 It is unfortunate that the Web Platform Installer [has been retired](https://blogs.iis.net/iisteam/web-platform-installer-end-of-support-feed). However, there is no need to worry as we will demonstrate a quick method for manually installing PHP 8.1.
 
-Use [this link](https://windows.php.net/downloads/releases/php-8.1.16-nts-Win32-vs16-x64.zip) to download the NTS PHP 8.1 package. Extract all files from downloaded `.zip` to the previously created folder e.g `C:\PHP8.1\`. 
+Use [this link](https://windows.php.net/downloads/releases/) to download the NTS PHP 8.1 package. Extract all files from downloaded `.zip` to the previously created folder e.g `C:\PHP8.1\`. 
 
 After extracting the files, you will need to choose either `php.ini-development` or `php.ini-production` and rename it to `php.ini`. This file is used to specify which extensions or settings to enable in PHP.
 

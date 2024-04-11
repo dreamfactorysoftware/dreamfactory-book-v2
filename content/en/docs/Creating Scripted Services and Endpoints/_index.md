@@ -149,7 +149,7 @@ All of the methods above accept the same arguments:
 * **payload** - Optional but must contain a valid object for the language of the script
 * **options** - Optional, may contain headers, query params and cURL options
 
-> When you are only calling internally, only the relative URL is required (without the /api/v2 portion). Absolute URLs ("https://example.com/my_api") can be passed to access external resources. See ***Scripting Tutorials and Examples*** for examples of calling platform.api methods from scripts. 
+> When you are only calling internally, only the relative URL is required (without the /api/v2 portion). Absolute URLs (`"https://example.com/my_api"`) can be passed to access external resources. See ***Scripting Tutorials and Examples*** for examples of calling platform.api methods from scripts. 
 
 ### platform.config
 

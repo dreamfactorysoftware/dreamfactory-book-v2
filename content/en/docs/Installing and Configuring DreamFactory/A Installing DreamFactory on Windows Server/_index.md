@@ -72,7 +72,7 @@ DreamFactory is a PHP application, following will walkthrough how to install and
 ### Downloading
 To begin, download a **Non thread safe** version of PHP 8
 
-- You can direct download a zip of NTS PHP 8.1.17 [here](https://windows.php.net/downloads/releases/php-8.1.x-nts-Win32-vs16-x64.zip)
+- You can direct download a zip of NTS PHP 8.1.17 [here](https://windows.php.net/downloads/releases/)
 - OR see releases and select one [here](https://windows.php.net/download#php-8.1
 )
     - **remember to download a NON Thread Safe version!**
