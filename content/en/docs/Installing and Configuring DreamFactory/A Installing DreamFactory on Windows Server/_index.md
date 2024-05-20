@@ -44,7 +44,7 @@ To Enable:
 6. Check Web Server(IIS) on server roles, install any admin tools if asked
 7. Your Web Server Role should look like (but will not say "installed"):
 
-<img src=“/images/02/windows_install/select_server_roles.jpg”>
+<img src="/images/02/windows_install/select_server_roles.jpg" alt="Web Server Role">
 
 8. Click Next and then Install, and let the install run
 
@@ -72,7 +72,7 @@ DreamFactory is a PHP application, following will walkthrough how to install and
 ### Downloading
 To begin, download a **Non thread safe** version of PHP 8
 
-- You can direct download a zip of NTS PHP 8.1.17 [here](https://windows.php.net/downloads/releases/php-8.1.x-nts-Win32-vs16-x64.zip)
+- You can direct download a zip of NTS PHP 8.1.17 [here](https://windows.php.net/downloads/releases/)
 - OR see releases and select one [here](https://windows.php.net/download#php-8.1
 )
     - **remember to download a NON Thread Safe version!**
@@ -82,7 +82,7 @@ To install PHP, begin by making a directory in the `C:\` for the PHP installatio
 
 Extract the contents of the PHP zip file into this directory. It will look something like:
 
-<img src="/images/02/windows_install/php_81_install.jpg">
+<img src="/images/02/windows_install/php_81_install.jpg" alt="Windows Installation Screenshot">
 
 Next, this directory must be added to your system path. To do so:
 1. Open Environment Variables by searching "environment" in the start menu

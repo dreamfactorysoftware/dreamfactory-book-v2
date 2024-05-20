@@ -155,7 +155,7 @@ A breakdown of the above:
 | payload             | optional         | Must contain a valid object for the language of the script.
 | options             | optional         | May contain headers, query parameters, and cURL options.
 
-Calling internally only requires the relative URL without the **/api/v2/** portion. You can pass absolute URLs like 'http://example.com/my_api' to these methods to access external resources. See the [scripting tutorials](https://wiki.dreamfactory.com/DreamFactory/Tutorials/Server_Side_Scripting) for more examples of calling platform.api methods from scripts.
+Calling internally only requires the relative URL without the **/api/v2/** portion. You can pass absolute URLs like `'http://example.com/my_api'` to these methods to access external resources. See the [scripting tutorials](https://wiki.dreamfactory.com/DreamFactory/Tutorials/Server_Side_Scripting) for more examples of calling platform.api methods from scripts.
 
 #### Node.js Platform API Example
 
@@ -709,7 +709,7 @@ If you'd like to permanently add a particular directory to PHP's include path, m
 
 ## Queued Scripting Setup
 
-DreamFactory queued scripting takes advantage of Laravel's built-in queueing feature, for more detailed information, see their documentation [here](https://laravel.com/docs/5.3/queues). Every DreamFactory instance comes already setup with the 'database' queue setting with all necessary tables created (scripts and failed_scripts). The queue configuration file is stored in `config/queue.php` and can be updated if another setup is preferred, such as [Beanstalkd](https://kr.github.com/beanstalkd), [Amazon SQS](https://aws.amazon.com/sqs), or [Redis](https://redis.io/).
+DreamFactory queued scripting takes advantage of Laravel's built-in queueing feature, for more detailed information, see their documentation [here](https://laravel.com/docs/5.3/queues). Every DreamFactory instance comes already setup with the 'database' queue setting with all necessary tables created (scripts and failed_scripts). The queue configuration file is stored in `config/queue.php` and can be updated if another setup is preferred, such as [Beanstalkd](https://github.com/beanstalkd/beanstalkd), [Amazon SQS](https://aws.amazon.com/sqs), or [Redis](https://redis.io/).
 
 DreamFactory also fully supports the following artisan commands for configuration and runtime execution:
 

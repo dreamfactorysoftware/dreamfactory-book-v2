@@ -676,7 +676,7 @@ Before proceeding, ensure that you have installed Visual C++ Redistributable. Th
 
 It is unfortunate that the Web Platform Installer [has been retired](https://blogs.iis.net/iisteam/web-platform-installer-end-of-support-feed). However, there is no need to worry as we will demonstrate a quick method for manually installing PHP 8.1.
 
-Use [this link](https://windows.php.net/downloads/releases/php-8.1.16-nts-Win32-vs16-x64.zip) to download the NTS PHP 8.1 package. Extract all files from downloaded `.zip` to the previously created folder e.g `C:\PHP8.1\`. 
+Use [this link](https://windows.php.net/downloads/releases/) to download the NTS PHP 8.1 package. Extract all files from downloaded `.zip` to the previously created folder e.g `C:\PHP8.1\`. 
 
 After extracting the files, you will need to choose either `php.ini-development` or `php.ini-production` and rename it to `php.ini`. This file is used to specify which extensions or settings to enable in PHP.
 
@@ -1116,9 +1116,7 @@ Next, we need to add the full path of the Instant Client to the environment vari
 When utilizing the IIS web server, it is essential to include a new variable PATH in your FastCGI environment.
 
 For example, a new variable could be: `%PATH%;C:\oracledrivers\instantclient_21_9`.
-<img src="/images/02/fastcgi-php-oracle-env.png" width="800" alt="Adding Oracle to the FastCGI PATH">
 {{< /alert >}}
-
 Almost there! Now, the last thing to do is to extract our PHP OCI8 extension package (It will be named along the lines of `php_oci8-3.2.1-8.1-nts-vc15-x64`) and move the `php_oci8.dll` file to the `ext` directory where PHP is located on your system (e.g `PHP\v8.1\ext`). Once that is done add `extension=php_oci8.dll` to your `php.ini` file and then restart the server (use `php -m` to make sure that the `oci8` extension is installed). Congratulations!
 
 ## Troubleshooting Oracle Connections

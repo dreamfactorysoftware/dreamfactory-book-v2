@@ -28,7 +28,7 @@ Next, click on the `Config` tab. It's here where you'll tell DreamFactory how to
 <img src="/images/remote-http-soap/http-service-config.png" width="800" alt="HTTP Service Connector Configuration Screen">
 </p>
 
-The easiest solution involves pasting in the remote API's base URL. According to the current [OpenWeather API documentation](https://openweathermap.org/current) you'll use the URL https://api.openweathermap.org/data/2.5/weather as the base URL.
+The easiest solution involves pasting in the remote API's base URL. According to the current [OpenWeather API documentation](https://openweathermap.org/current) you'll use the URL `https://api.openweathermap.org/data/2.5/weather` as the base URL.
 
 Next scroll down to the `Parameters` section and click the plus sign located on the right-side of the section:
 
