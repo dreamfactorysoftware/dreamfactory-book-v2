@@ -208,9 +208,3 @@ enable = false
     weight = 60
     url = "https://www.dreamfactory.com/demo"
     pre = "<i class='fas fa-link'></i>"
-
-[[menu.main]]
-    name = "Hosted Trial"
-    weight = 70
-    url = "https://genie.dreamfactory.com/register"
-    pre = "<i class='fas fa-link'></i>"

@@ -42,7 +42,7 @@ Looking for a more concise overview of the database API generation process? Chec
 {{< /alert >}}
 
 {{< alert color="success" title="TIP" >}}
-Want to create a MySQL API but don't have any test data? You can download a sample database from the MySQL website containing several million records of contrived employee-related data. [Click here](https://dev.mysql.com/doc/employee/en/) to learn more about and install the example database. If you've started a [DreamFactory hosted trial](https://genie.dreamfactory.com/) then we've created this database for you! Your welcome e-mail includes the credentials.
+Want to create a MySQL API but don't have any test data? You can download a sample database from the MySQL website containing several million records of contrived employee-related data. [Click here](https://dev.mysql.com/doc/employee/en/) to learn more about and install the example database.
 {{< /alert >}}
 
 ## Generating a MySQL-backed API
