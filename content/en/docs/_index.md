@@ -1,7 +1,7 @@
 
 ---
 title: "Getting Started With DreamFactory"
-linkTitle: "Documentation"
+linkTitle: "Guides"
 no_list: true
 weight: 20
 menu:
