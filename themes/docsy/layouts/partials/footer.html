@@ -1,39 +1,59 @@
 {{ $links := .Site.Params.links }}
-<footer class="bg-primary py-5 row d-print-none">
-  <div class="container-fluid mx-sm-5">
-    <div class="row">
-      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
-        {{ with $links }}
-        {{ with index . "user"}}
-        {{ template "footer-links-block"  . }}
-        {{ end }}
-        {{ end }}
-      </div>
-      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
-        {{ with $links }}
-        {{ with index . "developer"}}
-        {{ template "footer-links-block"  . }}
-        {{ end }}
-        {{ end }}
-      </div>
-      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        {{ with .Site.Params.copyright }}<small style="color: #ff8d5c;">&copy; {{ now.Year}} {{ .}} {{ T "footer_all_rights_reserved" }}</small>{{ end }}
-        {{ with .Site.Params.privacy_policy }}<small class="ml-1" style="color: #ff8d5c;"><a style="color: #ff8d5c;" href="{{ . }}" target="_blank">{{ "Terms of Use" }}</a></small>{{ end }}
-	{{ if not .Site.Params.ui.footer_about_disable }}
-		{{ with .Site.GetPage "about" }}<p class="mt-2"><a style="color: #ff8d5c;" href="{{ .RelPermalink }}">{{ .Title }}</a></p>{{ end }}
-	{{ end }}
-      </div>
+<footer
+    class="bg-primary py-5 row d-print-none"
+    style="box-shadow: rgba(0, 0, 0, 0.08) 5px 5px 6px 6px"
+>
+    <div class="container-fluid mx-sm-5">
+        <div class="row">
+            <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+                {{ with $links }} {{ with index . "user"}} {{ template
+                "footer-links-block" . }} {{ end }} {{ end }}
+            </div>
+            <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+                {{ with $links }} {{ with index . "developer"}} {{ template
+                "footer-links-block" . }} {{ end }} {{ end }}
+            </div>
+            <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+                {{ with .Site.Params.copyright }}<small style="color: #888"
+                    >&copy; {{ now.Year}} {{ .}} {{ T
+                    "footer_all_rights_reserved" }}</small
+                >{{ end }} {{ with .Site.Params.privacy_policy }}<small
+                    class="ml-1"
+                    style="color: #888"
+                    ><a style="color: #ff8d5c" href="{{ . }}" target="_blank"
+                        >{{ "Terms of Use" }}</a
+                    ></small
+                >{{ end }} {{ if not .Site.Params.ui.footer_about_disable }} {{
+                with .Site.GetPage "about" }}
+                <p class="mt-2">
+                    <a style="color: #ff8d5c" href="{{ .RelPermalink }}"
+                        >{{ .Title }}</a
+                    >
+                </p>
+                {{ end }} {{ end }}
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 {{ define "footer-links-block" }}
 <ul class="list-inline mb-0">
-  {{ range . }}
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="{{ .name }}" aria-label="{{ .name }}">
-    <a style="color: #ff8d5c;" target="_blank" rel="noopener noreferrer" href="{{ .url }}">
-      <i class="{{ .icon }}"></i>
-    </a>
-  </li>
-  {{ end }}
+    {{ range . }}
+    <li
+        class="list-inline-item mx-2 h3"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="{{ .name }}"
+        aria-label="{{ .name }}"
+    >
+        <a
+            style="color: #ff8d5c"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="{{ .url }}"
+        >
+            <i class="{{ .icon }}"></i>
+        </a>
+    </li>
+    {{ end }}
 </ul>
 {{ end }}
