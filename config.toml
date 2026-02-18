@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://guide.dreamfactory.com/"
 title = "DreamFactory"
 
 enableRobotsTXT = true
@@ -54,7 +54,7 @@ id = "UA-40461579-9"
 [languages]
 [languages.en]
 title = "DreamFactory"
-description = "Getting Started With DreamFactory"
+description = "Official DreamFactory documentation. Self-hosted governed API platform for secure database access, SSO, scripting, and enterprise data integration."
 languageName ="English"
 # Weight used for sorting.
 weight = 1
@@ -98,7 +98,7 @@ version = "0.0"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
-url_latest_version = "https://example.com"
+url_latest_version = "https://guide.dreamfactory.com"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
 github_repo = "https://github.com/dreamfactorysoftware/dreamfactory-book-v2/"
