@@ -1,8 +1,11 @@
 ---
-title: "Authenticating Your APIs"
+title: "DreamFactory API Authentication: SSO, LDAP, OAuth & Okta"
 linkTitle: "Authenticating Your APIs"
+description: "Configure SSO, LDAP, OAuth, and Okta authentication for DreamFactory APIs. Role-based access control and identity passthrough for enterprise environments."
 weight: 6
 ---
+
+# Authenticating Your DreamFactory APIs
 
 One of DreamFactory's most popular features is the wide-ranging authentication support. While API Key-based authentication is suffice for many DreamFactory-powered applications, developers often require a higher degree of security through user-specific authentication. In some cases [Basic HTTP authentication](https://wiki.dreamfactory.com/DreamFactory/Tutorials/Basic_Auth) will get the job done, however many enterprises require more sophisticated and flexible approaches largely because of the growing adoption of Single Sign On (SSO)-based solutions such as Active Directory and LDAP, and use of third-party identity providers and solutions such as [AWS Cognito](https://aws.amazon.com/cognito/), [Auth0](https://auth0.com/), and [Okta](https://www.okta.com/).
 
@@ -403,6 +406,8 @@ For more information about managing custom user attributes, check out [this wiki
 ## LDAP Authentication with DreamFactory
 
 Setting up LDAP-based authentication for your users into your DreamFactory workflow is a simple process, and even with LDAPS requires little configuration on the client (DreamFactory) side. In the following section we will guide you through setting up this process. If you would like to create an LDAP server to test, then we have also provided a tutorial [below](#creating-an-ldap-server) to setup a basic directory with two users.
+
+To restrict what authenticated users can access, see [Securing Your DreamFactory Environment]({{< relref "securing-your-dreamfactory-environment" >}}) and [Limiting and Logging API Requests]({{< relref "limiting-and-logging-api-requests" >}}) for rate limiting and audit logging.
 
 ### Testing Your LDAP Connection
 

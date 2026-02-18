@@ -1,6 +1,7 @@
 ---
-title: "Upgrade to PHP 8.1"
+title: "DreamFactory PHP 8.1 Upgrade Guide: Step-by-Step"
 linkTitle: "Upgrade to PHP 8.1"
+description: "Step-by-step guide to upgrading DreamFactory to PHP 8.1, including DataStax PHP driver updates, Composer dependency changes, and environment configuration."
 weight: 4
 ---
 **# Estimated Upgrade Time: 1.5 Hours**

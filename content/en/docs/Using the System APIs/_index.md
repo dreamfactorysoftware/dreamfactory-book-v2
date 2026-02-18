@@ -1,6 +1,7 @@
 ---
-title: "Using the System APIs"
+title: "DreamFactory System APIs: User, Service & Role Management"
 linkTitle: "Using the System APIs"
+description: "Use DreamFactory's system APIs to manage users, services, roles, and scripted deployments. Full reference for the admin API management platform."
 weight: 17
 ---
 

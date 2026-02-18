@@ -1,5 +1,5 @@
 ---
-title: "Appendix D: Architecture FAQ"
+title: "DreamFactory Architecture FAQ: Deployment, Scaling & Design"
 linkTitle: "D. Architecture FAQ"
 weight: 4
 ---

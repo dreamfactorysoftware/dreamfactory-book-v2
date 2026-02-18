@@ -1,9 +1,12 @@
 ---
 title: "Installing and Configuring DreamFactory"
 linkTitle: "Installing and Configuring DreamFactory"
+description: "Install DreamFactory on Linux, Docker, or Windows Server. Configure Apache, MySQL, SQL Server, Firebird, and environment settings. Self-hosted setup guide."
 date: 2021-03-12T10:30:40-05:00
 weight: 4
 ---
+
+# Installing and Configuring DreamFactory
 
 In this chapter you'll learn how to install and configure DreamFactory. A number of installation solutions are available, including GitHub repository, point-and-click installers, Docker container, and cloud-specific installers. Be sure to carefully read through the set of options before making a decision, because some might be more suitable than others for your particular situation.
 

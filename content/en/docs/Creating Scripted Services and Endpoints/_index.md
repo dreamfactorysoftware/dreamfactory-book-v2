@@ -2,7 +2,7 @@
 
 
 ---
-title: "Creating Scripted Services and Endpoints"
+title: "Creating Scripted Services and Endpoints in DreamFactory"
 linkTitle: "Creating Scripted Services and Endpoints"
 weight: 7
 ---

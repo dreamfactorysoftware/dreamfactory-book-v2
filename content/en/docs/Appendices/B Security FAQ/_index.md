@@ -1,6 +1,7 @@
 ---
-title: "Appendix B: Security FAQ"
+title: "DreamFactory Security FAQ: Authentication, Access & Compliance"
 linkTitle: "B. Security FAQ"
+description: "Answers to common DreamFactory security questions: API authentication, role-based access control, SSO configuration, encryption, and GDPR compliance considerations."
 weight: 2
 ---
 
