@@ -1,6 +1,7 @@
 ---
 title: "Modifying the Service Definition"
 linkTitle: "Modifying the Service Definition"
+description: "Learn how to modify DreamFactory service definitions to customize API behavior, override default schemas, and configure service-level parameters for database and HTTP connectors."
 weight: 19
 ---
 

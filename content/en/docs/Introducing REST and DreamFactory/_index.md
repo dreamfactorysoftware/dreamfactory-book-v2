@@ -1,6 +1,7 @@
 ---
-title: "Introducing REST and DreamFactory"
+title: "DreamFactory REST API Platform: Overview & Key Concepts"
 linkTitle: "Introducing REST and DreamFactory"
+description: "Learn how DreamFactory's governed REST API platform works: automatic API generation, role-based access, SSO integration, and self-hosted deployment for enterprise data."
 date: 2021-03-12T10:30:40-05:00
 weight: 3
 ---

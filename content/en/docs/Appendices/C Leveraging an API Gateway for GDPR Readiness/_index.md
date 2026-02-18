@@ -1,6 +1,7 @@
 ---
-title: "Appendix C: Leveraging an API Gateway for GDPR Readiness"
+title: "GDPR-Ready API Gateway: Data Deletion & Compliance Guide"
 linkTitle: "C. Leveraging an API Gateway for GDPR Readiness"
+description: "How unified API gateways support GDPR compliance: data deletion workflows, access control, audit logging, and cross-integration data governance with DreamFactory."
 weight: 3
 ---
 

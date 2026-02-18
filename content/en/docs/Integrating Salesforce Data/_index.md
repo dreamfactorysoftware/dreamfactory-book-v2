@@ -1,6 +1,7 @@
 ---
 title: "Integrating Salesforce Data using DreamFactory"
 linkTitle: "Integrating Salesforce Data"
+description: "Sync and query Salesforce data via REST API using DreamFactory. Covers MySQL-to-Salesforce integration, bidirectional data flows, and authentication setup."
 weight: 15
 ---
 
@@ -198,6 +199,19 @@ The JSON will automatically be converted into an array and made available to you
     return $result;
 
 Keep in mind the supported scripting engines (PHP, Python, NodeJS) are not incomplete or hobbled versions. These are the very same engines installed on the same server as DreamFactory, and as such you are free to take advantage of any language-specific packages or libraries simply by installing them on the server.
+
+## MySQL to Salesforce Integration
+
+DreamFactory serves as API middleware between MySQL and Salesforce, enabling bidirectional data sync without custom integration code. With both a MySQL service and a Salesforce service configured in DreamFactory, you can read Salesforce records into MySQL and push MySQL data to Salesforce objects using standard REST API calls.
+
+**Reading Salesforce data into MySQL**: Use a server-side script (as shown above) to query Salesforce records via the Salesforce service API and insert them into your MySQL database via the MySQL service API. This can be triggered on-demand or scheduled using DreamFactory's task scheduler.
+
+**Pushing MySQL data to Salesforce**: Reverse the flow by querying your MySQL service and posting records to the Salesforce service. For example, to sync a new customer record from MySQL to a Salesforce Account:
+
+    GET /api/v2/mysql/_table/customers/{id}
+    POST /api/v2/salesforce/_table/Account
+
+DreamFactory's role-based access control ensures that only authorized services and users can perform these sync operations, maintaining data governance across both systems.
 
 ## Conclusion
 

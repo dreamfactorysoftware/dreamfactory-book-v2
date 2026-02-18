@@ -1,6 +1,7 @@
 ---
 title: "Integrating with Version Control APIs"
 linkTitle: "Integrating with Version Control APIs"
+description: "Integrate DreamFactory with Git-based version control APIs to manage and deploy service configurations, scripts, and API definitions from a central repository."
 weight: 8
 ---
 

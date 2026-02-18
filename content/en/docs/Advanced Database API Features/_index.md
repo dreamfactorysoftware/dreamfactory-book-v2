@@ -1,6 +1,7 @@
 ---
-title: "Advanced Database API Features"
+title: "Advanced Database API Features in DreamFactory"
 linkTitle: "Advanced Database API Features"
+description: "Advanced DreamFactory database API features: field filtering, related table joins, server-side filtering, stored procedure calls, and custom SQL query support."
 weight: 5
 ---
 

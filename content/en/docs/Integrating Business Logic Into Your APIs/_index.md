@@ -1,6 +1,7 @@
 ---
-title: "Integrating Business Logic Into Your DreamFactory APIs"
+title: "DreamFactory API Business Logic: Scripts, Events & Hooks"
 linkTitle: "Integrating Business Logic Into Your APIs"
+description: "Add custom business logic to DreamFactory APIs using pre/post-process scripts, event-driven hooks, and server-side scripting in PHP, Python, Node.js, or V8."
 weight: 7
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Using DreamFactory's Remote HTTP and SOAP Connectors"
 linkTitle: "Using Remote HTTP and SOAP Connectors"
+description: "Connect to remote HTTP services and SOAP APIs using DreamFactory connectors. Configure authentication, headers, and parameters for external API integrations."
 weight: 16
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Securing Your DreamFactory Environment"
 linkTitle: "Securing Your DreamFactory Environment"
+description: "Secure your self-hosted DreamFactory environment: HTTPS setup, firewall configuration, role-based access control, API key management, and security hardening best practices."
 weight: 10
 ---
 

@@ -1,6 +1,7 @@
 ---
-title: "Performance Considerations"
+title: "DreamFactory Performance Tuning: Caching, Scaling & Optimization"
 linkTitle: "Performance Considerations"
+description: "Optimize DreamFactory performance with caching (Redis, Memcached), database connection pooling, rate limiting, and horizontal scaling strategies for enterprise deployments."
 weight: 11
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Appendix E: Scalability"
+title: "DreamFactory Scalability Guide: Horizontal Scaling & Load Balancing"
 linkTitle: "E. Scalability"
 weight: 5
 ---

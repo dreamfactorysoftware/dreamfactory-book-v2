@@ -1,3 +1,9 @@
+---
+title: "Install DreamFactory on Windows Server 2022 with IIS"
+linkTitle: "Installing DreamFactory on Windows Server"
+description: "Step-by-step guide to installing DreamFactory on Windows Server 2022 with IIS 10. Covers PHP setup, Apache configuration, SQL Server, and environment configuration."
+---
+
 # Installing DreamFactory on Windows Server 2022
 
 The following instructions are geared to a Windows Server 2022 installation, however the steps are going to be nearly identical for Windows Server 2019. 

@@ -1,8 +1,11 @@
 ---
 title: "Limiting and Logging API Requests"
 linkTitle: "Limiting and Logging API Requests"
+description: "Configure DreamFactory API rate limiting, request throttling, and logging. Monitor API usage with platform logs and integrate with Splunk for enterprise observability."
 weight: 9
 ---
+
+# Limiting and Logging API Requests in DreamFactory
 
 In this chapter you'll learn how to use DreamFactory's API limiting and logging capabilities to assign and monitor access to your restricted APIs.
 
