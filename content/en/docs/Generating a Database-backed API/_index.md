@@ -18,7 +18,7 @@ DreamFactory auto-generates these APIs from any supported database — no hand-c
 | Hand-coded REST API | Weeks–months | Ongoing bug fixes | Manual auth implementation |
 | DreamFactory auto-generated | Minutes | Automatic with schema changes | Built-in RBAC and API keys |
 
-For advanced query capabilities after generating your API, see [Advanced Database API Features]({{< relref "advanced-database-api-features" >}}). To control access and monitor usage, see [Limiting and Logging API Requests]({{< relref "limiting-and-logging-api-requests" >}}).
+For advanced query capabilities after generating your API, see [Advanced Database API Features](../advanced-database-api-features/). To control access and monitor usage, see [Limiting and Logging API Requests](../limiting-and-logging-api-requests/).
 
 DreamFactory's capabilities are vast, however there is no more popular feature than its ability to generate a database-backed REST API. By embracing this automated approach, development teams can shave weeks if not months off the development cycle, and in doing so greatly reduce the likelihood of bugs or security issues due to mishaps such as SQL injection. This approach doesn't come at the cost of trade offs either, because DreamFactory's database-backed APIs are fully-featured REST interfaces, offering comprehensive CRUD (create, retrieve, update, delete) capabilities, endpoints for executing stored procedures, and even endpoints for managing the schema.
 

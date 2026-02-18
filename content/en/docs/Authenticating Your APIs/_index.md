@@ -407,7 +407,7 @@ For more information about managing custom user attributes, check out [this wiki
 
 Setting up LDAP-based authentication for your users into your DreamFactory workflow is a simple process, and even with LDAPS requires little configuration on the client (DreamFactory) side. In the following section we will guide you through setting up this process. If you would like to create an LDAP server to test, then we have also provided a tutorial [below](#creating-an-ldap-server) to setup a basic directory with two users.
 
-To restrict what authenticated users can access, see [Securing Your DreamFactory Environment]({{< relref "securing-your-dreamfactory-environment" >}}) and [Limiting and Logging API Requests]({{< relref "limiting-and-logging-api-requests" >}}) for rate limiting and audit logging.
+To restrict what authenticated users can access, see [Securing Your DreamFactory Environment](../securing-your-dreamfactory-environment/) and [Limiting and Logging API Requests](../limiting-and-logging-api-requests/) for rate limiting and audit logging.
 
 ### Testing Your LDAP Connection
 
