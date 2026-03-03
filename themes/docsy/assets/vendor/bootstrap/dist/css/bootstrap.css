@@ -4684,7 +4684,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-dark .navbar-nav .nav-link.disabled {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 141, 92, 0.25);
 }
 
 .navbar-dark .navbar-nav .show > .nav-link,
