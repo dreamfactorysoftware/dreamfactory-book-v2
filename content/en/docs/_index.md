@@ -12,7 +12,11 @@ menu:
 Welcome to the DreamFactory platform! Whether you’re an open source user, or a paid customer taking advantage of DreamFactory’s advanced capabilities, we wrote this guide to help you begin incorporating the platform into your organization in the most efficient way possible.
 
 {{< alert color="warning" >}}
-This guide is under heavy development, and is a work-in-progress. Check back often as we'll be publishing updates regularly!
+This guide is under heavy development, and is a work-in-progress. Check out our most recent chapter below:
+
+### [Building React Apps Against .NET Using DreamFactory](./building-react-apps-against-net-using-dreamfactory)
+
+Modern React applications often need to integrate with existing enterprise infrastructure including .NET APIs, databases, and legacy SOAP services. This typically involves managing multiple authentication mechanisms, inconsistent API patterns, and complex security configurations. In this chapter you'll learn how to use DreamFactory as a unified API gateway that sits between your React application and all backend systems, providing a single consistent REST interface. You'll discover how to wrap .NET APIs using HTTP service connectors, auto-generate REST APIs for your databases, modernize legacy SOAP services, and configure role-based security. By the end of this chapter, you'll have a production-ready architecture where your React app communicates exclusively with DreamFactory, eliminating months of custom integration work.
 {{< /alert >}}
 
 ## About this Guide
@@ -58,6 +62,10 @@ While DreamFactory is already secure, and relatively maintenance free, there are
 ### [Performance Considerations](./performance-considerations)
 
 DreamFactory is already very performant out of the box, however logically you'll want to do everything practical to ensure your instance can really fly. In this chapter we'll provide some benchmarks, and guidance regarding how to properly tune your instance environment.
+
+### [Building React Apps Against .NET Using DreamFactory](./building-react-apps-against-net-using-dreamfactory)
+
+Modern React applications often need to integrate with existing enterprise infrastructure including .NET APIs, databases, and legacy SOAP services. This typically involves managing multiple authentication mechanisms, inconsistent API patterns, and complex security configurations. In this chapter you'll learn how to use DreamFactory as a unified API gateway that sits between your React application and all backend systems, providing a single consistent REST interface. You'll discover how to wrap .NET APIs using HTTP service connectors, auto-generate REST APIs for your databases, modernize legacy SOAP services, and configure role-based security. By the end of this chapter, you'll have a production-ready architecture where your React app communicates exclusively with DreamFactory, eliminating months of custom integration work.
 
 ### [Installing DreamFactory on a Raspberry Pi](./installing-dreamfactory-on-raspberry-pi)
 
